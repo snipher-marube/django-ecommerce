@@ -1,0 +1,79 @@
+{% load static %}
+<nav class="container mx-auto bg-white px-6">
+  <div class="flex items-center justify-between p-3">
+    <!--Logo start-->
+    <div>
+      <a href="{% url 'home' %}">
+        <img
+          src="{% static 'images/logo/Logo.png' %}"
+          alt="logo"
+          class="h-16"
+        />
+      </a>
+    </div>
+    <!--Logo end-->
+    <!--Categories start-->
+    <div>
+        <ul class="flex items-center space-x-4">
+            <li>
+            <a href="#" class="text-gray-700 hover:text-gray-900">
+                Home
+            </a>
+            </li>
+            <li>
+            <a href="#" class="text-gray-700 hover:text-gray-900">
+                Products
+            </a>
+            </li>
+            <li>
+            <a href="#" class="text-gray-700 hover:text-gray-900">
+                Contact
+            </a>
+            </li>
+            <li>
+            <a href="#" class="text-gray-700 hover:text-gray-900">
+                About
+            </a>
+            </li>
+            <li>
+            <a href="#" class="text-gray-700 hover:text-gray-900">
+                Cart
+            </a>
+            </li>
+        </ul>
+    </div>
+    <!--Categories End-->
+
+    <!--buttons start-->
+    <div>
+        <ul class="flex items-center space-x-4">
+            <li>
+            <a
+                href="#"
+                class="text-gray-700 hover:text-gray-900"
+            >
+                Login
+            </a>
+            </li>
+            <li>
+            <a
+                href="#"
+                class="text-gray-700 hover:text-gray-900"
+            >
+                Register
+            </a>
+            </li>
+            <li>
+            <a
+                href="#"
+                class="text-gray-700 hover:text-gray-900"   
+            >
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            </li>
+        </ul>
+    </div>
+    <!--buttons end-->
+
+  </div>
+</nav>
