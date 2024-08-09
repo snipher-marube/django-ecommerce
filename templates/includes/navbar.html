@@ -1,79 +1,144 @@
 {% load static %}
+
 <nav class="container mx-auto bg-white px-6">
-  <div class="flex items-center justify-between p-3">
-    <!--Logo start-->
-    <div>
-      <a href="{% url 'home' %}">
-        <img
-          src="{% static 'images/logo/Logo.png' %}"
-          alt="logo"
-          class="h-16"
-        />
-      </a>
-    </div>
-    <!--Logo end-->
-    <!--Categories start-->
-    <div>
+  <div class="items-center justify-between p-3 md:flex">
+    <div class="flex justify-between">
+      <!--Logo start-->
+      <div>
+        <a href="{% url 'home' %}">
+          <img
+            src="{% static 'images/logo/Logo.png' %}"
+            alt="logo"
+            class="h-16"
+          />
+        </a>
+      </div>
+      <!--Logo end-->
+
+      <!--buttons start-->
+      <div class="flex md:hidden">
         <ul class="flex items-center space-x-4">
-            <li>
+          <li>
+            <a href="#" class="text-gray-700 hover:text-gray-900"> Login </a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-700 hover:text-gray-900"> Register </a>
+          </li>
+          <li>
             <a href="#" class="text-gray-700 hover:text-gray-900">
-                Home
+              <i class="fas fa-shopping-cart"></i>
             </a>
-            </li>
-            <li>
-            <a href="#" class="text-gray-700 hover:text-gray-900">
-                Products
-            </a>
-            </li>
-            <li>
-            <a href="#" class="text-gray-700 hover:text-gray-900">
-                Contact
-            </a>
-            </li>
-            <li>
-            <a href="#" class="text-gray-700 hover:text-gray-900">
-                About
-            </a>
-            </li>
-            <li>
-            <a href="#" class="text-gray-700 hover:text-gray-900">
-                Cart
-            </a>
-            </li>
+          </li>
         </ul>
+      </div>
+      <!--buttons end-->
+
+      <!--Hamburger menu-->
+      <div class="sticky top-0 z-50 mx-4 p-2 md:hidden">
+        <button
+          id="menu-btn"
+          class="focus:outline-none"
+          aria-label="Toggle Menu"
+        >
+          <span class="text-gray font-bold">MENU</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="text-primary h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+            role="graphics-symbol"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
+      </div>
+      <!--Hamburger menu end-->
+    </div>
+
+    <!--Categories start (for large screens)-->
+    <div class="hidden md:flex">
+      <ul class="flex items-center space-x-4" id="menu">
+        <li>
+          <a href="#" class="text-gray-700 hover:text-gray-900"> Home </a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-700 hover:text-gray-900"> Products </a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-700 hover:text-gray-900"> Contact </a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-700 hover:text-gray-900"> About </a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-700 hover:text-gray-900"> Cart </a>
+        </li>
+      </ul>
     </div>
     <!--Categories End-->
 
-    <!--buttons start-->
-    <div>
-        <ul class="flex items-center space-x-4">
-            <li>
-            <a
-                href="#"
-                class="text-gray-700 hover:text-gray-900"
-            >
-                Login
-            </a>
-            </li>
-            <li>
-            <a
-                href="#"
-                class="text-gray-700 hover:text-gray-900"
-            >
-                Register
-            </a>
-            </li>
-            <li>
-            <a
-                href="#"
-                class="text-gray-700 hover:text-gray-900"   
-            >
-                <i class="fas fa-shopping-cart"></i>
-            </a>
-            </li>
-        </ul>
+    <!--buttons start (for large screens)-->
+    <div class="hidden md:flex">
+      <ul class="flex items-center space-x-4">
+        <li>
+          <a href="#" class="text-gray-700 hover:text-gray-900"> Login </a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-700 hover:text-gray-900"> Register </a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-700 hover:text-gray-900">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+        </li>
+      </ul>
     </div>
     <!--buttons end-->
-
   </div>
+
+  <!--Categories start (for small screens)-->
+  <div
+    id="mobile-menu"
+    class="fixed hidden flex-col items-center justify-center bg-gray-200 md:hidden mx-0 shadow-lg w-full"
+  >
+    <ul class="space-y-6 p-4">
+      <li>
+        <a href="#" class="text-lg text-gray-700 hover:text-gray-900"> Home </a>
+      </li>
+      <li>
+        <a href="#" class="text-lg text-gray-700 hover:text-gray-900">
+          Products
+        </a>
+      </li>
+      <li>
+        <a href="#" class="text-lg text-gray-700 hover:text-gray-900">
+          Contact
+        </a>
+      </li>
+      <li>
+        <a href="#" class="text-lg text-gray-700 hover:text-gray-900">
+          About
+        </a>
+      </li>
+      <li>
+        <a href="#" class="text-lg text-gray-700 hover:text-gray-900"> Cart </a>
+      </li>
+    </ul>
+  </div>
+  <!--Categories End-->
 </nav>
+
+<script>
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+</script>
