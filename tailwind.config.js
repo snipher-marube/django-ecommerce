@@ -8,6 +8,7 @@ module.exports = {
     transparent: "transparent",
     white: "#ffffff",
     black: "#000000",
+    secondary: "#ffb929",
   },
   plugins: [],
 };
