@@ -59,10 +59,14 @@
         <li
           class="group relative border-gray-400 max-lg:border-b max-lg:py-3 lg:border-r lg:px-8"
         >
-          <a href="#" class="block text-sm text-pink-500 hover:text-pink-500"
+          <a
+            href="#"
+            id="shopLink"
+            class="block text-sm text-pink-500 hover:text-pink-500"
             >Shop
           </a>
           <div
+            id="shopDropdown"
             class="absolute -left-6 z-50 min-h-[360px] bg-white px-8 py-4 shadow-lg max-lg:top-8 lg:top-11"
           >
             <div
@@ -410,4 +414,13 @@
 
   toggleOpen.addEventListener("click", handleClick);
   toggleClose.addEventListener("click", handleClick);
+
+  document.getElementById('shopLink').addEventListener('click', function(event) {
+  event.preventDefault(); // Prevent the default link behavior
+  const dropdown = document.getElementById('shopDropdown');
+  
+  // Toggle the visibility of the dropdown
+  dropdown.classList.toggle('hidden');
+});
+
 </script>
