@@ -1,3 +1,4 @@
+{% extends 'base.html' %} {% block content %}
 <section class="h-screen bg-gray-100 py-12 sm:py-16 lg:py-20">
   <div class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-center">
@@ -192,29 +193,33 @@
           </div>
 
           <div class="mt-6 text-center">
-            <button
-              type="button"
-              class="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out hover:bg-gray-800 focus:shadow"
-            >
-              Checkout
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="ml-4 h-6 w-6 transition-all group-hover:ml-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
+            <a href="{% url 'checkout' %}">
+              <button
+                type="button"
+                class="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out hover:bg-gray-800 focus:shadow"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </button>
+                Checkout
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="ml-4 h-6 w-6 transition-all group-hover:ml-8"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </button>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+{% endblock content %}

@@ -40,53 +40,11 @@
             class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
           >
             <input
-              type="text"
-              id="first_name"
-              name="frst_name"
-              class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-              placeholder="First Name"
-              required
-            />
-          </div>
-        </div>
-        <div class="flex flex-col pt-4">
-          <div
-            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
-          >
-            <input
-              type="text"
-              id="last_name"
-              name="last_name"
-              class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-              placeholder="Last Name"
-              required
-            />
-          </div>
-        </div>
-        <div class="flex flex-col pt-4">
-          <div
-            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
-          >
-            <input
               type="email"
               id="email"
               name="email"
               class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
               placeholder="Email"
-              required
-            />
-          </div>
-        </div>
-        <div class="flex flex-col pt-4">
-          <div
-            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
-          >
-            <input
-              type="password"
-              id="pasword"
-              name="password"
-              class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-              placeholder="Password"
               required
             />
           </div>
@@ -97,10 +55,10 @@
           >
             <input
               type="password"
-              id="confirm_password"
-              name="confirm_password"
+              id="password"
+              name="password"
               class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-              placeholder="Confirm Password"
+              placeholder="Password"
               required
             />
           </div>
@@ -109,16 +67,16 @@
           type="submit"
           class="w-full rounded-lg bg-gray-900 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
         >
-          Create Account
+          Log in
         </button>
       </form>
       <div class="py-12 text-center">
         <p class="whitespace-nowrap text-gray-600">
-          Already have an account?
+          Don't have an account?
           <a
-            href="{% url 'login' %}"
+            href="{% url 'register' %}"
             class="font-semibold text-gray-900 underline underline-offset-4"
-            >login.</a
+            >Sign up for free.</a
           >
         </p>
       </div>

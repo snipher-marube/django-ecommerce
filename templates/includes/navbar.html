@@ -5,7 +5,7 @@
   <div
     class="relative flex w-full flex-wrap items-center justify-between gap-y-6 px-10 py-3 max-sm:gap-x-4 lg:gap-y-4"
   >
-    <a href="javascript:void(0)"
+    <a href="{% url 'home' %}"
       ><img
         src="https://readymadeui.com/readymadeui.svg"
         alt="logo"
@@ -52,16 +52,14 @@
         <li
           class="border-gray-400 max-lg:border-b max-lg:py-3 lg:border-r lg:px-8"
         >
-          <a href="javascript:void(0)" class="block text-sm hover:text-pink-500"
+          <a href="{% url 'home' %}" class="block text-sm hover:text-pink-500"
             >Home</a
           >
         </li>
         <li
           class="group relative border-gray-400 max-lg:border-b max-lg:py-3 lg:border-r lg:px-8"
         >
-          <a
-            href="javascript:void(0)"
-            class="block text-sm text-pink-500 hover:text-pink-500"
+          <a href="#" class="block text-sm text-pink-500 hover:text-pink-500"
             >Shop
           </a>
           <div
@@ -316,9 +314,9 @@
           class="group border-gray-400 max-lg:border-b max-lg:py-3 lg:border-r lg:px-8"
         >
           <a
-            href="javascript:void(0)"
+            href="{% url 'products' %}"
             class="block text-sm text-black hover:text-pink-500"
-            >Blog
+            >Products
           </a>
         </li>
         <li
