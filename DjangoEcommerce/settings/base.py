@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from re import A
+from telnetlib import AUTHENTICATION
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +33,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoEcommerce.urls'
@@ -126,3 +133,24 @@ STATIC_ROOT = BASE_DIR / '../static/staticfiles'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# django allauth settings
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_RIDIRECT_URL = 'home'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
+SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_EMAIL_REQUIRED = ACCOUNT_EMAIL_REQUIRED
+SOCIALACCOUNT_STORE_TOKENS = True

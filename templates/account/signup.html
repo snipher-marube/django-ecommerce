@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% block content %}
 <div class="flex flex-wrap">
   <div class="flex w-full flex-col md:w-1/2">
     <div class="flex justify-center pt-12 md:-mb-24 md:justify-start md:pl-12">
@@ -16,7 +18,8 @@
       <p class="mt-2 text-left text-gray-500">
         Welcome back, please enter your details.
       </p>
-      <button
+      <a href="{% provider_login_url 'google' %}">
+        <button
         class="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
       >
         <img
@@ -26,6 +29,8 @@
         />
         Log in with Google
       </button>
+      </a>
+      
       <div class="relative mt-8 flex h-px place-items-center bg-gray-200">
         <div
           class="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-white text-center text-sm text-gray-500"
@@ -40,11 +45,53 @@
             class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
           >
             <input
+              type="text"
+              id="first_name"
+              name="frst_name"
+              class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+              placeholder="First Name"
+              required
+            />
+          </div>
+        </div>
+        <div class="flex flex-col pt-4">
+          <div
+            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
+          >
+            <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+              placeholder="Last Name"
+              required
+            />
+          </div>
+        </div>
+        <div class="flex flex-col pt-4">
+          <div
+            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
+          >
+            <input
               type="email"
               id="email"
               name="email"
               class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
               placeholder="Email"
+              required
+            />
+          </div>
+        </div>
+        <div class="flex flex-col pt-4">
+          <div
+            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
+          >
+            <input
+              type="password"
+              id="pasword"
+              name="password"
+              class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+              placeholder="Password"
               required
             />
           </div>
@@ -55,10 +102,10 @@
           >
             <input
               type="password"
-              id="password"
-              name="password"
+              id="confirm_password"
+              name="confirm_password"
               class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-              placeholder="Password"
+              placeholder="Confirm Password"
               required
             />
           </div>
@@ -67,16 +114,16 @@
           type="submit"
           class="w-full rounded-lg bg-gray-900 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
         >
-          Log in
+          Create Account
         </button>
       </form>
       <div class="py-12 text-center">
         <p class="whitespace-nowrap text-gray-600">
-          Don't have an account?
+          Already have an account?
           <a
-            href="{% url 'register' %}"
+            href="{% url 'login' %}"
             class="font-semibold text-gray-900 underline underline-offset-4"
-            >Sign up for free.</a
+            >login.</a
           >
         </p>
       </div>
