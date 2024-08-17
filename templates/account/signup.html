@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
+{% load allauth i18n %}
 {% load socialaccount %}
+
+{% block title %}
+  SignUp
+{% endblock title %}
+  
 {% block content %}
 <div class="flex flex-wrap">
   <div class="flex w-full flex-col md:w-1/2">
-    <div class="flex justify-center pt-12 md:-mb-24 md:justify-start md:pl-12">
-      <a
-        href="#"
-        class="border-b-4 border-b-gray-700 pb-2 text-2xl font-bold text-gray-900"
-      >
-        Damasus .
-      </a>
-    </div>
+   
     <div
       class="mx-auto my-auto flex flex-col justify-center pt-8 md:justify-start md:px-6 md:pt-0 lg:w-[28rem]"
     >
@@ -18,6 +17,7 @@
       <p class="mt-2 text-left text-gray-500">
         Welcome back, please enter your details.
       </p>
+      {% if SOCIALACCOUNT_ENABLED %}
       <a href="{% provider_login_url 'google' %}">
         <button
         class="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
@@ -30,6 +30,7 @@
         Log in with Google
       </button>
       </a>
+      {% endif %}
       
       <div class="relative mt-8 flex h-px place-items-center bg-gray-200">
         <div
@@ -38,41 +39,16 @@
           or
         </div>
       </div>
-      <form class="flex flex-col pt-3 md:pt-8" action="#" method="post">
-        {% csrf_token %}
-        <div class="flex flex-col pt-4">
-          <div
-            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
-          >
-            <input
-              type="text"
-              id="first_name"
-              name="frst_name"
-              class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-              placeholder="First Name"
-              required
-            />
-          </div>
-        </div>
-        <div class="flex flex-col pt-4">
-          <div
-            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
-          >
-            <input
-              type="text"
-              id="last_name"
-              name="last_name"
-              class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-              placeholder="Last Name"
-              required
-            />
-          </div>
-        </div>
-        <div class="flex flex-col pt-4">
-          <div
-            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
-          >
-            <input
+
+     
+  <form class="flex flex-col pt-3 md:pt-8" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    {{ redirect_field }} <!-- To display non-field specific errors -->
+    
+    <div class="flex flex-col pt-4">
+      <div class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500">
+        
+        <input
               type="email"
               id="email"
               name="email"
@@ -80,48 +56,54 @@
               placeholder="Email"
               required
             />
-          </div>
-        </div>
-        <div class="flex flex-col pt-4">
-          <div
-            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
-          >
-            <input
+            <p class="text-sm text-red-500">{{ form.email.errors }}</p>
+             <!-- Display errors for email --> <!-- Render the email input field -->
+      </div>
+    </div>
+    
+    <div class="flex flex-col pt-4">
+      <div class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500">
+        
+        <input
               type="password"
-              id="pasword"
-              name="password"
+              id="pasword1"
+              name="password1"
               class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
               placeholder="Password"
               required
             />
-          </div>
-        </div>
-        <div class="mb-12 flex flex-col pt-4">
-          <div
-            class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500"
-          >
-            <input
+            <p class="text-sm text-red-500">{{ form.password1.errors }}</p>
+             <!-- Display errors for password1 --> <!-- Render the password1 input field -->
+      </div>
+    </div>
+    
+    <div class="mb-12 flex flex-col pt-4">
+      <div class="relative flex overflow-hidden border-b-2 transition focus-within:border-b-gray-500">
+        
+        <input
               type="password"
-              id="confirm_password"
-              name="confirm_password"
+              id="pasword2"
+              name="password2"
               class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-              placeholder="Confirm Password"
+              placeholder="Password"
               required
             />
-          </div>
-        </div>
-        <button
-          type="submit"
-          class="w-full rounded-lg bg-gray-900 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
-        >
-          Create Account
-        </button>
-      </form>
+            <p class="text-sm text-red-500">{{ form.password2.errors }}</p>
+             <!-- Display errors for password2 --> <!-- Render the password2 input field -->
+      </div>
+    </div>
+    
+    <button type="submit" class="w-full rounded-lg bg-gray-900 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2">
+      Create Account
+    </button>
+  </form>
+  
+
       <div class="py-12 text-center">
         <p class="whitespace-nowrap text-gray-600">
           Already have an account?
           <a
-            href="{% url 'login' %}"
+            href="{{ login_url }}"
             class="font-semibold text-gray-900 underline underline-offset-4"
             >login.</a
           >

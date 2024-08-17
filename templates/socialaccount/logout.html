@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load allauth i18n %}
+{% load static %}
+
+{% block content %}
+<div
+  class="mx-auto my-4 mt-4 max-w-sm overflow-hidden rounded-lg bg-white font-[sans-serif] shadow-[0_8px_14px_-3px_rgba(136,153,190,0.3)]"
+  role="alert"
+>
+  <div class="bg-gray-50 px-6 py-3">
+    <h4 class="text-base font-bold text-gray-800">Sign Out!</h4>
+  </div>
+
+  <div class="px-6 py-3">
+    <p class="text-sm text-gray-600">Are you sure you want to sign out?</p>
+    {% url 'account_logout' as action_url %}
+    <form method="post" action="{{ action_url }}">
+        {% csrf_token %}
+        {{ redirect_field }}
+
+        <div class="mt-6 space-x-3"> 
+          <button
+            type="submit"
+            class="rounded-lg bg-red-600 px-3 py-2 text-xs tracking-wider text-white transition-all hover:bg-red-700"
+          >
+            Sign Out
+          </button>
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

@@ -85,7 +85,40 @@
               </span>
             </li>
           </a>
-          <a href="{% url 'login' %}">
+          {% if request.user.is_authenticated %}
+            {% url 'account_email' as email_url %}
+            {% if logout_url %}
+            <a href="{{ email_url }}">
+              <li
+              class="flex px-3 text-[15px] hover:fill-[#007bff] hover:text-[#007bff] max-lg:py-2"
+            >
+              <button
+                class="rounded border-2 border-[#333] bg-transparent px-4 py-2 text-sm font-semibold text-[#333]"
+              >
+                Change Email
+              </button>
+              </li>
+            </a>
+          {% endif %}
+
+          {% url 'account_logout' as logout_url %}
+          {% if logout_url %}
+          <a href="{{ logout_url }}">
+            <li
+            class="flex px-3 text-[15px] hover:fill-[#ff3c00] hover:text-[#ff5100] max-lg:py-2"
+          >
+            <button
+              class="rounded border-2 border-[#333] bg-transparent px-4 py-2 text-sm font-semibold text-[#333]"
+            >
+              Logout
+            </button>
+          </li>
+          </a>
+          {% endif %}
+          {% else %}
+          <!--login-->
+          {% url 'account_login' as login_url %}
+          <a href="{{login_url}}">
             <li
             class="flex px-3 text-[15px] hover:fill-[#007bff] hover:text-[#007bff] max-lg:py-2"
           >
@@ -96,6 +129,8 @@
             </button>
           </li>
           </a>
+          {% endif %}
+          
           
           <li id="toggleOpen" class="lg:hidden">
             <button>
