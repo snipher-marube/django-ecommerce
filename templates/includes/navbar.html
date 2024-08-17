@@ -5,7 +5,7 @@
   >
     <a href="javascript:void(0)" class="shrink-0 max-sm:mb-3 max-sm:w-full"
       ><img
-        src="https://readymadeui.com/readymadeui.svg"
+        src="{% static 'images/logo/Logo.png' %}"
         alt="logo"
         class="w-[160px]"
       />
@@ -85,8 +85,8 @@
               </span>
             </li>
           </a>
-
-          <li
+          <a href="{% url 'login' %}">
+            <li
             class="flex px-3 text-[15px] hover:fill-[#007bff] hover:text-[#007bff] max-lg:py-2"
           >
             <button
@@ -95,6 +95,8 @@
               Sign In
             </button>
           </li>
+          </a>
+          
           <li id="toggleOpen" class="lg:hidden">
             <button>
               <svg

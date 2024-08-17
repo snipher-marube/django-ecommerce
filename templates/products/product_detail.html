@@ -118,12 +118,15 @@
         </div>
 
         <div class="mt-8 flex flex-wrap gap-4">
-          <button
+          <a href="{% url 'payment' %}">
+            <button
             type="button"
             class="min-w-[200px] rounded bg-yellow-300 px-4 py-3 text-sm font-semibold text-black hover:bg-yellow-400"
           >
             Buy now
           </button>
+          </a>
+          
           <a href="{% url 'checkout' %}">
           <button
             type="button"
