@@ -1,304 +1,229 @@
 {% extends 'base.html' %} {% block content %}
-<section class="bg-white py-12 text-gray-700 sm:py-16 lg:py-20">
-  <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-md text-center">
-      <h2 class="font-serif text-2xl font-bold sm:text-3xl">
-        Fresh Fruits & Vegetables
-      </h2>
-    </div>
-
-    <div class="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 lg:mt-16">
-      <article class="relative flex flex-col overflow-hidden rounded-lg border">
-        <div class="aspect-square overflow-hidden">
+<div class="bg-gray-50 px-4 py-8 font-sans">
+  <div class="mx-auto md:max-w-4xl lg:max-w-6xl">
+    <h2 class="mb-12 text-center text-4xl font-extrabold text-gray-800">
+      Top Products
+    </h2>
+    <div
+      class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+    >
+    <a href="{% url 'product_detail' %}">
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
+        >
           <img
-            class="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-            src="/images/neZnfwBHi0f-4TivjA6BS.png"
-            alt=""
+            src="https://readymadeui.com/images/watch1.webp"
+            alt="product1"
+            class="mx-auto block h-full w-5/6 object-contain"
           />
         </div>
-        <div class="absolute top-0 m-2 rounded-full bg-white">
-          <p
-            class="rounded-full bg-emerald-500 p-1 text-[8px] font-bold uppercase tracking-wide text-white sm:px-3 sm:py-1"
-          >
-            Sale
-          </p>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">French Timex</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$95.00</h4>
         </div>
+      </div>
+    </a>
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
         <div
-          class="mx-auto my-4 flex w-10/12 flex-col items-start justify-between"
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
         >
-          <div class="mb-2 flex">
-            <p class="mr-3 text-sm font-semibold">$99.00</p>
-            <del class="text-xs text-gray-400"> $79.00 </del>
-          </div>
-          <h3 class="mb-2 text-sm text-gray-400">Fresh Apples</h3>
-        </div>
-        <button
-          class="group mx-auto mb-2 flex h-10 w-10/12 items-stretch overflow-hidden rounded-md text-gray-600"
-        >
-          <div
-            class="flex w-full items-center justify-center bg-gray-100 text-xs uppercase transition group-hover:bg-emerald-600 group-hover:text-white"
-          >
-            Add
-          </div>
-          <div
-            class="flex items-center justify-center bg-gray-200 px-5 transition group-hover:bg-emerald-500 group-hover:text-white"
-          >
-            +
-          </div>
-        </button>
-      </article>
-
-      <article class="relative flex flex-col overflow-hidden rounded-lg border">
-        <div class="aspect-square overflow-hidden">
           <img
-            class="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-            src="/images/exH8iOZwkjQekSALkXCZb.png"
-            alt=""
+            src="https://readymadeui.com/images/product14.webp"
+            alt="product2"
+            class="mx-auto block h-full w-5/6 object-contain"
           />
         </div>
-        <div class="absolute top-0 m-2 rounded-full bg-white">
-          <p
-            class="rounded-full bg-emerald-500 p-1 text-[8px] font-bold uppercase tracking-wide text-white sm:px-3 sm:py-1"
-          >
-            Sale
-          </p>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">Echo Elegance</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$20.00</h4>
         </div>
-        <div
-          class="mx-auto my-4 flex w-10/12 flex-col items-start justify-between"
-        >
-          <div class="mb-2 flex">
-            <p class="mr-3 text-sm font-semibold">$99.00</p>
-            <del class="text-xs text-gray-400"> $79.00 </del>
-          </div>
-          <h3 class="mb-2 text-sm text-gray-400">Fresh Apples</h3>
-        </div>
-        <button
-          class="group mx-auto mb-2 flex h-10 w-10/12 items-stretch overflow-hidden rounded-md text-gray-600"
-        >
-          <div
-            class="flex w-full items-center justify-center bg-gray-100 text-xs uppercase transition group-hover:bg-emerald-600 group-hover:text-white"
-          >
-            Add
-          </div>
-          <div
-            class="flex items-center justify-center bg-gray-200 px-5 transition group-hover:bg-emerald-500 group-hover:text-white"
-          >
-            +
-          </div>
-        </button>
-      </article>
+      </div>
 
-      <article class="relative flex flex-col overflow-hidden rounded-lg border">
-        <div class="aspect-square overflow-hidden">
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
+        >
           <img
-            class="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-            src="/images/86WxAQqZpR5CqrhSPKwNv.png"
-            alt=""
+            src="https://readymadeui.com/images/laptop4.webp"
+            alt="product3"
+            class="mx-auto block h-full w-5/6 object-contain"
           />
         </div>
-
-        <div
-          class="mx-auto my-4 flex w-10/12 flex-col items-start justify-between"
-        >
-          <div class="mb-2 flex">
-            <p class="mr-3 text-sm font-semibold">$99.00</p>
-            <del class="text-xs text-gray-400"> $79.00 </del>
-          </div>
-          <h3 class="mb-2 text-sm text-gray-400">Fresh Apples</h3>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">Acer One 14 AMD</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$400.00</h4>
         </div>
-        <button
-          class="group mx-auto mb-2 flex h-10 w-10/12 items-stretch overflow-hidden rounded-md text-gray-600"
-        >
-          <div
-            class="flex w-full items-center justify-center bg-gray-100 text-xs uppercase transition group-hover:bg-emerald-600 group-hover:text-white"
-          >
-            Add
-          </div>
-          <div
-            class="flex items-center justify-center bg-gray-200 px-5 transition group-hover:bg-emerald-500 group-hover:text-white"
-          >
-            +
-          </div>
-        </button>
-      </article>
+      </div>
 
-      <article class="relative flex flex-col overflow-hidden rounded-lg border">
-        <div class="aspect-square overflow-hidden">
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
+        >
           <img
-            class="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-            src="/images/0RV9Zy3daoeMbDmTOOMKm.png"
-            alt=""
+            src="https://readymadeui.com/images/watch4.webp"
+            alt="product4"
+            class="mx-auto block h-full w-5/6 object-contain"
           />
         </div>
-
-        <div
-          class="mx-auto my-4 flex w-10/12 flex-col items-start justify-between"
-        >
-          <div class="mb-2 flex">
-            <p class="mr-3 text-sm font-semibold">$99.00</p>
-            <del class="text-xs text-gray-400"> $79.00 </del>
-          </div>
-          <h3 class="mb-2 text-sm text-gray-400">Fresh Apples</h3>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">Irish Cream Dream</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$11.00</h4>
         </div>
-        <button
-          class="group mx-auto mb-2 flex h-10 w-10/12 items-stretch overflow-hidden rounded-md text-gray-600"
-        >
-          <div
-            class="flex w-full items-center justify-center bg-gray-100 text-xs uppercase transition group-hover:bg-emerald-600 group-hover:text-white"
-          >
-            Add
-          </div>
-          <div
-            class="flex items-center justify-center bg-gray-200 px-5 transition group-hover:bg-emerald-500 group-hover:text-white"
-          >
-            +
-          </div>
-        </button>
-      </article>
+      </div>
 
-      <article class="relative flex flex-col overflow-hidden rounded-lg border">
-        <div class="aspect-square overflow-hidden">
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
+        >
           <img
-            class="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-            src="/images/1DULzCtZvWhr5q5DDT6Ac.png"
-            alt=""
+            src="https://readymadeui.com/images/coffee7.webp"
+            alt="product5"
+            class="mx-auto block h-full w-5/6 object-contain"
           />
         </div>
-
-        <div
-          class="mx-auto my-4 flex w-10/12 flex-col items-start justify-between"
-        >
-          <div class="mb-2 flex">
-            <p class="mr-3 text-sm font-semibold">$99.00</p>
-            <del class="text-xs text-gray-400"> $79.00 </del>
-          </div>
-          <h3 class="mb-2 text-sm text-gray-400">Fresh Apples</h3>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">Luxury desk clock</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$90.00</h4>
         </div>
-        <button
-          class="group mx-auto mb-2 flex h-10 w-10/12 items-stretch overflow-hidden rounded-md text-gray-600"
-        >
-          <div
-            class="flex w-full items-center justify-center bg-gray-100 text-xs uppercase transition group-hover:bg-emerald-600 group-hover:text-white"
-          >
-            Add
-          </div>
-          <div
-            class="flex items-center justify-center bg-gray-200 px-5 transition group-hover:bg-emerald-500 group-hover:text-white"
-          >
-            +
-          </div>
-        </button>
-      </article>
+      </div>
 
-      <article class="relative flex flex-col overflow-hidden rounded-lg border">
-        <div class="aspect-square overflow-hidden">
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
+        >
           <img
-            class="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-            src="/images/neZnfwBHi0f-4TivjA6BS.png"
-            alt=""
+            src="https://readymadeui.com/images/watch7.webp"
+            alt="product6"
+            class="mx-auto block h-full w-5/6 object-contain"
           />
         </div>
-
-        <div
-          class="mx-auto my-4 flex w-10/12 flex-col items-start justify-between"
-        >
-          <div class="mb-2 flex">
-            <p class="mr-3 text-sm font-semibold">$99.00</p>
-            <del class="text-xs text-gray-400"> $79.00 </del>
-          </div>
-          <h3 class="mb-2 text-sm text-gray-400">Fresh Apples</h3>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">Smart Watch</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$110.00</h4>
         </div>
-        <button
-          class="group mx-auto mb-2 flex h-10 w-10/12 items-stretch overflow-hidden rounded-md text-gray-600"
-        >
-          <div
-            class="flex w-full items-center justify-center bg-gray-100 text-xs uppercase transition group-hover:bg-emerald-600 group-hover:text-white"
-          >
-            Add
-          </div>
-          <div
-            class="flex items-center justify-center bg-gray-200 px-5 transition group-hover:bg-emerald-500 group-hover:text-white"
-          >
-            +
-          </div>
-        </button>
-      </article>
+      </div>
 
-      <article class="relative flex flex-col overflow-hidden rounded-lg border">
-        <div class="aspect-square overflow-hidden">
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
+        >
           <img
-            class="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-            src="/images/POklWwmmu0AtDZe5tNh9j.png"
-            alt=""
+            src="https://readymadeui.com/images/watch8.webp"
+            alt="product7"
+            class="mx-auto block h-full w-5/6 object-contain"
           />
         </div>
-
-        <div
-          class="mx-auto my-4 flex w-10/12 flex-col items-start justify-between"
-        >
-          <div class="mb-2 flex">
-            <p class="mr-3 text-sm font-semibold">$99.00</p>
-            <del class="text-xs text-gray-400"> $79.00 </del>
-          </div>
-          <h3 class="mb-2 text-sm text-gray-400">Fresh Apples</h3>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">Creative Wall Clock</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$50.00</h4>
         </div>
-        <button
-          class="group mx-auto mb-2 flex h-10 w-10/12 items-stretch overflow-hidden rounded-md text-gray-600"
-        >
-          <div
-            class="flex w-full items-center justify-center bg-gray-100 text-xs uppercase transition group-hover:bg-emerald-600 group-hover:text-white"
-          >
-            Add
-          </div>
-          <div
-            class="flex items-center justify-center bg-gray-200 px-5 transition group-hover:bg-emerald-500 group-hover:text-white"
-          >
-            +
-          </div>
-        </button>
-      </article>
+      </div>
 
-      <article class="relative flex flex-col overflow-hidden rounded-lg border">
-        <div class="aspect-square overflow-hidden">
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
+        >
           <img
-            class="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-            src="/images/7ObHe1EuFqmsZmri6-ROD.png"
-            alt=""
+            src="https://readymadeui.com/images/laptop2.webp"
+            alt="product8"
+            class="mx-auto block h-full w-5/6 object-contain"
           />
         </div>
-        <div class="absolute top-0 m-2 rounded-full bg-white">
-          <p
-            class="rounded-full bg-emerald-500 p-1 text-[8px] font-bold uppercase tracking-wide text-white sm:px-3 sm:py-1"
-          >
-            Sale
-          </p>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">ASUS Vivobook 15</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$450.00</h4>
         </div>
+      </div>
+
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
         <div
-          class="mx-auto my-4 flex w-10/12 flex-col items-start justify-between"
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
         >
-          <div class="mb-2 flex">
-            <p class="mr-3 text-sm font-semibold">$99.00</p>
-            <del class="text-xs text-gray-400"> $79.00 </del>
-          </div>
-          <h3 class="mb-2 text-sm text-gray-400">Fresh Apples</h3>
+          <img
+            src="https://readymadeui.com/images/watch3.webp"
+            alt="product1"
+            class="mx-auto block h-full w-5/6 object-contain"
+          />
         </div>
-        <button
-          class="group mx-auto mb-2 flex h-10 w-10/12 items-stretch overflow-hidden rounded-md text-gray-600"
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">French Timex</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$95.00</h4>
+        </div>
+      </div>
+
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
         >
-          <div
-            class="flex w-full items-center justify-center bg-gray-100 text-xs uppercase transition group-hover:bg-emerald-600 group-hover:text-white"
-          >
-            Add
-          </div>
-          <div
-            class="flex items-center justify-center bg-gray-200 px-5 transition group-hover:bg-emerald-500 group-hover:text-white"
-          >
-            +
-          </div>
-        </button>
-      </article>
+          <img
+            src="https://readymadeui.com/images/product14.webp"
+            alt="product2"
+            class="mx-auto block h-full w-5/6 object-contain"
+          />
+        </div>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">Echo Elegance</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$20.00</h4>
+        </div>
+      </div>
+
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
+        >
+          <img
+            src="https://readymadeui.com/images/laptop4.webp"
+            alt="product3"
+            class="mx-auto block h-full w-5/6 object-contain"
+          />
+        </div>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">Acer One 14 AMD</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$400.00</h4>
+        </div>
+      </div>
+
+      <div
+        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
+      >
+        <div
+          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
+        >
+          <img
+            src="https://readymadeui.com/images/watch5.webp"
+            alt="product4"
+            class="mx-auto block h-full w-5/6 object-contain"
+          />
+        </div>
+        <div class="mt-4 text-center">
+          <h3 class="text-sm font-bold text-gray-800">Irish Cream Dream</h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">$11.00</h4>
+        </div>
+      </div>
     </div>
   </div>
-</section>
-
+</div>
 {% endblock content %}

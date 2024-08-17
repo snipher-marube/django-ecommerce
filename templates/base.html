@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="{% static 'css/output.css' %}" />
   </head>
   <body>
-    {% include 'includes/topbar.html' %}
+    
     {% include 'includes/navbar.html' %}
     {% block content %}
     <!--content goes here-->
     {% endblock %}
+    {% include 'includes/footer.html' %}
     <script src="https://kit.fontawesome.com/2897fee97b.js" crossorigin="anonymous"></script>
   </body>
 </html>

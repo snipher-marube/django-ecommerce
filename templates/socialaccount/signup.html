@@ -38,7 +38,7 @@
           or
         </div>
       </div>
-      <form class="flex flex-col pt-3 md:pt-8" action="#" method="post">
+      <form class="flex flex-col pt-3 md:pt-8" action="{% url 'account_signup' %}" method="post">
         {% csrf_token %}
         <div class="flex flex-col pt-4">
           <div
@@ -88,8 +88,8 @@
           >
             <input
               type="password"
-              id="pasword"
-              name="password"
+              id="pasword1"
+              name="password1"
               class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
               placeholder="Password"
               required
@@ -102,8 +102,8 @@
           >
             <input
               type="password"
-              id="confirm_password"
-              name="confirm_password"
+              id="password2"
+              name="password2"
               class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
               placeholder="Confirm Password"
               required
