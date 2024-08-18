@@ -139,7 +139,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-
+# allauth settings
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
@@ -156,6 +156,8 @@ SOCIALACCOUNT_STORE_TOKENS = True
 SOCIALACCOUNT_ENABLED = True
 SOCIALACCOUNT_ONLY = False
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_LOGIN_BY_CODE_ENABLED = True
+ACCOUNT_PASSKEY_LOGIN_ENABLED = True
 
 # Sending email settings
 EMAIL_HOST = config('EMAIL_HOST')
