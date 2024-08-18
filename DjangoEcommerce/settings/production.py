@@ -6,15 +6,16 @@ DEBUG = False
 ALLOWED_HOSTS = []
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': config('DATABASE_HOST'),
-        'PORT': config('DATABASE_PORT'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config["POSTGRES_DB"],
+        "USER": config["POSTGRES_USER"],
+        "PASSWORD": config["POSTGRES_PASSWORD"],
+        "HOST": config["POSTGRES_HOST"],
+        "PORT": config["POSTGRES_PORT"],
     }
 }
+
 
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

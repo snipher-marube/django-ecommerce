@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
+import admin_thumbnails
 from .models import Category, Product, ProductGallery
 
 @admin.register(Category)
@@ -8,7 +9,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('category_name', 'slug')
     prepopulated_fields = {'slug': ('category_name',)}
     search_fields = ('category_name',)
-
+@admin_thumbnails.thumbnail('image')
 class ProductGalleryInline(admin.TabularInline):
     model = ProductGallery
     extra = 1
