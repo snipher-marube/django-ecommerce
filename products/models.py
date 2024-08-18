@@ -42,7 +42,7 @@ class Product(models.Model):
     
 class ProductGallery(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    images = models.ImageField(upload_to='uploads/products/gallery')
+    image = models.ImageField(upload_to='uploads/products/gallery')
     
     def __str__(self):
         return self.product.product_name
