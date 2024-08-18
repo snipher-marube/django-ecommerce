@@ -29,17 +29,17 @@ This is a fully functional ecommerce website built with Django and Tailwind CSS.
     pip install -r requirements.txt
     ```
 
-3. Set up the database:
-
-    ```bash
-    python manage.py migrate
-    ```
-
-4. Start the development server:
+3. Start the development server:
 
     ```bash
     export DJANGO_SETTINGS_MODULE=DjangoEcommerce.settings.development
     python manage.py runserver
+    ```
+
+4. Set up the database:
+
+    ```bash
+    python manage.py migrate
     ```
 
 5. Open your browser and visit `http://localhost:8000` to access the website.

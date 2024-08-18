@@ -13,21 +13,21 @@
     <div
       class="mx-auto my-auto flex flex-col justify-center pt-8 md:justify-start md:px-6 md:pt-0 lg:w-[28rem]"
     >
-      <p class="text-left text-3xl font-bold">Welcome back, Olivia</p>
+      <p class="text-left text-3xl font-bold">Welcome back</p>
       <p class="mt-2 text-left text-gray-500">
         Welcome back, please enter your details.
       </p>
       {% if SOCIALACCOUNT_ENABLED %}
       <a href="{% provider_login_url 'google' %}">
         <button
-        class="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
+        class="-2 mt-8 flex w-full items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
       >
         <img
           class="mr-2 h-5"
           src="https://static.cdnlogo.com/logos/g/35/google-icon.svg"
           alt
         />
-        Log in with Google
+        Sign Up with Google
       </button>
       </a>
       {% endif %}

@@ -16,7 +16,7 @@
       {% if SOCIALACCOUNT_ENABLED %}
       <a href="{% provider_login_url 'google' %}" class="google-bg">
         <button
-          class="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
+          class="-2 mt-8 w-full flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
         >
           <img
             class="mr-2 h-5"
@@ -27,6 +27,36 @@
         </button>
       </a>
       {% endif %}
+      <!--othe logins-->
+      {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
+      <div class="relative mt-8 flex h-px place-items-center bg-gray-200">
+        <div
+          class="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-white text-center text-sm text-gray-500"
+        >
+          or
+        </div>
+      </div>
+      <div class="flex flex-col pt-3 md:pt-8">
+        {% if PASSKEY_LOGIN_ENABLED %}
+        <a
+          href="{{request_passkey_login_url}}"
+          class="flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
+        >
+          Sign in with a passkey
+        </a>
+        {% endif %} 
+        {% if LOGIN_BY_CODE_ENABLED %}
+        <a
+          href="{{request_login_code_url}}"
+          class="flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
+        >
+          Mail me a sign-in code
+        </a>
+        {% endif %}
+      </div>
+
+      {% endif %}
+      <!--oter logins end-->
 
       <div class="relative mt-8 flex h-px place-items-center bg-gray-200">
         <div
@@ -35,7 +65,7 @@
           or
         </div>
       </div>
-
+      
       <form
         class="flex flex-col pt-3 md:pt-8"
         method="post"
@@ -87,36 +117,7 @@
           Log in
         </button>
       </form>
-      <!--othe logins-->
-      {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
-      <div class="relative mt-8 flex h-px place-items-center bg-gray-200">
-        <div
-          class="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-white text-center text-sm text-gray-500"
-        >
-          or
-        </div>
-      </div>
-      <div class="flex flex-col pt-3 md:pt-8">
-        {% if PASSKEY_LOGIN_ENABLED %}
-        <a
-          href="{{request_passkey_login_url}}"
-          class="flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
-        >
-          Sign in with a passkey
-        </a>
-        {% endif %} 
-        {% if LOGIN_BY_CODE_ENABLED %}
-        <a
-          href="{{request_login_code_url}}"
-          class="flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition hover:border-transparent hover:bg-black hover:text-white focus:ring-2"
-        >
-          Mail me a sign-in code
-        </a>
-        {% endif %}
-      </div>
-
-      {% endif %}
-      <!--oter logins end-->
+      
       <div class="py-12 text-center">
         <p class="whitespace-nowrap text-gray-600">
           If you have not created an account yet, then please
