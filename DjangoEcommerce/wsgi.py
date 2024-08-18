@@ -19,3 +19,5 @@ application = get_wsgi_application()
 
 # wrap the application with WhiteNoise
 application = WhiteNoise(application)
+
+app = application
