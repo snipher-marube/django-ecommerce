@@ -35,5 +35,5 @@ CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_PRELOAD = True
 
-DOMAIN = ""
+DOMAIN = "https://django-ecommerce-9ppdumlcu-sniphermarubes-projects.vercel.app"
 
