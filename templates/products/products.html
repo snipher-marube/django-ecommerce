@@ -1,4 +1,10 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block title %}
+  Products
+{% endblock title %}
+  
+{% block content %}
 <div class="bg-gray-50 px-4 py-8 font-sans">
   <div class="mx-auto md:max-w-4xl lg:max-w-6xl">
     <h2 class="mb-12 text-center text-4xl font-extrabold text-gray-800">
@@ -7,7 +13,9 @@
     <div
       class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
     >
-    <a href="{% url 'product_detail' %}">
+    {% if products %}
+    {% for product in products %}
+    <a href="{{product.get_absolute_url}}">
       <div
         class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
       >
@@ -15,214 +23,22 @@
           class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
         >
           <img
-            src="https://readymadeui.com/images/watch1.webp"
-            alt="product1"
+            src="{{product.image.url}}"
+            alt="{{product.product_name}}"
             class="mx-auto block h-full w-5/6 object-contain"
           />
         </div>
         <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">French Timex</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$95.00</h4>
+          <h3 class="text-sm font-bold text-gray-800"> {{product.product_name}} </h3>
+          <h4 class="mt-2 text-base font-bold text-blue-600">${{product.price}} </h4>
         </div>
       </div>
     </a>
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/product14.webp"
-            alt="product2"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">Echo Elegance</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$20.00</h4>
-        </div>
-      </div>
+    {% endfor %}
+    {% else %}
+    <p class="text-center">No Products Available</p>
+    {% endif %}
 
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/laptop4.webp"
-            alt="product3"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">Acer One 14 AMD</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$400.00</h4>
-        </div>
-      </div>
-
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/watch4.webp"
-            alt="product4"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">Irish Cream Dream</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$11.00</h4>
-        </div>
-      </div>
-
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/coffee7.webp"
-            alt="product5"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">Luxury desk clock</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$90.00</h4>
-        </div>
-      </div>
-
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/watch7.webp"
-            alt="product6"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">Smart Watch</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$110.00</h4>
-        </div>
-      </div>
-
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/watch8.webp"
-            alt="product7"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">Creative Wall Clock</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$50.00</h4>
-        </div>
-      </div>
-
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/laptop2.webp"
-            alt="product8"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">ASUS Vivobook 15</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$450.00</h4>
-        </div>
-      </div>
-
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/watch3.webp"
-            alt="product1"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">French Timex</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$95.00</h4>
-        </div>
-      </div>
-
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/product14.webp"
-            alt="product2"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">Echo Elegance</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$20.00</h4>
-        </div>
-      </div>
-
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/laptop4.webp"
-            alt="product3"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">Acer One 14 AMD</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$400.00</h4>
-        </div>
-      </div>
-
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
-          <img
-            src="https://readymadeui.com/images/watch5.webp"
-            alt="product4"
-            class="mx-auto block h-full w-5/6 object-contain"
-          />
-        </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800">Irish Cream Dream</h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">$11.00</h4>
-        </div>
-      </div>
     </div>
   </div>
 </div>

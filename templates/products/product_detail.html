@@ -1,59 +1,45 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block title %}
+  {{product.product_name}}
+{% endblock title %}
+  
+{% block content %}
 <div class="bg-gray-700 font-sans">
   <div class="max-w-2xl p-4 max-lg:mx-auto lg:max-w-7xl">
     <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-5">
       <div class="top-0 w-full text-center lg:sticky lg:col-span-3">
         <div class="rounded-xl bg-gray-800 px-4 py-12">
           <img
-            src="https://readymadeui.com/images/coffee2.webp"
-            alt="Product"
+            src="{{product.image.url}}"
+            alt="{{product.product_name}}"
             class="mx-auto w-9/12 rounded object-cover"
           />
         </div>
 
         <div class="mx-auto mt-4 flex flex-wrap justify-center gap-4">
+          <!--Product Gallery-->
+          {% if gallery %}
+          {% for i in gallery %}
           <div
             class="items-cemter flex h-20 w-[90px] cursor-pointer justify-center rounded-xl bg-gray-800 p-4"
           >
             <img
-              src="https://readymadeui.com/images/coffee3.webp"
-              alt="Product2"
+              src="{{i.image.url}}"
+              alt="{{product.product_name}}"
               class="w-full object-contain"
             />
           </div>
-          <div
-            class="items-cemter flex h-20 w-[90px] cursor-pointer justify-center rounded-xl bg-gray-800 p-4"
-          >
-            <img
-              src="https://readymadeui.com/images/coffee4.webp"
-              alt="Product2"
-              class="w-full object-contain"
-            />
-          </div>
-          <div
-            class="items-cemter flex h-20 w-[90px] cursor-pointer justify-center rounded-xl bg-gray-800 p-4"
-          >
-            <img
-              src="https://readymadeui.com/images/coffee5.webp"
-              alt="Product2"
-              class="w-full object-contain"
-            />
-          </div>
-          <div
-            class="items-cemter flex h-20 w-[90px] cursor-pointer justify-center rounded-xl bg-gray-800 p-4"
-          >
-            <img
-              src="https://readymadeui.com/images/coffee6.webp"
-              alt="Product2"
-              class="w-full object-contain"
-            />
-          </div>
+          {% endfor %}
+          {% endif %}
+          <!--End of Gallery-->
+          
         </div>
       </div>
 
       <div class="lg:col-span-2">
         <h2 class="text-3xl font-semibold text-white">
-          Espresso Elegante | Coffee
+          {{product.product_name}}
         </h2>
 
         <div class="mt-4 flex space-x-2">
@@ -111,10 +97,12 @@
         </div>
 
         <div class="mt-8 flex flex-wrap gap-4">
-          <p class="text-4xl font-semibold text-white">$12</p>
+          <p class="text-4xl font-semibold text-white">${{product.price}} </p>
+          {% if product.discount %}
           <p class="text-base text-gray-400">
-            <strike>$16</strike> <span class="ml-1 text-sm">Tax included</span>
+            <strike> ${{product.discount}} </strike> <span class="ml-1 text-sm">Tax included</span>
           </p>
+          {% endif %}
         </div>
 
         <div class="mt-8 flex flex-wrap gap-4">
@@ -138,23 +126,10 @@
         </a>
 
         <div class="mt-8">
-          <h3 class="text-xl font-semibold text-white">About the coffee</h3>
+          <h3 class="text-xl font-semibold text-white">About {{product.product_name}} </h3>
           <ul class="mt-4 list-disc space-y-3 pl-4 text-sm text-white">
             <li>
-              A cup of coffee is a beverage essential because of its timeless
-              appeal
-            </li>
-            <li>
-              Easy to prepare. It can be brewed using various methods, from drip
-              machines to manual pour-overs.
-            </li>
-            <li>
-              Available in various sizes, from a standard espresso shot to a
-              large Americano, catering to different preferences.
-            </li>
-            <li>
-              You can customize your coffee by adding cream, sugar, or
-              flavorings to suit your taste preferences.
+              {{product.description}}
             </li>
           </ul>
         </div>
