@@ -25,8 +25,6 @@ SECRET_KEY = config
 
 
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
