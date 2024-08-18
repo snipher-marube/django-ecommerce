@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load account %}
+{% load allauth %}
+{% load static %}
+{% user_display user as user_display %}
+
+<div class="bg-white max-w-sm mx-auto my-2 shadow-[0_3px_16px_-4px_rgba(197,182,255)] rounded-xl font-[sans-serif]" role="alert">
+      <div class="px-6 py-8 text-center">
+        <p class="block sm:inline text-sm text-gray-800">
+            <strong>Note:</strong> You are already logged in as {{ user_display }}.
+        </p>
+      </div>
+
+</div>
