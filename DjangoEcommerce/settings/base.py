@@ -31,6 +31,7 @@ SECRET_KEY = config
 INSTALLED_APPS = [
     'allauth',
     'allauth.account',
+    'allauth.usersessions',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django.contrib.admin',
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'allauth.usersessions.middleware.UserSessionsMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoEcommerce.urls'
@@ -146,7 +148,7 @@ LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_SESSION_REMEMBER = False
+ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 SOCIALACCOUNT_QUERY_EMAIL = ACCOUNT_EMAIL_REQUIRED
@@ -158,6 +160,8 @@ SOCIALACCOUNT_ONLY = False
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_LOGIN_BY_CODE_ENABLED = True
 ACCOUNT_PASSKEY_LOGIN_ENABLED = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+USERSESSIONS_TRACK_ACTIVITY = True
 
 # Sending email settings
 EMAIL_HOST = config('EMAIL_HOST')
