@@ -175,7 +175,7 @@ SESSION_COOKIE_AGE = 1209600  # 2 weeks, or set to your preference
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_EXPIRE_SECONDS = 7200  # 10 minutes, or set to your preference
 SESSION_TIMEOUT_REDIRECT = 'account_login'
-
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Sending email settings
 EMAIL_HOST = config('EMAIL_HOST')
