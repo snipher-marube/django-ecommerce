@@ -1,10 +1,12 @@
+# production.py
 from .base import *
 
-DEBUG = False
+
+DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app']
 
-# Database settings
+# Configure your production database 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -17,17 +19,18 @@ DATABASES = {
     }
 }
 
-# Session settings
-SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
 
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 SECURE_HSTS_SECONDS = 60
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+ACCOUNT_SESSION_REMEMBER = True  # or False, depending on your needs
+SESSION_COOKIE_AGE = 1209600  # 2 weeks, or set to your preference
+CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_PRELOAD = True
 
 DOMAIN = "https://django-ecommerce-gamma.vercel.app/"
+
