@@ -43,5 +43,12 @@ CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_PRELOAD = True
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
+
 DOMAIN = "https://django-ecommerce-gamma.vercel.app/"
 

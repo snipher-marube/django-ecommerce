@@ -1,4 +1,16 @@
 {
+  "headers": [
+    {
+      "source": "/admin/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ],
+  
   "builds": [
     {
       "src": "DjangoEcommerce/wsgi.py",
