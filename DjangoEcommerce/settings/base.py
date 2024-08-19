@@ -31,7 +31,6 @@ SECRET_KEY = config
 INSTALLED_APPS = [
     'allauth',
     'allauth.account',
-    'allauth.usersessions',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django.contrib.admin',
@@ -61,7 +60,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-    'allauth.usersessions.middleware.UserSessionsMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoEcommerce.urls'
@@ -151,6 +149,7 @@ ACCOUNT_RATE_LIMITS = {
 }
 
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
@@ -171,6 +170,11 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 
 # Enable user session tracking
 USERSESSIONS_TRACK_ACTIVITY = True
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 1209600  # 2 weeks, or set to your preference
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_EXPIRE_SECONDS = 7200  # 10 minutes, or set to your preference
+SESSION_TIMEOUT_REDIRECT = 'account_login'
 
 
 # Sending email settings
