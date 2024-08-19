@@ -48,7 +48,7 @@ CSRF_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Change this to False to keep the session even if the browser is closed
 
 # Session age (2 weeks in seconds)
-SESSION_COOKIE_AGE = 1209600  # Adjust as needed
+SESSION_COOKIE_AGE = 0  # Adjust as needed
 SESSION_SAVE_EVERY_REQUEST = True
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
