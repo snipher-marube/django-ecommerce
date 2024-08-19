@@ -16,10 +16,6 @@ DATABASES = {
         'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT'),
         'CONN_MAX_AGE': 600,
-        'OPTIONS': {
-            'sslmode': 'require',
-            'client_encoding': 'UTF8',           
-        }
     }
 }
 
