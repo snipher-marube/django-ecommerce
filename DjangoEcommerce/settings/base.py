@@ -170,8 +170,9 @@ ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Django Ecommerce'
 
-
-
+# Session settings
+SESSION_COOKIE_AGE = 172800  # 2 days in seconds
+SESSION_SAVE_EVERY_REQUEST = True
 
 
 # Sending email settings
