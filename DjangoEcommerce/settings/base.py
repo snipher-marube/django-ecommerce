@@ -177,6 +177,8 @@ SESSION_EXPIRE_SECONDS = 7200  # 10 minutes, or set to your preference
 SESSION_TIMEOUT_REDIRECT = 'account_login'
 SESSION_SAVE_EVERY_REQUEST = True
 
+
+
 # Sending email settings
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = 587
