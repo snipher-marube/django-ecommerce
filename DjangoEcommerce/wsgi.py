@@ -8,16 +8,14 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 """
 
 import os
-from re import DEBUG
+
 
 from django.core.wsgi import get_wsgi_application
 
 from whitenoise import WhiteNoise
 
-if DEBUG:
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoEcommerce.settings.development')
-else:
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoEcommerce.settings.production')
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoEcommerce.settings')
 
 application = get_wsgi_application()
 
