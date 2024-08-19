@@ -10,7 +10,7 @@
       ]
     }
   ],
-  
+
   "builds": [
     {
       "src": "DjangoEcommerce/wsgi.py",
