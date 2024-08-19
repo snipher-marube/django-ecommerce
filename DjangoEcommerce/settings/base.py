@@ -143,8 +143,13 @@ AUTHENTICATION_BACKENDS = [
 
 # allauth settings
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300  # in seconds (5 minutes)
+ACCOUNT_RATE_LIMITS = {
+    "login.failed": "5/300s",  # 5 login attempts within 5 minutes (300 seconds)
+    #"login.success": "20/1s",  # Example: limit successful logins to 20 per second
+    #"signup": "3/1h",          # Example: limit signup attempts to 3 per hour
+    # Add other rate limits as needed
+}
+
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_USERNAME_REQUIRED = False
@@ -163,7 +168,10 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_LOGIN_BY_CODE_ENABLED = True
 ACCOUNT_PASSKEY_LOGIN_ENABLED = True
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+
+# Enable user session tracking
 USERSESSIONS_TRACK_ACTIVITY = True
+
 
 # Sending email settings
 EMAIL_HOST = config('EMAIL_HOST')
