@@ -58,6 +58,6 @@ SECURE_SSL_REDIRECT = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
 
-DOMAIN = "https://django-ecommerce-gamma.vercel.app"
-CSRF_TRUSTED_ORIGINS = ['https://django-ecommerce-gamma.vercel.app']
+DOMAIN = ['https://django-ecommerce-3nfg.vercel.app/']
+CSRF_TRUSTED_ORIGINS = ['.vercel.app']
 

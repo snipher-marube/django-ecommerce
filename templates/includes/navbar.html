@@ -203,55 +203,15 @@
           >Products</a
         >
       </li>
+      {% for category in categories %}
       <li class="px-3 max-lg:border-b max-lg:py-3">
         <a
-          href="javascript:void(0)"
+          href="{{category.get_absolute_url}}"
           class="block text-[15px] font-medium text-white hover:text-yellow-300"
-          >Makeup</a
+          > {{category.category_name}} </a
         >
       </li>
-      <li class="px-3 max-lg:border-b max-lg:py-3">
-        <a
-          href="javascript:void(0)"
-          class="block text-[15px] font-medium text-white hover:text-yellow-300"
-          >Hair</a
-        >
-      </li>
-      <li class="px-3 max-lg:border-b max-lg:py-3">
-        <a
-          href="javascript:void(0)"
-          class="block text-[15px] font-medium text-white hover:text-yellow-300"
-          >Tools & Brushes</a
-        >
-      </li>
-      <li class="px-3 max-lg:border-b max-lg:py-3">
-        <a
-          href="javascript:void(0)"
-          class="block text-[15px] font-medium text-white hover:text-yellow-300"
-          >Bath & body</a
-        >
-      </li>
-      <li class="px-3 max-lg:border-b max-lg:py-3">
-        <a
-          href="javascript:void(0)"
-          class="block text-[15px] font-medium text-white hover:text-yellow-300"
-          >Clean Body</a
-        >
-      </li>
-      <li class="px-3 max-lg:border-b max-lg:py-3">
-        <a
-          href="javascript:void(0)"
-          class="block text-[15px] font-medium text-white hover:text-yellow-300"
-          >Gifts</a
-        >
-      </li>
-      <li class="px-3 max-lg:border-b max-lg:py-3">
-        <a
-          href="javascript:void(0)"
-          class="block text-[15px] font-medium text-white hover:text-yellow-300"
-          >Skincare</a
-        >
-      </li>
+      {% endfor %}
     </ul>
   </div>
 </header>
