@@ -2,7 +2,7 @@
 from .base import *
 
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app']
 
@@ -23,6 +23,17 @@ DATABASES = {
     }
 }
 
+# This configuration block is setting up a cache using Redis for the Django project in a production environment.
+# The cache is used to store the results of expensive database queries, API calls, or other computationally expensive operations.
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': config('UPSTASH_REDIS_REST_URL'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
 
 
 # Static and media files settings for production
