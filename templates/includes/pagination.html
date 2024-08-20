@@ -1,0 +1,43 @@
+{% load static %}
+<!-- Component: Underline basic pagination  -->
+<nav role="navigation" aria-label="Pagination Navigation">
+  {% if products.has_other_pages %}
+    <ul class="flex items-center justify-center text-sm list-none md:gap-1 text-slate-700">
+      {% if products.has_previous %}
+      <li>
+        <a data-page="{{products.previous_page_number}}" href="?page={{products.previous_page_number}}" aria-label="Goto Page 1" class="inline-flex items-center justify-center h-10 gap-4 px-4 text-sm font-medium transition duration-300 focus-visible:outline-none stroke-slate-700 text-dark hover:bg-gray hover:stroke-secondary hover:text-secondary focus:bg-primary focus:stroke-dark focus:text-secondary"><span class="order-2 md:sr-only">Prev</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 -mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" role="graphics-symbol" aria-labelledby="title-15 desc-15">
+            <title id="title-15">Previous page</title>
+            <desc id="desc-15">link to previous page</desc>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </a>
+      </li>
+      {% endif %}
+      {% for i in products.paginator.page_range %}
+      {% if products.number == i %}
+      <li>
+        <a href="?page={{i}}" aria-label="Goto Page 1" class="items-center justify-center hidden h-10 gap-4 px-4 text-sm font-medium transition duration-300 focus-visible:outline-none md:inline-flex stroke-dark text-dark hover:bg-gray hover:stroke-secondary hover:text-secondary focus:bg-primary focus:stroke-dark focus:text-secondary"> {{i}} </a>
+      </li>
+      {% else %}
+      <li aria-current="page">
+        <a href="?page={{i}}" aria-label="Goto Page 2" class="items-center justify-center hidden h-10 gap-4 px-4 text-sm font-medium transition duration-300 focus-visible:outline-none md:inline-flex stroke-dark text-dark hover:bg-gray hover:stroke-secondary hover:text-secondary focus:bg-primary focus:stroke-dark focus:text-secondary"> {{i}} </a>
+      </li>
+      {% endif %}
+      {% endfor %}
+      {% if products.has_next %}
+      <li>
+        <a data-page="{{products.paginator.num_pages}}" href="?page={{products.next_page_number}}" aria-label="Go to next page" class="inline-flex items-center justify-center h-10 gap-4 px-4 text-sm font-medium transition duration-300 focus-visible:outline-none stroke-slate-700 text-dark hover:bg-gray hover:stroke-secondary hover:text-secondary focus:bg-primary focus:stroke-dark focus:text-secondary"><span class="md:sr-only">Next</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 -mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" role="graphics-symbol" aria-labelledby="title-16 desc-16">
+            <title id="title-16">Next page</title>
+            <desc id="desc-16">link to next page</desc>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </li>
+      {% endif %}
+    
+    </ul>
+  {% endif %}
+  </nav>
+  <!-- End Underline basic pagination  -->

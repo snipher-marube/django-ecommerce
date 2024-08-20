@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 from .models import Product, ProductGallery, Category
 
 def products(request, category_slug=None):
@@ -7,7 +9,23 @@ def products(request, category_slug=None):
         products = Product.objects.filter(category=category, available=True)
     else:
         products = Product.objects.filter(available=True).order_by('-created')
-        
+
+    paginator = Paginator(products, 1)  # Adjust items per page as needed
+    page = request.GET.get('page')
+
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page is not an integer, deliver the first page.
+        products = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range, deliver the last page.
+        products = paginator.page(paginator.num_pages)
+    except Exception as e:
+        # Handle any other unexpected exceptions
+        products = paginator.page(1)  # fallback to the first page or handle as needed
+        print(f"Pagination error: {e}")  # Log the error for debugging
+
     context = {
         'products': products
     }
