@@ -6,11 +6,11 @@ from .models import Product, ProductGallery, Category
 def products(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(category=category, available=True)
+        products = Product.objects.filter(category=category, available=True)[:12]
     else:
         products = Product.objects.filter(available=True).order_by('-created')
 
-    paginator = Paginator(products, 1)  # Adjust items per page as needed
+    paginator = Paginator(products, 18)  # Adjust items per page as needed
     page = request.GET.get('page')
 
     try:
