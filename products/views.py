@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
+from carts.views import _cart_id
+from carts.models import CartItem
+
 from .models import Product, ProductGallery, Category
 
 def products(request, category_slug=None):
@@ -32,11 +35,21 @@ def products(request, category_slug=None):
     return render(request, 'products/products.html', context)
 
 def product_detail(request, category_slug, product_slug):
+    # Retrieve the product or raise a 404 if not found
     product = get_object_or_404(Product, category__slug=category_slug, slug=product_slug)
+
+    # Check if the product is in the user's cart
+    cart_id = _cart_id(request)
+    in_cart = CartItem.objects.filter(cart__cart_id=cart_id, product=product).exists()
+
+    # Fetch the product's gallery images
     gallery = ProductGallery.objects.filter(product=product)
-    
+
+    # Prepare the context for the template
     context = {
         'product': product,
-        'gallery': gallery
+        'gallery': gallery,
+        'in_cart': in_cart
     }
+
     return render(request, 'products/product_detail.html', context)

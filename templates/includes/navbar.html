@@ -80,7 +80,7 @@
                 </svg>
                 <span
                   class="absolute -top-1 left-auto -ml-1 rounded-full bg-red-500 px-1 py-0 text-xs text-white"
-                  >0</span
+                  > {{item_count}} </span
                 >
               </span>
             </li>
@@ -183,7 +183,7 @@
       <li class="mb-6 hidden max-lg:block">
         <a href="{% url 'home' %}"
           ><img
-            src="https://readymadeui.com/readymadeui-white.svg"
+            src="{% static 'images/logo/Logo.png' %}"
             alt="logo"
             class="w-36"
           />

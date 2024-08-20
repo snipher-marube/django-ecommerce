@@ -7,6 +7,7 @@
 {% block content %}
 <div class="bg-gray-700 font-sans">
   <div class="max-w-2xl p-4 max-lg:mx-auto lg:max-w-7xl">
+    <form action=""></form>
     <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-5">
       <div class="top-0 w-full text-center lg:sticky lg:col-span-3">
         <div class="rounded-xl bg-gray-800 px-4 py-12">
@@ -106,7 +107,7 @@
         </div>
 
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href="{% url 'payment' %}">
+          <a href="{% url 'checkout' %}">
             <button
             type="button"
             class="min-w-[200px] rounded bg-yellow-300 px-4 py-3 text-sm font-semibold text-black hover:bg-yellow-400"
@@ -115,7 +116,7 @@
           </button>
           </a>
           
-          <a href="{% url 'checkout' %}">
+          <a href="{% url 'add_cart' product.id %}">
           <button
             type="button"
             class="min-w-[200px] rounded border border-yellow-300 bg-transparent px-4 py-2.5 text-sm font-semibold text-yellow-300"
