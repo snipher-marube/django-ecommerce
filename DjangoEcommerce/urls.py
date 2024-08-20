@@ -19,8 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-# Secure admin login with allauth
-'''from allauth.account.decorators import secure_admin_login
+'''# Secure admin login with allauth
+from allauth.account.decorators import secure_admin_login
 
 
 admin.autodiscover()

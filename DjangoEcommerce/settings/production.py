@@ -1,4 +1,4 @@
-# production.py
+
 from .base import *
 
 
@@ -43,16 +43,10 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_PRELOAD = True
 SECURE_SSL_REDIRECT = True
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Change this to False to keep the session even if the browser is closed
-
-# Session age (2 weeks in seconds)
-SESSION_COOKIE_AGE = 0  # Adjust as needed
-SESSION_SAVE_EVERY_REQUEST = True
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
 
-DOMAIN = "https://django-ecommerce-gamma.vercel.app/"
+DOMAIN = "https://django-ecommerce-gamma.vercel.app"
+CSRF_TRUSTED_ORIGINS = ['https://django-ecommerce-gamma.vercel.app']
 

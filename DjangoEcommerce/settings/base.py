@@ -30,6 +30,7 @@ SECRET_KEY = config
 
 INSTALLED_APPS = [
     'allauth',
+    'allauth.usersessions',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'cloudinary_storage',
     'cloudinary',
     
@@ -49,7 +51,7 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'orders.apps.OrdersConfig',
 ]
-
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -60,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'allauth.usersessions.middleware.UserSessionsMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoEcommerce.urls'
@@ -148,7 +151,7 @@ ACCOUNT_RATE_LIMITS = {
     # Add other rate limits as needed
 }
 
-ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_USERNAME_REQUIRED = False
@@ -170,7 +173,9 @@ ACCOUNT_SESSION_REMEMBER = False  # This keeps users logged in across sessions
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Django Ecommerce'
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
-
+ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
+ACCOUNT_SESSION_REMOVAL = 'all'  # Possible options: 'none', 'oldest', 'all'
+USERSESSIONS_TRACK_ACTIVITY = True
 
 
 
