@@ -24,13 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config
 
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
     'allauth',
-    'allauth.usersessions',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
@@ -62,7 +59,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-    'allauth.usersessions.middleware.UserSessionsMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoEcommerce.urls'
@@ -146,13 +142,6 @@ AUTHENTICATION_BACKENDS = [
 
 # allauth settings
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_RATE_LIMITS = {
-    "login.failed": "5/300s",  # 5 login attempts within 5 minutes (300 seconds)
-    #"login.success": "20/1s",  # Example: limit successful logins to 20 per second
-    #"signup": "3/1h",          # Example: limit signup attempts to 3 per hour
-    # Add other rate limits as needed
-}
-
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'account_login'
 LOGIN_REDIRECT_URL = 'home'
@@ -175,11 +164,9 @@ ACCOUNT_SESSION_REMEMBER = False  # This keeps users logged in across sessions
 ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Django Ecommerce '
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
-ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
-ACCOUNT_SESSION_REMOVAL = 'all'  # Possible options: 'none', 'oldest', 'all'
-USERSESSIONS_TRACK_ACTIVITY = True
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Sending email settings
 EMAIL_HOST = config('EMAIL_HOST')

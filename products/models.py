@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from django.urls import reverse
 
@@ -6,7 +7,8 @@ class Category(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name = 'Product Category'
+        verbose_name_plural = 'Product Categories'
         indexes = [
             models.Index(fields=['id', 'slug']),
         ]
@@ -42,6 +44,37 @@ class Product(models.Model):
     
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
+class VariationCategory(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    display_name = models.CharField(max_length=100)  # For displaying in the choices
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.display_name
+    
+    class Meta:
+        verbose_name = 'Variation Category'
+        verbose_name_plural = 'Variation Categories'
+        indexes = [
+            models.Index(fields=['id', 'name']),
+        ]
+
+class Variation(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    variation_category = models.ForeignKey(VariationCategory, on_delete=models.CASCADE)
+    variation_value = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.variation_value} ({self.variation_category})'
+    
+    class Meta:
+        verbose_name = 'Variation'
+        verbose_name_plural = 'Variations'
+        indexes = [
+            models.Index(fields=['id', 'variation_category']),
+        ]
     
 class ProductGallery(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
