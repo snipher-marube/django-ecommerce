@@ -2,7 +2,7 @@
 from .base import *
 
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.vercel.app']
 
@@ -58,6 +58,6 @@ SECURE_SSL_REDIRECT = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
 
-DOMAIN = ['https://django-ecommerce-3nfg.vercel.app/']
-CSRF_TRUSTED_ORIGINS = ['.vercel.app']
+DOMAIN = ['https://django-ecommerce-3nfg.vercel.app']
+CSRF_TRUSTED_ORIGINS = ['https://django-ecommerce-3nfg.vercel.app']
 
