@@ -44,6 +44,28 @@ This is a fully functional ecommerce website built with Django and Tailwind CSS.
 
 5. Open your browser and visit `http://localhost:8000` to access the website.
 
+## Setting up Django-allauth with Google
+
+1. Go to the [Google Developer Console](https://console.developers.google.com/) and create a new project.
+
+2. Enable the Google+ API for your project:
+   - In the sidebar, click on "Library".
+   - Search for "Google+ API" and click on it.
+   - Click on the "Enable" button.
+
+3. Create OAuth 2.0 credentials:
+   - In the sidebar, click on "Credentials".
+   - Click on the "Create Credentials" button and select "OAuth client ID".
+   - Select "Web application" as the application type.
+   - Enter a name for your credentials.
+   - Under "Authorized JavaScript origins", add `http://localhost:8000` (replace with your actual domain if needed).
+   - Under "Authorized redirect URIs", add `http://localhost:8000/accounts/google/login/callback/` (replace with your actual domain if needed).
+   - Click on the "Create" button.
+
+4. Copy the generated "Client ID" and "Client Secret" values.
+
+5. Navigate to you admin panel then under add social application add Client ID and Client Secret and Name.
+
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
