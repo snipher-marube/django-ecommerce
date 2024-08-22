@@ -35,6 +35,8 @@ CACHES = {
     }
 }
 
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 # Static and media files settings for production
 STATIC_URL = '/static/'
