@@ -16,7 +16,7 @@ DATABASES = {
         'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT'),
         'CONN_MAX_AGE': 1200,
-         'OPTIONS': {
+        'OPTIONS': {
             'sslmode': 'require',
             'client_encoding': 'UTF8',           
         }
@@ -36,10 +36,6 @@ CACHES = {
 }'''
 
 
-# Static and media files settings for production
-STATIC_URL = '/static/'
-
-MEDIA_URL = '/media/'
 
 # Cloudinary storage for production
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
