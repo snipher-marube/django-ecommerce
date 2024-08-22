@@ -55,9 +55,8 @@ SECURE_HSTS_PRELOAD = True
 SECURE_SSL_REDIRECT = True
 
 
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_DOMAIN = 'https://django-ecommerce-3nfg.vercel.app'
+CSRF_COOKIE_SECURE = True
 
 DOMAIN = ['https://django-ecommerce-3nfg.vercel.app']
 CSRF_TRUSTED_ORIGINS = ['https://django-ecommerce-3nfg.vercel.app']
