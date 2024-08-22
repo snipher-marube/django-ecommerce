@@ -23,7 +23,7 @@ DATABASES = {
     }
 }
 
-# This configuration block is setting up a cache using Redis for the Django project in a production environment.
+'''# This configuration block is setting up a cache using Redis for the Django project in a production environment.
 # The cache is used to store the results of expensive database queries, API calls, or other computationally expensive operations.
 CACHES = {
     'default': {
@@ -33,7 +33,7 @@ CACHES = {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
-}
+}'''
 
 
 # Static and media files settings for production
@@ -45,7 +45,7 @@ MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
-'''SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SECURE_HSTS_SECONDS = 60
@@ -53,10 +53,8 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_PRELOAD = True
 SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True'''
-
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-SESSION_CACHE_ALIAS = "default"
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
