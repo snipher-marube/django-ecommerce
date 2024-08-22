@@ -19,6 +19,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoEcommerce.settings')
 application = get_wsgi_application()
 
 # wrap the application with WhiteNoise
-application = WhiteNoise(application)
+application = WhiteNoise(application, root='static')
 
 app = application

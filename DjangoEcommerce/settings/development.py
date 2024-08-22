@@ -1,15 +1,15 @@
-# Development settings
 from .base import *
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# Development-specific settings
 DEBUG = True
 
-# SECURITY WARNING: keep the secret key used in production secret!
-ALLOWED_HOSTS = ['*']
+# Add 'localhost' to ALLOWED_HOSTS for development
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+DOMAINS = ['localhost', '127.0.0.1']
+SECURE_SSL_REDIRECT = False
+CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", "http://127.0.0.1:8000"]
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# Use SQLite for development
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -18,11 +18,4 @@ DATABASES = {
 }
 
 
-# Add 'localhost' to ALLOWED_HOSTS for development
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-DOMAINS = ['localhost', '127.0.0.1']
-SECURE_SSL_REDIRECT = False
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8000", "http://127.0.0.1:8000"]
-
-
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http'
+CLOUDINARY_STORAGE['SECURE'] = False

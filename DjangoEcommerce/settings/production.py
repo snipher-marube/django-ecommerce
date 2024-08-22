@@ -2,7 +2,7 @@
 from .base import *
 
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.vercel.app']
 
@@ -23,13 +23,6 @@ DATABASES = {
     }
 }
 
-# Static and media files settings for production
-STATIC_URL = '/static/'
-
-MEDIA_URL = '/media/'
-
-# Cloudinary storage for production
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -44,6 +37,8 @@ SECURE_HSTS_PRELOAD = True
 
 DOMAIN = "https://django-ecommerces.vercel.app"
 CSRF_TRUSTED_ORIGINS = ['https://django-ecommerces.vercel.app']
+
+CLOUDINARY_STORAGE['SECURE'] = True
 
 
 
