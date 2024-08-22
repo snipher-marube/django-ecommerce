@@ -15,7 +15,7 @@ DATABASES = {
         'PASSWORD': config('DATABASE_PASSWORD'),
         'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT'),
-        'CONN_MAX_AGE': 600,
+        'CONN_MAX_AGE': 1200,
          'OPTIONS': {
             'sslmode': 'require',
             'client_encoding': 'UTF8',           
@@ -45,7 +45,7 @@ MEDIA_URL = '/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
-SECURE_SSL_REDIRECT = True
+'''SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SECURE_HSTS_SECONDS = 60
@@ -53,6 +53,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_PRELOAD = True
 SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True'''
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
