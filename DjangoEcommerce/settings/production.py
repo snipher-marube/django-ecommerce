@@ -38,7 +38,7 @@ CSRF_COOKIE_SECURE = True
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
-CSRF_TRUSTED_ORIGINS = ['https://django-ecommerce-tau.vercel.app']
+CSRF_TRUSTED_ORIGINS = ['https://django-ecommerces.vercel.app']
 
 
 # Static and media files settings for production
