@@ -35,8 +35,6 @@ CACHES = {
     }
 }
 
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-SESSION_CACHE_ALIAS = "default"
 
 # Static and media files settings for production
 STATIC_URL = '/static/'
@@ -56,10 +54,12 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_PRELOAD = True
 SECURE_SSL_REDIRECT = True
 
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ['https://django-ecommerce-tau.vercel.app']
 
-DOMAIN = ['https://django-ecommerce-3nfg.vercel.app']
-CSRF_TRUSTED_ORIGINS = ['https://django-ecommerce-3nfg.vercel.app']
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
