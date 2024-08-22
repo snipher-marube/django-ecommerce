@@ -1,0 +1,14 @@
+.hero {
+    background: url(../images/hero/hero.jpg) no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
