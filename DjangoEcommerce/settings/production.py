@@ -38,6 +38,14 @@ SECURE_HSTS_PRELOAD = True
 DOMAIN = "https://django-ecommerces.vercel.app"
 CSRF_TRUSTED_ORIGINS = ['https://django-ecommerces.vercel.app']
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET'),
+    
+}
+# Ensure that the following is correctly configured for Cloudinary
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE['SECURE'] = True
 
 
