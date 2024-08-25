@@ -30,7 +30,7 @@ class Order(models.Model):
         ('Cancelled', 'Cancelled')
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, null=True)
     order_number = models.CharField(max_length=20)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)

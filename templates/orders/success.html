@@ -1,4 +1,10 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+
+{% block title %}
+  success
+{% endblock title %}
+  
+{% block content %}
 <div
   class="fixed inset-0 z-[1000] flex h-full w-full flex-wrap items-center justify-center overflow-auto p-4 font-[sans-serif] before:fixed before:inset-0 before:h-full before:w-full before:bg-[rgba(0,0,0,0.5)]"
 >
@@ -7,6 +13,7 @@
       xmlns="http://www.w3.org/2000/svg"
       class="float-right w-3.5 shrink-0 cursor-pointer fill-gray-400 hover:fill-red-500"
       viewBox="0 0 320.591 320.591"
+      id="close"
     >
       <path
         d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
@@ -52,4 +59,8 @@
     </a>
   </div>
 </div>
+
+
 {% endblock content %}
+
+

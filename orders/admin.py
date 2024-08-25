@@ -13,7 +13,6 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ['status', 'is_ordered', 'created_at']
     list_per_page = 20
     search_fields = ['order_number', 'first_name', 'last_name', 'phone', 'email']
-    list_editable = ['status', 'is_ordered']
 
     inlines = [OrderProductInline]
 
