@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 from products.models import Product, Variation
 
 class Cart(models.Model):
@@ -28,5 +29,8 @@ class CartItem(models.Model):
 
     def sub_total(self):
         return self.product.price * self.quantity
-
+    
+    def total_discount(self):
+        return self.product.discount * self.quantity
+    
     

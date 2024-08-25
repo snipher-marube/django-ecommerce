@@ -38,7 +38,8 @@
             </div>
 
             <div class="mt-4 flex flex-wrap gap-4">
-              <button
+              <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you sure you want to remove this item?')">
+                <button
                 type="button"
                 class="flex shrink-0 items-center gap-2 text-sm font-semibold text-red-500"
               >
@@ -58,6 +59,8 @@
                 </svg>
                 Remove
               </button>
+              </a>
+              
               <button
                 type="button"
                 class="flex shrink-0 items-center gap-2 text-sm font-semibold text-pink-500"
@@ -77,10 +80,16 @@
             </div>
           </div>
 
+          
           <div class="ml-auto text-right">
-            <div class="flex items-center justify-end gap-3">
+            <form action="{% url 'cart' %}" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ cart_item.product.id }}">
+              <input type="hidden" name="cart_item_id" value="{{ cart_item.id }}">
+              <div class="flex items-center justify-end gap-3">
               <!--decrement item-->
-              <button
+              <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}">
+                <button
                 type="button"
                 class="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 outline-none"
               >
@@ -95,7 +104,9 @@
                   ></path>
                 </svg>
               </button>
-              <span class="text-sm font-bold leading-[18px]">{{cart_item.quantity}}</span>
+              </a>
+              <input class="text-sm font-bold leading-[18px]" type="text" name="quantity" value="{{ cart_item.quantity }}" min="1" max="{{ cart_item.product.stock }}">
+              
               <!--increment item-->
               <a href="{% url 'add_cart' cart_item.product.id %}">
                 <button
@@ -116,12 +127,14 @@
               </a>
               
             </div>
+            </form>
+            
 
             <div class="mt-4">
               <h4 class="mb-1 text-lg font-bold text-gray-500">
-                <strike class="font-medium">${{cart_item.product.discount}}</strike>
+                <strike class="font-medium">${{cart_item.total_discount}}</strike>
               </h4>
-              <h4 class="text-lg font-bold text-gray-800"> ${{cart_item.product.price}} </h4>
+              <h4 class="text-lg font-bold text-gray-800"> ${{cart_item.sub_total}} </h4>
             </div>
           </div>
         </div>
@@ -142,24 +155,24 @@
 
       <ul class="mt-4 divide-y text-gray-800">
         <li class="flex flex-wrap gap-4 py-3 text-sm">
-          Subtotal <span class="ml-auto font-bold">$73.00</span>
+          Subtotal <span class="ml-auto font-bold">${{total}} </span>
         </li>
         <li class="flex flex-wrap gap-4 py-3 text-sm">
-          Shipping <span class="ml-auto font-bold">$4.00</span>
+          Shipping <span class="ml-auto font-bold">${{shipping_fee}}</span>
         </li>
         <li class="flex flex-wrap gap-4 py-3 text-sm">
-          Tax <span class="ml-auto font-bold">$4.00</span>
+          Tax <span class="ml-auto font-bold">${{tax}} </span>
         </li>
         <li class="flex flex-wrap gap-4 py-3 text-sm font-bold">
-          Total <span class="ml-auto">$81.00</span>
+          Total <span class="ml-auto">${{grand_total}}</span>
         </li>
       </ul>
-      <a href="{% url 'checkout' %}">
+      <a href="{% url 'place_order' %}">
         <button
           type="button"
           class="mt-4 w-full rounded-md bg-blue-600 px-5 py-2.5 text-sm text-white hover:bg-blue-700"
         >
-          Make Payment
+          Place Order
         </button>
       </a>
 

@@ -15,7 +15,8 @@ DATABASES = {
         'PASSWORD': config('DATABASE_PASSWORD'),
         'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT'),
-        'CONN_MAX_AGE': 1200,
+        'CONN_MAX_AGE': 600,
+        'CONN_HEALTH_CHEKS': True,
         'OPTIONS': {
             'sslmode': 'require',
             'client_encoding': 'UTF8',           
@@ -23,6 +24,7 @@ DATABASES = {
     }
 }
 
+DISABLE_SERVER_SIDE_CURSORS = True
 
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -44,7 +46,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': config('API_SECRET'),
     
 }
-# Ensure that the following is correctly configured for Cloudinary
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE['SECURE'] = True
 

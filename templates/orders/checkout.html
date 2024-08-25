@@ -1,4 +1,10 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block title %}
+  checkout
+{% endblock title %}
+  
+{% block content %}
 <div class="bg-white font-[sans-serif]">
   <div class="mx-auto w-full max-lg:max-w-xl">
     <div class="grid gap-6 lg:grid-cols-3">
@@ -13,7 +19,8 @@
           </h2>
         </div>
 
-        <form class="lg:mt-16">
+        <form method="post" action="{% url 'place_order' %}" class="lg:mt-16">
+          {% csrf_token %}
           <div>
             <h2 class="text-xl font-bold text-gray-800">Shipping info</h2>
 
@@ -21,7 +28,24 @@
               <div>
                 <input
                   type="text"
-                  placeholder="Name"
+                  placeholder="Fist Name"
+                  name="first_name"
+                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  name="last_name"
+                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Phone Number"
+                  name="phone"
                   class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
                 />
               </div>
@@ -29,13 +53,15 @@
                 <input
                   type="email"
                   placeholder="Email address"
+                  name="email"
                   class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
                 />
               </div>
               <div>
                 <input
                   type="text"
-                  placeholder="Street address"
+                  placeholder="State/County"
+                  name="state"
                   class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
                 />
               </div>
@@ -43,20 +69,25 @@
                 <input
                   type="text"
                   placeholder="City"
+                  name="city"
                   class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
                 />
               </div>
               <div>
                 <input
                   type="text"
-                  placeholder="State"
+                  placeholder="Street address"
+                  name="street_address"
                   class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
                 />
               </div>
+              
+              
               <div>
                 <input
                   type="number"
                   placeholder="Postal code"
+                  name="postal_code"
                   class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
                 />
               </div>
@@ -192,7 +223,7 @@
               type="button"
               class="min-w-[150px] rounded-lg bg-blue-600 px-6 py-3.5 text-sm text-white hover:bg-blue-700"
             >
-              Confirm payment $240
+              Confirm payment ${{grand_total}}
             </button>
             </a>
             
@@ -208,123 +239,47 @@
             <h2 class="text-xl font-bold text-gray-800">Order Summary</h2>
 
             <div class="mt-8 space-y-8">
+              {% for cart_item in cart_items %}
               <div class="flex flex-col gap-4">
                 <div class="max-w-[140px] shrink-0 rounded-lg bg-gray-200 p-4">
                   <img
-                    src="https://readymadeui.com/images/product10.webp"
+                    src="{{cart_item.product.image.url}}"
                     class="w-full object-contain"
                   />
                 </div>
 
                 <div class="w-full">
-                  <h3 class="text-base font-bold text-gray-800">
-                    Naruto: Split Sneakers
+                  <a href="{{ cart_item.product.get_url }}">
+                    <h3 class="text-base font-bold text-gray-800">
+                    {{cart_item.product.product_name}}
                   </h3>
+                  </a>
+                  
                   <ul class="mt-2 space-y-2 text-sm text-gray-800">
+                    {% if cart_item.variations.all %}
+                    {% for item in cart_item.variations.all %}
                     <li class="flex flex-wrap gap-4">
-                      Size <span class="ml-auto">37</span>
+                      {{ item.variation_category | capfirst }} <span class="ml-auto">{{ item.variation_value | capfirst }}</span>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                    <li class="flex flex-wrap gap-4">
+                      Quantity <span class="ml-auto">{{cart_item.quantity}}</span>
                     </li>
                     <li class="flex flex-wrap gap-4">
-                      Quantity <span class="ml-auto">2</span>
-                    </li>
-                    <li class="flex flex-wrap gap-4">
-                      Total Price <span class="ml-auto">$40</span>
+                      Total Price <span class="ml-auto">${{cart_item.sub_total}}</span>
                     </li>
                   </ul>
                 </div>
               </div>
+              {% endfor %}
 
-              <div class="flex flex-col gap-4">
-                <div class="max-w-[140px] shrink-0 rounded-lg bg-gray-200 p-4">
-                  <img
-                    src="https://readymadeui.com/images/product11.webp"
-                    class="w-full object-contain"
-                  />
-                </div>
-
-                <div class="w-full">
-                  <h3 class="text-base font-bold text-gray-800">
-                    VelvetGlide Boots
-                  </h3>
-                  <ul class="mt-2 space-y-2 text-sm text-gray-800">
-                    <li>Size <span class="float-right">37</span></li>
-                    <li>Quantity <span class="float-right">2</span></li>
-                    <li>Total Price <span class="float-right">$40</span></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="flex flex-col gap-4">
-                <div class="max-w-[140px] shrink-0 rounded-lg bg-gray-200 p-4">
-                  <img
-                    src="https://readymadeui.com/images/product14.webp"
-                    class="w-full object-contain"
-                  />
-                </div>
-
-                <div class="w-full">
-                  <h3 class="text-base font-bold text-gray-800">
-                    Echo Elegance
-                  </h3>
-                  <ul class="mt-2 space-y-2 text-sm text-gray-800">
-                    <li>Size <span class="float-right">37</span></li>
-                    <li>Quantity <span class="float-right">2</span></li>
-                    <li>Total Price <span class="float-right">$40</span></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="flex flex-col gap-4">
-                <div class="max-w-[140px] shrink-0 rounded-lg bg-gray-200 p-4">
-                  <img
-                    src="https://readymadeui.com/images/product12.webp"
-                    class="w-full object-contain"
-                  />
-                </div>
-
-                <div class="w-full">
-                  <h3 class="text-base font-bold text-gray-800">
-                    Naruto: Split Sneakers
-                  </h3>
-                  <ul class="mt-2 space-y-2 text-sm text-gray-800">
-                    <li class="flex flex-wrap gap-4">
-                      Size <span class="ml-auto">37</span>
-                    </li>
-                    <li class="flex flex-wrap gap-4">
-                      Quantity <span class="ml-auto">2</span>
-                    </li>
-                    <li class="flex flex-wrap gap-4">
-                      Total Price <span class="ml-auto">$40</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="flex flex-col gap-4">
-                <div class="max-w-[140px] shrink-0 rounded-lg bg-gray-200 p-4">
-                  <img
-                    src="https://readymadeui.com/images/product9.webp"
-                    class="w-full object-contain"
-                  />
-                </div>
-
-                <div class="w-full">
-                  <h3 class="text-base font-bold text-gray-800">
-                    VelvetGlide Boots
-                  </h3>
-                  <ul class="mt-2 space-y-2 text-sm text-gray-800">
-                    <li>Size <span class="float-right">37</span></li>
-                    <li>Quantity <span class="float-right">2</span></li>
-                    <li>Total Price <span class="float-right">$40</span></li>
-                  </ul>
-                </div>
-              </div>
             </div>
           </div>
 
           <div class="w-full bg-gray-200 p-4 lg:absolute lg:bottom-0 lg:left-0">
             <h4 class="flex flex-wrap gap-4 text-base font-bold text-gray-800">
-              Total <span class="ml-auto">$240.00</span>
+              Total <span class="ml-auto">${{grand_total}}</span> <p class="text-xs">Tax and shipping inclusive</p>
             </h4>
           </div>
         </div>

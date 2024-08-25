@@ -131,7 +131,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / '../staticfiles'
 
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -169,10 +168,8 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Django Ecommerce '
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 # Sending email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = 587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')

@@ -1,22 +1,24 @@
 from .models import Cart, CartItem
+
 from .views import _cart_id
 
 def counter(request):
+    item_count = 0
     if 'admin' in request.path:
         return {}
+    else:
+        try:
+            cart = Cart.objects.filter(cart_id=_cart_id(request)) # get the cart using the cart_id present in the session
+            if request.user.is_authenticated:
+                cart_items = CartItem.objects.all().filter(user=request.user)
+            else:
+                cart_items = CartItem.objects.all().filter(cart=cart[:1]) # get all the cart items using the cart
+                
+            for cart_item in cart_items:
+                item_count += cart_item.quantity
 
-    item_count = 0
+        except Cart.DoesNotExist:
+            item_count = 0
 
-    try:
-        if request.user.is_authenticated:
-            # Use CartItem to get the cart associated with the user
-            cart_items = CartItem.objects.filter(user=request.user, is_active=True)
-        else:
-            cart = Cart.objects.get(cart_id=_cart_id(request))
-            cart_items = CartItem.objects.filter(cart=cart, is_active=True)
-
-        item_count = sum(cart_item.quantity for cart_item in cart_items)
-    except Cart.DoesNotExist:
-        pass
-
-    return {'item_count': item_count}
+        
+    return dict(item_count=item_count)
