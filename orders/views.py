@@ -5,6 +5,7 @@ from carts.models import CartItem
 from .forms import OrderForm
 from django.utils import timezone
 from django.utils.crypto import get_random_string
+from django.conf import settings
 
 from .models import Order, Payment, OrderProduct
 import json
@@ -121,6 +122,7 @@ def place_order(request, total=0, quantity=0,):
 
             order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
             context = {
+                'paypal_client_id': settings.PAYPAL_CLIENT_ID,
                 'order': order,
                 'cart_items': cart_items,
                 'total': total,

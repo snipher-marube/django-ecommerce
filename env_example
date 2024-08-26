@@ -1,0 +1,24 @@
+SECRET_KEY=your secret key
+
+
+# Your cloudinary settings
+CLOUD_NAME=cloud_name
+API_KEY=your_api_key
+API_SECRET=your_api_secret
+
+# Your email settings
+EMAIL_HOST=smtp.gmail.com
+EMAIL_HOST_USER=your_email_host
+EMAIL_HOST_PASSWORD=your_host_password
+DEFAULT_FROM_EMAIL=your default_email
+
+# Database details
+DATABASE_NAME=database_name
+DATABASE_USER=database_user
+DATABASE_PASSWORD=database_password
+DATABASE_HOST=database_host
+DATABASE_PORT=database_port
+
+
+PAYPAL_CLIENT_ID=your_paypal_client_id
+
