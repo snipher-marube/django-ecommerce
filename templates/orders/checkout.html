@@ -103,46 +103,6 @@
           </div>
 
           <div class="mt-16">
-            <h2 class="text-xl font-bold text-gray-800">Payment method</h2>
-
-            <div class="mt-4 grid gap-4 sm:grid-cols-2">
-              
-              <div class="flex items-center">
-                <input
-                  type="radio"
-                  class="h-5 w-5 cursor-pointer"
-                  id="paypal-radio"
-                  name="payment_method"
-                  value="PayPal"
-                />
-                <label for="paypal" class="ml-4 flex cursor-pointer gap-2">
-                  <img
-                    src="{% static 'images/pay/paypal.webp' %}"
-                    class="w-20"
-                    alt="paypalCard"
-                  />
-                  
-                </label>
-
-                <input
-                type="radio"
-                class="h-5 w-5 cursor-pointer"
-                id="mpesa-radio"
-                name="payment_method"
-                value="Mpesa"
-                />
-                <label for="mpesa" class="ml-4 flex cursor-pointer gap-2">
-                  <img
-                    src="{% static 'images/pay/m-pesa.png' %}"
-                    class="w-20"
-                    alt="mpesacard"
-                  />
-                  
-                </label>
-
-              </div>
-            </div>
-
             <div class="mt-8 grid gap-8">
 
               <div class="flex items-center">
@@ -167,12 +127,12 @@
           </div>
 
           <div class="mt-8 flex flex-wrap gap-4">
-            <a href="{% url 'cart' %}">
+            <a href="{% url 'products' %}">
               <button
               type="button"
               class="min-w-[150px] rounded-lg bg-gray-200 px-6 py-3.5 text-sm text-gray-800 hover:bg-gray-300"
             >
-              Back
+              Continue Shopping
             </button>
             </a>
             
@@ -181,7 +141,7 @@
               type="submit"
               class="min-w-[150px] rounded-lg bg-blue-600 px-6 py-3.5 text-sm text-white hover:bg-blue-700"
             >
-              Confirm payment ${{grand_total}}
+              Place Order of ${{grand_total}}
             </button>
             
             
@@ -245,77 +205,4 @@
   </div>
 </div>
 
-<script>
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-      const cookies = document.cookie.split(";");
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
-
-  var total = '{{grand_total}}';
-  var url = '{% url "payments" %}';
-  var csrftoken = getCookie("csrftoken");
-  var orderID = '{{order.order_number}}'
-  var payment_method = 'PayPal'
-  var redirect_url = '{% url "order_success" %}'
-
-  paypal.Buttons({
-    style: {
-      layout: 'horizontal',
-      color: 'gold',
-      shape: 'rect',
-      label: 'paypal',
-      tagline: 'false',
-      height: 40
-    },
-    createOrder: function(data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          amount: { value: total }
-        }]
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
-        fetch(url, {
-          method: 'POST',
-          headers: {
-            "content-type": "application/json",
-            "X-CSRFToken": csrftoken,
-          },
-          body: JSON.stringify({
-            orderID: orderID,
-            transID: details.id,
-            payment_method: payment_method,
-            status: details.status,
-          }),
-        })
-        .then(response => response.json())
-        .then(data => {
-          window.location.href = redirect_url + '?order_number=' + data.order_number + '&payment_id=' + data.transID;
-        });
-      });
-    }
-  }).render('#paypal-button-container');
-
-  document.getElementById("confirm-payment-button").addEventListener("click", function(event) {
-    var selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
-
-    if (selectedPaymentMethod === "PayPal") {
-      event.preventDefault();
-      document.getElementById('paypal-button-container').click();
-    } else {
-      document.getElementById("checkout-form").submit();
-    }
-  });
-</script>
 {% endblock content %}

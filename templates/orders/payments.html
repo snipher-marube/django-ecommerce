@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  My Cart
+  Payment
 {% endblock title %}
   
 {% block content %}
@@ -167,35 +167,72 @@
           Total <span class="ml-auto">${{grand_total}}</span>
         </li>
       </ul>
-      <a href="{% url 'place_order' %}">
-        <button
-          type="button"
-          class="mt-4 w-full rounded-md bg-blue-600 px-5 py-2.5 text-sm text-white hover:bg-blue-700"
-        >
-          checkout
-        </button>
-      </a>
-
-      <div class="mt-8">
-        <h3 class="mb-4 text-lg font-bold text-gray-800">Apply promo code</h3>
-
-        <div
-          class="flex max-w-md overflow-hidden rounded-md border border-blue-600"
-        >
-          <input
-            type="email"
-            placeholder="Promo code"
-            class="w-full bg-white px-4 py-2.5 text-sm text-gray-600 outline-none"
-          />
-          <button
-            type="button"
-            class="flex items-center justify-center bg-blue-600 px-5 text-sm text-white hover:bg-blue-700"
-          >
-            Apply
-          </button>
-        </div>
-      </div>
+      <div id="paypal-button-container"></div>
     </div>
   </div>
 </div>
+
+<!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AXPJyhCjaTIG1VJjWUmKD05qRtIp1x6f9-XaHAqrKda9zw1-W4SQBvYghEnppEXqO_nCdB63j_CIBDQ5&currency=USD"></script>
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  var total = '{{grand_total}}';
+  var url = '{% url "payments" %}';
+  var csrftoken = getCookie("csrftoken");
+  var orderID = '{{order.order_number}}'
+  var payment_method = 'PayPal'
+  var redirect_url = '{% url "order_success" %}'
+
+  paypal.Buttons({
+    style: {
+      color: 'gold',
+      shape: 'rect',
+      label: 'paypal',
+      tagline: 'false',
+      height: 40
+    },
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: total }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            "content-type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          body: JSON.stringify({
+            orderID: orderID,
+            transID: details.id,
+            payment_method: payment_method,
+            status: details.status,
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          window.location.href = redirect_url + '?order_number=' + data.order_number + '&payment_id=' + data.transID;
+        });
+      });
+    }
+  }).render('#paypal-button-container');
+</script>
 {% endblock content %}
