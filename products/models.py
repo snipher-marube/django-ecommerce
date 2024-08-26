@@ -1,5 +1,4 @@
 from django.db import models
-from django.forms import ValidationError
 from django.urls import reverse
 
 class Category(models.Model):
@@ -26,7 +25,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='product_images/%Y/%m/%d/')
+    image = models.ImageField(upload_to='images/products/%Y/%m/%d/')
     stock = models.PositiveBigIntegerField()
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -78,7 +77,7 @@ class Variation(models.Model):
     
 class ProductGallery(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='product_gallery/%Y/%m/%d/')
+    image = models.ImageField(upload_to='images/products/gallery/%Y/%m/%d/')
     
     def __str__(self):
         return self.product.product_name
