@@ -24,6 +24,16 @@ DATABASES = {
     }
 }
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET'),
+    'SECURE': True,
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 DISABLE_SERVER_SIDE_CURSORS = True
 
 SECURE_SSL_REDIRECT = True
@@ -40,15 +50,7 @@ SECURE_HSTS_PRELOAD = True
 DOMAIN = "https://django-ecommerces.vercel.app"
 CSRF_TRUSTED_ORIGINS = ['https://django-ecommerces.vercel.app']
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUD_NAME'),
-    'API_KEY': config('API_KEY'),
-    'API_SECRET': config('API_SECRET'),
-    
-}
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-CLOUDINARY_STORAGE['SECURE'] = True
 
 
 
