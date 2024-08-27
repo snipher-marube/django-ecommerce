@@ -10,7 +10,7 @@ django-allauth==64.1.0
 django-cloudinary-storage==0.3.0
 django-mpesa==2.0.14
 django-redis==5.4.0
-django-unfold==0.36.0
+django-unfold==0.37.0
 djangorestframework==3.15.2
 idna==3.8
 jsonfield==3.1.0
