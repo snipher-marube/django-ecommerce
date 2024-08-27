@@ -42,7 +42,7 @@ class VariationAdmin(admin.ModelAdmin):
     list_filter = ('variation_category', 'is_active', 'created')
     search_fields = ('product__product_name', 'variation_value')
     list_editable = ('is_active',)
-    ordering = ('-created',)
+    ordering = ('variation_category', 'variation_value')
     autocomplete_fields = ['product', 'variation_category']
     list_per_page = 20
     save_as = True  # Save as new option in the change view
@@ -67,24 +67,44 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('category_name', 'slug')
     prepopulated_fields = {'slug': ('category_name',)}
     search_fields = ('category_name',)
+    ordering = ('category_name',)
+    list_filter = ('category_name',)
 
 @admin_thumbnails.thumbnail('image')
 class ProductGalleryInline(admin.TabularInline):
     model = ProductGallery
     extra = 1
+    readonly_fields = ('image',)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     def thumbnail(self, object):
         return format_html('<img src="{}" width="40" >'.format(object.image.url))
     
-    list_display = ('thumbnail', 'product_name', 'slug', 'price', 'stock', 'available', 'created', 'updated')
-    list_filter = ('available', 'created', 'updated')
-    list_editable = ('price', 'stock', 'available')
-    prepopulated_fields = {'slug': ('product_name',)}
+    list_display = ('thumbnail', 'product_name', 'category', 'price', 'stock', 'available', 'created', 'updated')
+    list_filter = ('available', 'category', 'created', 'updated')
     search_fields = ('product_name', 'description')
-    date_hierarchy = 'created'
+    prepopulated_fields = {'slug': ('product_name',)}
+    list_editable = ('price', 'stock', 'available')
     ordering = ('-created',)
-    list_display_links = ['product_name']
+    inlines = [ProductGalleryInline, VariationInline]
+    readonly_fields = ('created', 'updated')
+    date_hierarchy = 'created'
     
-    inlines = [ProductGalleryInline, VariationInline]  # Variations are inline with Products
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.select_related('category')
+    
+
+@admin.register(ReviewRating)
+class ReviewRatingAdmin(admin.ModelAdmin):
+    list_display = ('product', 'user', 'rating', 'status', 'created_at', 'updated_at')
+    list_filter = ('status', 'rating', 'created_at', 'updated_at')
+    search_fields = ('user__username', 'product__product_name', 'subject', 'review')
+    readonly_fields = ('created_at', 'updated_at')
+    ordering = ('-created_at',)
+    date_hierarchy = 'created_at'
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.select_related('product', 'user')

@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
 
 class Category(models.Model):
     """
@@ -66,6 +69,22 @@ class Product(models.Model):
         """
         reviews = ReviewRating.objects.filter(product=self, status=True).aggregate(count=models.Count('id'))
         return int(reviews['count']) if reviews['count'] is not None else 0
+    
+    def clean(self):
+        """
+        Custom validation to ensure that the discount is less than the price.
+        """
+        if self.discount is not None and self.discount >= self.price:
+            raise ValidationError(
+                {'discount': _('Discount cannot be greater than or equal to the product price.')}
+            )
+    
+    def save(self, *args, **kwargs):
+        """
+        Override save method to ensure clean is called.
+        """
+        self.full_clean()
+        super().save(*args, **kwargs)
 
 
 class VariationCategory(models.Model):
