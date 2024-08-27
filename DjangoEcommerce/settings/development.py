@@ -17,7 +17,10 @@ DATABASES = {
     }
 }
 
+# Static and media files settings for development
+STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
 
 
 

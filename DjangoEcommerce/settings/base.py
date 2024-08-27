@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary_storage',
-    'cloudinary',
     
     # local apps
     'pages.apps.PagesConfig',
@@ -46,6 +44,10 @@ INSTALLED_APPS = [
     'carts.apps.CartsConfig',
     'products.apps.ProductsConfig',
     'orders.apps.OrdersConfig',
+    
+    'whitenoise',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -118,7 +120,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-# Static and media files settings
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
@@ -126,12 +127,9 @@ STATICFILES_DIRS = [
     BASE_DIR / '../static'
 ]
 STATIC_ROOT = BASE_DIR / '../staticfiles/'
-MEDIA_ROOT = BASE_DIR / '../static/media'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # django allauth settings
 AUTHENTICATION_BACKENDS = [
@@ -139,7 +137,13 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUD_NAME'),
+    'API_KEY': config('API_KEY'),
+    'API_SECRET': config('API_SECRET'),
+}
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # allauth settings
 ACCOUNT_EMAIL_REQUIRED = True
@@ -175,11 +179,8 @@ EMAIL_USE_TLS = True
 
 PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUD_NAME'),
-    'API_KEY': config('API_KEY'),
-    'API_SECRET': config('API_SECRET'),
-}
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
