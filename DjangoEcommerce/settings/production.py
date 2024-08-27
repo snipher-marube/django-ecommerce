@@ -46,7 +46,5 @@ CSRF_TRUSTED_ORIGINS = ['https://django-ecommerces.vercel.app']
 # Static and media files settings for production
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/media/'
-
-# Cloudinary storage for production
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
