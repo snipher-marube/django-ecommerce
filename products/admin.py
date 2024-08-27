@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 import admin_thumbnails
-from .models import Category, Product, ProductGallery, Variation, VariationCategory
+from .models import Category, Product, ProductGallery, Variation, VariationCategory, ReviewRating
 
 class VariationInline(admin.TabularInline):
     model = Variation
