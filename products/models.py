@@ -28,12 +28,18 @@ class Category(models.Model):
 
 class Product(models.Model):
     """
-    Represents a product with details like name, description, price, and stock.
+    Represents a product with details like name, description, price, stock, and discount.
     """
+    DISCOUNT_TYPE_CHOICES = [
+        ('amount', 'Amount'),  # Fixed amount discount
+        ('percent', 'Percentage'),  # Percentage discount
+    ]
+    
     product_name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    discount_type = models.CharField(max_length=10, choices=DISCOUNT_TYPE_CHOICES, blank=True, null=True)
     discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     image = models.ImageField(upload_to='uploads/images/products/%Y/%m/%d/')
@@ -55,6 +61,39 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
     
+    def clean(self):
+        """
+        Custom validation to ensure the discount is correctly applied based on the discount type.
+        """
+        if self.discount_type and self.discount:
+            if self.discount_type == 'amount' and self.discount >= self.price:
+                raise ValidationError(
+                    {'discount': _('Discount amount cannot be greater than or equal to the product price.')}
+                )
+            elif self.discount_type == 'percent' and (self.discount < 0 or self.discount > 100):
+                raise ValidationError(
+                    {'discount': _('Percentage discount must be between 0 and 100.')}
+                )
+    
+    
+    
+    def get_final_price(self):
+        """
+        Calculates the final price after applying the discount.
+        """
+        if self.discount_type == 'amount' and self.discount:
+            return max(self.price - self.discount, 0)
+        elif self.discount_type == 'percent' and self.discount:
+            return self.price * (1 - self.discount / 100)
+        return self.price
+    
+    def save(self, *args, **kwargs):
+        """
+        Override save method to ensure clean is called.
+        """
+        self.full_clean()
+        super().save(*args, **kwargs)
+
     def average_review(self):
         """
         Calculates the average rating for the product.
@@ -69,22 +108,6 @@ class Product(models.Model):
         """
         reviews = ReviewRating.objects.filter(product=self, status=True).aggregate(count=models.Count('id'))
         return int(reviews['count']) if reviews['count'] is not None else 0
-    
-    def clean(self):
-        """
-        Custom validation to ensure that the discount is less than the price.
-        """
-        if self.discount is not None and self.discount >= self.price:
-            raise ValidationError(
-                {'discount': _('Discount cannot be greater than or equal to the product price.')}
-            )
-    
-    def save(self, *args, **kwargs):
-        """
-        Override save method to ensure clean is called.
-        """
-        self.full_clean()
-        super().save(*args, **kwargs)
 
 
 class VariationCategory(models.Model):

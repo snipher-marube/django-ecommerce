@@ -43,68 +43,38 @@
           {{product.product_name}}
         </h2>
 
-        <div class="mt-4 flex space-x-2">
-          <svg
-            class="w-[18px] fill-yellow-300"
-            viewBox="0 0 14 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
-            />
-          </svg>
-          <svg
-            class="w-[18px] fill-yellow-300"
-            viewBox="0 0 14 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
-            />
-          </svg>
-          <svg
-            class="w-[18px] fill-yellow-300"
-            viewBox="0 0 14 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
-            />
-          </svg>
-          <svg
-            class="w-[18px] fill-yellow-300"
-            viewBox="0 0 14 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
-            />
-          </svg>
-          <svg
-            class="w-[18px] fill-[#CED5D8]"
-            viewBox="0 0 14 13"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
-            />
-          </svg>
-          <h4 class="text-base text-gray-500">500 Reviews</h4>
+        <div class="mt-4 flex space-x-2 items-center">
+    <!-- Full stars -->
+    {% for star in full_stars %}
+        <svg class="w-[18px] fill-yellow-300" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+        </svg>
+    {% endfor %}
+    
+    <!-- Empty stars -->
+    {% for star in empty_stars %}
+        <svg class="w-[18px] fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+        </svg>
+    {% endfor %}
+    
+    <h4 class="text-base text-gray-500">{{ product.count_review }} Reviews</h4>
+</div>
+
+        <!-- Product Variations -->
+        {% for category in variation_categories %}
+        <div class="mt-4">
+          <label class="block text-sm font-medium text-gray-700">{{ category.display_name }}</label>
+          <select class="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+            {% for variation in variations %}
+              {% if variation.variation_category == category %}
+              <option value="{{ variation.id }}">{{ variation.variation_value }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
         </div>
-        <div class="mt-8">
-          <h3 class="text-xl font-bold text-gray-800">Sizes</h3>
-          <div class="flex flex-wrap gap-4 mt-4">
-              <button type="button" class="w-10 h-10 border-2 hover:border-blue-600 font-semibold text-sm rounded-full flex items-center justify-center shrink-0">SM</button>
-              <button type="button" class="w-10 h-10 border-2 hover:border-blue-600 border-blue-600 font-semibold text-sm rounded-full flex items-center justify-center shrink-0">MD</button>
-              <button type="button" class="w-10 h-10 border-2 hover:border-blue-600 font-semibold text-sm rounded-full flex items-center justify-center shrink-0">LG</button>
-              <button type="button" class="w-10 h-10 border-2 hover:border-blue-600 font-semibold text-sm rounded-full flex items-center justify-center shrink-0">XL</button>
-          </div>
-      </div>
+        {% endfor %}
+        <!-- End of Product Variations -->
 
         <div class="mt-8 flex flex-wrap gap-4">
           <p class="text-4xl font-semibold text-gray-800">${{product.price}} </p>
@@ -265,6 +235,7 @@
             <div class="ml-3">
               <h4 class="text-sm font-semibold text-gray-800">John Doe</h4>
               <div class="mt-1 flex space-x-1">
+                
                 <svg
                   class="w-4 fill-yellow-300"
                   viewBox="0 0 14 13"
