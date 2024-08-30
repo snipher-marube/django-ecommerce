@@ -3,7 +3,7 @@
 {% block title %}
   {{product.product_name}}
 {% endblock title %}
-  
+{% load static %}
 {% block content %}
 <div class=" font-sans">
   <div class="max-w-2xl p-4 max-lg:mx-auto lg:max-w-7xl">
@@ -177,7 +177,7 @@
           {% for review in reviews %}
           <div class="mt-8 flex items-start">
             <img
-              src="https://readymadeui.com/team-2.webp"
+              src="{% static 'images/defaults/user.png' %}"
               class="h-12 w-12 rounded-full border-2 border-white"
             />
 
@@ -216,13 +216,6 @@
             </div>
           </div>
           {% endfor %}
-
-          <button
-            type="button"
-            class="mt-8 w-full rounded border border-gray-300 bg-gray-800 px-4 py-2.5 font-semibold text-gray-300"
-          >
-            Read all reviews
-          </button>
         </div>
       </div>
     </div>
