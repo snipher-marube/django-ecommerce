@@ -44,22 +44,22 @@
         </h2>
 
         <div class="mt-4 flex space-x-2 items-center">
-    <!-- Full stars -->
-    {% for star in full_stars %}
-        <svg class="w-[18px] fill-yellow-300" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-        </svg>
-    {% endfor %}
+          <!-- Full stars -->
+          {% for star in full_stars %}
+            <svg class="w-[18px] fill-yellow-300" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+            </svg>
+          {% endfor %}
     
-    <!-- Empty stars -->
-    {% for star in empty_stars %}
-        <svg class="w-[18px] fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-        </svg>
-    {% endfor %}
+          <!-- Empty stars -->
+          {% for star in empty_stars %}
+              <svg class="w-[18px] fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.     29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+              </svg>
+          {% endfor %}
     
-    <h4 class="text-base text-gray-500">{{ product.count_review }} Reviews</h4>
-</div>
+          <h4 class="text-base text-gray-500">{{ product.count_review }} Reviews</h4>
+        </div>
 
         <!-- Product Variations -->
         {% for category in variation_categories %}
@@ -117,10 +117,10 @@
         </div>
 
         <div id="review" class="mt-8">
-    <form action="{% url 'submit_review' product.id %}" method="POST">
-        {% csrf_token %}
-        <div class="flex flex-wrap gap-4">
-            <div class="w-full rate">
+          <form action="{% url 'submit_review' product.id %}" method="POST">
+            {% csrf_token %}
+            <div class="flex flex-wrap gap-4">
+              <div class="w-full rate">
                 <label class="block text-md font-bold text-gray-700"> Rate this Product </label>
                 <div class="star-rating ">
                     <input type="radio" id="star5" name="rating" value="5" />
@@ -141,8 +141,8 @@
             </div>
         </div>
         <button type="submit" class="mt-4 w-full rounded border border-gray-300 bg-gray-800 px-4 py-2.5 font-semibold text-gray-300">Submit review</button>
-    </form>
-</div>
+      </form>
+      </div>
 
 
         <!--review progress bar start-->
@@ -157,28 +157,23 @@
             
           </ul>
 
+          <!--Review progress bar start-->
           <div class="mt-8">
-    {% for rating in "54321" %}
-    {% with review_percentage=review_summary.rating %}
-    <div class="flex items-center">
-        <p class="text-sm font-semibold text-gray-800">{{ rating }}.0</p>
-        <svg class="ml-1 w-5 fill-yellow-300" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-        </svg>
-        <div class="ml-3 h-2 w-full rounded bg-gray-400">
-            <div class="h-full rounded bg-yellow-300" style="width: {{ review_summary.rating }}%;"></div>
-        </div>
-        <p class="ml-3 text-sm font-semibold text-gray-800">{{ review_summary.rating }}%</p>
-    </div>
-    {% endwith %}
-{% endfor %}
+            {% for rating, percentage in review_summary.items %}
+              <div class="flex items-center mb-2">
+                <p class="text-sm font-semibold text-gray-800">{{ rating }}.0</p>
+                <svg class="ml-1 w-5 fill-yellow-300" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                </svg>
+                <div class="ml-3 h-2 w-full rounded bg-gray-400">
+                  <div class="h-full rounded bg-yellow-300" style="width: {{ percentage }}%;"></div>
+                </div>
+                <p class="ml-3 text-sm font-semibold text-gray-800">{{ percentage|floatformat:0 }}%</p>
+              </div>
+            {% endfor %}
+          </div>
+          <!--Review progress bar end-->
 
-</div>
-
-
-  
-
-          <!--Review progress  end-->
           {% for review in reviews %}
           <div class="mt-8 flex items-start">
             <img
