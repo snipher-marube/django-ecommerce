@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 
 from products.models import Product, Variation
 from .models import Cart, CartItem
@@ -159,7 +160,7 @@ def add_cart(request, product_id):
         # show success message
         messages.success(request, "The product was successfully added to the cart")
         return redirect('cart')
-    
+
 
 def remove_cart(request, product_id, cart_item_id):
     
@@ -180,6 +181,7 @@ def remove_cart(request, product_id, cart_item_id):
     # show success message
     messages.success(request, "The product was successfully removed from the cart")
     return redirect('cart')
+
 
 def remove_cart_item(request, product_id, cart_item_id):
     if request.user.is_authenticated:
@@ -244,6 +246,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
     }
     return render(request, 'carts/cart.html', context)
 
+@login_required
 def checkout(request, total=0, quantity=0, cart_items=None):
     try:
         shipping_fee = 0

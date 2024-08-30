@@ -6,6 +6,7 @@ from .forms import OrderForm
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 from .models import Order, Payment, OrderProduct
 import json
@@ -78,7 +79,7 @@ def payments(request):
     }
     return JsonResponse(data)
 
-
+@login_required
 def place_order(request, total=0, quantity=0,):
     current_user = request.user
 
