@@ -16,19 +16,13 @@ class CartItemInline(admin.TabularInline):
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    list_display = ('cart_id', 'date_added', 'total_items', 'total_price')
+    list_display = ('cart_id', 'date_added')
     search_fields = ('cart_id',)
     readonly_fields = ('date_added',)
     list_filter = ('date_added',)
     inlines = [CartItemInline]
 
-    def total_items(self, obj):
-        return obj.items.count()
-    total_items.short_description = 'Total Items'
-
-    def total_price(self, obj):
-        return sum(item.sub_total() for item in obj.items.all())
-    total_price.short_description = 'Total Price'
+    
 
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):

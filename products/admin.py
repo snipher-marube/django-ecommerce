@@ -73,8 +73,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin_thumbnails.thumbnail('image')
 class ProductGalleryInline(admin.TabularInline):
     model = ProductGallery
-    extra = 1
-    readonly_fields = ('image',)
+    extra = 1  # Number of empty variations to show
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -90,6 +89,7 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductGalleryInline, VariationInline]
     readonly_fields = ('created', 'updated')
     date_hierarchy = 'created'
+    list_display_links = ('product_name', 'thumbnail')
     
     def get_queryset(self, request):
         qs = super().get_queryset(request)
