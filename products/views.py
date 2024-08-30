@@ -1,11 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
+from .forms import ReviewForm
 from carts.views import _cart_id
 from carts.models import CartItem
-
 from .models import Product, ProductGallery, Category, ReviewRating, VariationCategory, Variation
-from orders.models import OrderProduct
+
 
 def products(request, category_slug=None):
     if category_slug:
@@ -58,6 +61,22 @@ def product_detail(request, category_slug, product_slug):
     # Calculate the number of full and empty stars
     full_stars = range(int(product.average_review()))
     empty_stars = range(5 - int(product.average_review()))
+    
+    # Calculate the review summary
+    total_reviews = reviews.count()
+    review_summary = {
+        '5': reviews.filter(rating=5).count(),
+        '4': reviews.filter(rating=4).count(),
+        '3': reviews.filter(rating=3).count(),
+        '2': reviews.filter(rating=2).count(),
+        '1': reviews.filter(rating=1).count(),
+    }
+    if total_reviews > 0:
+        for key in review_summary:
+            review_summary[key] = (review_summary[key] / total_reviews) * 100
+    else:
+        for key in review_summary:
+            review_summary[key] = 0
 
     # Prepare the context for the template
     context = {
@@ -68,7 +87,45 @@ def product_detail(request, category_slug, product_slug):
         'full_stars': full_stars,
         'empty_stars': empty_stars,
         'variation_categories': variation_categories,
-        'variations': variations
+        'variations': variations,
+        'review_summary': review_summary,
     }
 
     return render(request, 'products/product_detail.html', context)
+
+@login_required
+def submit_review(request, product_id):
+    url = request.META.get('HTTP_REFERER', '/')
+    
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            # Get or create review
+            review, created = ReviewRating.objects.get_or_create(
+                user=request.user,
+                product_id=product_id,
+                defaults={
+                    'subject': form.cleaned_data['subject'],
+                    'rating': form.cleaned_data['rating'],
+                    'review': form.cleaned_data['review'],
+                    'ip': request.META.get('REMOTE_ADDR'),
+                }
+            )
+            if not created:
+                # Update the existing review
+                review.subject = form.cleaned_data['subject']
+                review.rating = form.cleaned_data['rating']
+                review.review = form.cleaned_data['review']
+                review.save()
+                messages.success(request, 'Thank you! Your review has been updated.')
+            else:
+                messages.success(request, 'Thank you! Your review has been submitted.')
+            
+            return redirect(url)
+        else:
+            # Handle form errors
+            messages.error(request, 'There was an error with your submission. Please check the form and try again.')
+            return HttpResponseRedirect(url)
+
+    # Handle non-POST requests
+    return redirect(url)
