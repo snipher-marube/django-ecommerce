@@ -90,12 +90,13 @@ class Product(models.Model):
         return self.price
     
     def save(self, *args, **kwargs):
-        """
-        Override save method to ensure clean is called.
-        """
+        print(f"Image before saving: {self.image}")
+        if not self.image:
+            raise ValidationError("Image field cannot be empty.")
+    
         self.full_clean()
-        print(f"Uploading {self.image} to Cloudinary...")
         super().save(*args, **kwargs)
+
 
     def average_review(self):
         """
