@@ -1,3 +1,5 @@
+from re import A
+from urllib.parse import urlparse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib import messages
@@ -8,6 +10,10 @@ from .forms import ReviewForm
 from carts.views import _cart_id
 from carts.models import CartItem
 from .models import Product, ProductGallery, Category, ReviewRating, VariationCategory, Variation
+
+from django.conf import settings
+
+ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
 
 def products(request, category_slug=None):
@@ -93,9 +99,24 @@ def product_detail(request, category_slug, product_slug):
 
     return render(request, 'products/product_detail.html', context)
 
+def is_safe_url(url, allowed_hosts):
+    """
+    Checks if a URL is safe to redirect to by verifying that it belongs to an allowed host.
+    """
+    if not url:
+        return False
+    parsed_url = urlparse(url)
+    return parsed_url.netloc in allowed_hosts
+
+
 @login_required
 def submit_review(request, product_id):
-    url = request.META.get('HTTP_REFERER', '/')
+    # Get the referer URL or default to home
+    referer_url = request.META.get('HTTP_REFERER', '/')
+    
+    # Validate the referer URL
+    if not is_safe_url(referer_url, ALLOWED_HOSTS):
+        referer_url = '/'  # Redirect to home if the URL is not safe
     
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -121,11 +142,11 @@ def submit_review(request, product_id):
             else:
                 messages.success(request, 'Thank you! Your review has been submitted.')
             
-            return redirect(url)
+            return redirect(referer_url)
         else:
             # Handle form errors
             messages.error(request, 'There was an error with your submission. Please check the form and try again.')
-            return HttpResponseRedirect(url)
+            return HttpResponseRedirect(referer_url)
 
     # Handle non-POST requests
-    return redirect(url)
+    return redirect(referer_url)

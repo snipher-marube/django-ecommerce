@@ -1,9 +1,9 @@
 
 from .base import *
-import logging
 
 
-DEBUG = True
+
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['.vercel.app']
