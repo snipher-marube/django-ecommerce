@@ -26,7 +26,10 @@ DATABASES = {
     }
 }
 
+# Static and media files settings for production
+STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
 
 DISABLE_SERVER_SIDE_CURSORS = True
 
@@ -44,23 +47,5 @@ SECURE_HSTS_PRELOAD = True
 DOMAIN = "https://django-ecommerces.vercel.app"
 CSRF_TRUSTED_ORIGINS = ['https://django-ecommerces.vercel.app']
 
-
-# cloudinary settings
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUD_NAME'),
-    'API_KEY': config('API_KEY'),
-    'API_SECRET': config('API_SECRET'),
-    'SECURE': True
-}
-
-MEDIA_URL = f'https://res.cloudinary.com/{CLOUDINARY_STORAGE["CLOUD_NAME"]}/'
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-logger = logging.getLogger(__name__)
-# check the loggeer level if the cloudinary is not working
-logger.info('Cloudinary settings: {}'.format(CLOUDINARY_STORAGE))
-# check the loggeer level if the cloudinary is set to be the default file storage
-logger.info('Default file storage: {}'.format(DEFAULT_FILE_STORAGE))
 
 
