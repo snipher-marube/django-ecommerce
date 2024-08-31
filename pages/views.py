@@ -1,11 +1,15 @@
 from django.shortcuts import render
 
-from products.models import Product, Category
+from products.models import Product
 
 def home(request):
     products = Product.objects.filter(available=True)
+    
+    for product in products:
+        product.averageReview = product.average_review()
+    
     context = {
-        'products': products
+        'products': products,
     }
     return render(request, 'pages/home.html', context)
 
