@@ -137,6 +137,7 @@ cloudinary.config(
     api_secret=config('CLOUDINARY_API_SECRET')
 )
 
+
 # django allauth settings
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',

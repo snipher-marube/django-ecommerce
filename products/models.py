@@ -1,3 +1,4 @@
+from webbrowser import BackgroundBrowser
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -45,7 +46,7 @@ class Product(models.Model):
     discount_type = models.CharField(max_length=10, choices=DISCOUNT_TYPE_CHOICES, blank=True, null=True)
     discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
-    image = CloudinaryField('image')
+    image = CloudinaryField('image', validators=[validate_image_size])
     stock = models.PositiveBigIntegerField()
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
