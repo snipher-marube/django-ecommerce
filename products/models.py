@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from cloudinary.models import CloudinaryField
 
 from .validators import validate_image_size
 
@@ -44,7 +45,7 @@ class Product(models.Model):
     discount_type = models.CharField(max_length=10, choices=DISCOUNT_TYPE_CHOICES, blank=True, null=True)
     discount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
-    image = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True, validators=[validate_image_size])
+    image = CloudinaryField('image')
     stock = models.PositiveBigIntegerField()
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -154,7 +155,7 @@ class ProductGallery(models.Model):
     Represents a gallery of images for a product.
     """
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='gallery')
-    image = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    image = CloudinaryField('image')
     class Meta:
         verbose_name = 'Product Gallery'
         verbose_name_plural = 'Product Gallery'
