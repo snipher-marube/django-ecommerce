@@ -53,8 +53,7 @@ CLOUDINARY_STORAGE = {
     'SECURE': True
 }
 
-MEDIA_URL = f'https://res.cloudinary.com/{CLOUDINARY_STORAGE["CLOUD_NAME"]}/'
-MEDIA_ROOT = None  # This can be omitted or set to None
+MEDIA_URL = '/media/'
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
