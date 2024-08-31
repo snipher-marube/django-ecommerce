@@ -63,7 +63,7 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
     
-    '''def clean(self):
+    def clean(self):
         """
         Custom validation to ensure the discount is correctly applied based on the discount type.
         """
@@ -75,8 +75,7 @@ class Product(models.Model):
             elif self.discount_type == 'percent' and (self.discount < 0 or self.discount > 100):
                 raise ValidationError(
                     {'discount': _('Percentage discount must be between 0 and 100.')}
-                )'''
-    
+                )
     
     
     def get_final_price(self):
@@ -90,10 +89,6 @@ class Product(models.Model):
         return self.price
     
     def save(self, *args, **kwargs):
-        print(f"Image before saving: {self.image}")
-        if not self.image:
-            raise ValidationError("Image field cannot be empty.")
-    
         self.full_clean()
         super().save(*args, **kwargs)
 
