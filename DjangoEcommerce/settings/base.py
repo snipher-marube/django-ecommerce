@@ -130,15 +130,6 @@ MEDIA_ROOT = BASE_DIR / '../static/media'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Cloudinary settings
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUD_NAME'),
-    'API_KEY': config('API_KEY'),
-    'API_SECRET': config('API_SECRET'),
-    'SECURE': True,
-}
-
-
 
 # django allauth settings
 AUTHENTICATION_BACKENDS = [

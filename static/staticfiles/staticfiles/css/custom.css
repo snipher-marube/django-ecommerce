@@ -1,0 +1,34 @@
+.star-rating {
+    display: flex;
+    direction: row-reverse;
+    font-size: 2.5em;
+    unicode-bidi: bidi-override;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #ccc;
+    transition: color 0.2s ease-in-out;
+}
+
+.star-rating input:checked ~ label {
+    color: gold;
+}
+
+.star-rating input:checked + label {
+    color: gold;
+}
+
+.star-rating input:not(:checked) ~ label:hover,
+.star-rating input:not(:checked) ~ label:hover ~ label {
+    color: gold;
+}
+
+.rating-star i {
+  color: #ffb503;
+}

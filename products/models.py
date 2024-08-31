@@ -94,6 +94,7 @@ class Product(models.Model):
         Override save method to ensure clean is called.
         """
         self.full_clean()
+        print(f"Uploading {self.image} to Cloudinary...")
         super().save(*args, **kwargs)
 
     def average_review(self):
