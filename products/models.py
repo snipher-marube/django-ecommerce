@@ -89,13 +89,6 @@ class Product(models.Model):
             return self.price * (1 - self.discount / 100)
         return self.price
     
-    def save(self, *args, **kwargs):
-        print(f"Image before saving: {self.image}")
-        if not self.image:
-            raise ValidationError("Image field cannot be empty.")
-    
-        self.full_clean()
-        super().save(*args, **kwargs)
 
 
     def average_review(self):
