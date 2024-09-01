@@ -91,7 +91,7 @@
               <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}">
                 <button
                 type="button"
-                class="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 outline-none"
+                class="flex h-5 w-5 items-center justify-center rounded-full bg-gray-800 outline-none"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -105,13 +105,23 @@
                 </svg>
               </button>
               </a>
-              <input class="text-sm font-bold leading-[18px]" type="text" name="quantity" value="{{ cart_item.quantity }}" min="1" max="{{ cart_item.product.stock }}">
+
+              <div>
+                <input
+                  type="number"
+                  name="quantity"
+                  value="{{ cart_item.quantity }}"
+                  min="1"
+                  max="{{ cart_item.product.stock }}"
+                  class="w-12 h-8 text-center border border-gray-300 rounded-md"
+                />
+              </div>
               
               <!--increment item-->
               <a href="{% url 'add_cart' cart_item.product.id %}">
                 <button
                 type="button"
-                class="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 outline-none"
+                class="flex h-5 w-5 items-center justify-center rounded-full bg-gray-800 outline-none"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +180,7 @@
       <a href="{% url 'place_order' %}">
         <button
           type="button"
-          class="mt-4 w-full rounded-md bg-blue-600 px-5 py-2.5 text-sm text-white hover:bg-blue-700"
+          class="mt-4 w-full rounded-md bg-gray-800 px-5 py-2.5 text-sm text-white hover:bg-gray-700"
         >
           checkout
         </button>
