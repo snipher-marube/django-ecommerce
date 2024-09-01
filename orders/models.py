@@ -52,7 +52,7 @@ class Order(models.Model):
     def full_name(self):
         return f'{self.first_name} {self.last_name}'
     
-    def _strr__(self):
+    def _str__(self):
         return self.order_number
 
 class OrderProduct(models.Model):
