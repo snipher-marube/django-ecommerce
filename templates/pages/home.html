@@ -11,17 +11,18 @@
   >
   {% if products %}
   {% for product in products %}
-  <a href="{{product.get_absolute_url}}">
+  
     <div
       class="relative cursor-pointer overflow-hidden rounded-lg bg-gray-50 shadow-md transition-all hover:-translate-y-2"
     >
+      <!--wish list heart start-->
       <div
-        class="absolute right-3 top-3 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-gray-100"
+        class="absolute right-3 top-3 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-gray-100 hover:bg-red-600 transition-colors duration-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16px"
-          class="inline-block fill-gray-800"
+          class="inline-block fill-gray-800 "
           viewBox="0 0 64 64"
         >
           <path
@@ -30,6 +31,7 @@
           ></path>
         </svg>
       </div>
+      <!--wish list heart end-->
 
       <div
         class="aspect-w-16 aspect-h-8 mx-auto h-[260px] w-5/6 overflow-hidden p-4"
@@ -40,7 +42,7 @@
           class="h-full w-full object-contain"
         />
       </div>
-
+      <a href="{{product.get_absolute_url}}">
       <div class="bg-white p-6">
         <h3 class="text-lg font-bold text-gray-800"> {{product.product_name}} </h3>
         <h4 class="mt-2 text-lg font-bold text-gray-800">${{product.price}} </h4>
@@ -54,8 +56,8 @@
                 <i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}" aria-hidden="true"></i>
         </div>
       </div>
+      </a>
     </div>
-  </a>
     {% endfor %}
     {% else %}
     <p class="text-center">No products available</p>
