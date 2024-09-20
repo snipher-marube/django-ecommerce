@@ -9,7 +9,7 @@ django-admin-thumbnails==0.2.9
 django-allauth==64.2.1
 django-mpesa==2.0.14
 django-redis==5.4.0
-django-unfold==0.38.0
+django-unfold==0.39.0
 djangorestframework==3.15.2
 idna==3.8
 jsonfield==3.1.0
