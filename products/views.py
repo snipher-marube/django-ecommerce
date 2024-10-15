@@ -1,10 +1,10 @@
-from re import A
-from urllib.parse import urlparse
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+
+from django.urls import reverse
 
 from .forms import ReviewForm
 from carts.views import _cart_id
@@ -99,30 +99,49 @@ def product_detail(request, category_slug, product_slug):
 
     return render(request, 'products/product_detail.html', context)
 
+def is_safe_url(url, allowed_hosts):
+    from urllib.parse import urlparse
+    url = url.strip()
+    if url == '':
+        return False
+    url_obj = urlparse(url)
+    return url_obj.netloc in allowed_hosts
 
-
+@login_required
 def submit_review(request, product_id):
-    url = request.META.get('HTTP_REFERER')
+    # Get the product instance to retrieve the category_slug and product_slug
+    product = get_object_or_404(Product, id=product_id)
+    category_slug = product.category.slug
+    product_slug = product.slug
+
+    # Get the referer URL or fall back to the product detail page
+    referer_url = request.META.get('HTTP_REFERER', reverse('product_detail', args=[category_slug, product_slug]))
+
+    # Validate the referer URL to ensure it's safe
+    if not is_safe_url(referer_url, allowed_hosts={request.get_host()}):
+        referer_url = reverse('product_detail', args=[category_slug, product_slug])
+
     if request.method == 'POST':
-        try:
-            reviews = ReviewRating.objects.get(user__id=request.user.id, product__id=product_id)
-            form = ReviewForm(request.POST, instance=reviews)
-            form.save()
-            messages.success(request, 'Thank you! Your review has been updated.')
-            return redirect(url)
-        except ReviewRating.DoesNotExist:
-            form = ReviewForm(request.POST)
-            if form.is_valid():
-                data = ReviewRating()
-                data.subject = form.cleaned_data['subject']
-                data.rating = form.cleaned_data['rating']
-                data.review = form.cleaned_data['review']
-                data.ip = request.META.get('REMOTE_ADDR')
-                data.product_id = product_id
-                data.user_id = request.user.id
-                data.save()
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            # Update or create the review
+            review, created = ReviewRating.objects.update_or_create(
+                user=request.user,
+                product_id=product_id,
+                defaults={
+                    'subject': form.cleaned_data['subject'],
+                    'rating': form.cleaned_data['rating'],
+                    'review': form.cleaned_data['review'],
+                    'ip': request.META.get('REMOTE_ADDR'),
+                }
+            )
+            if created:
                 messages.success(request, 'Thank you! Your review has been submitted.')
-                return redirect(url)
             else:
-                print(form.errors)
-                return redirect(url)
+                messages.success(request, 'Thank you! Your review has been updated.')
+        else:
+            messages.error(request, 'There was an error with your submission. Please correct the form.')
+            return redirect(referer_url)
+
+    # Redirect to the product detail page or the referer URL
+    return redirect(referer_url)
