@@ -18,7 +18,7 @@ psycopg2-binary==2.9.10
 pycparser==2.22
 PyJWT==2.9.0
 python-decouple==3.8
-redis==5.1.1
+redis==5.2.0
 requests==2.32.3
 setuptools==75.3.0
 six==1.16.0
