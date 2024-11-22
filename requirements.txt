@@ -22,6 +22,6 @@ redis==5.2.0
 requests==2.32.3
 setuptools==75.6.0
 six==1.16.0
-sqlparse==0.5.1
+sqlparse==0.5.2
 urllib3==2.2.3
 whitenoise==6.8.2
