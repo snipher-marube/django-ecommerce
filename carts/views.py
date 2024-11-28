@@ -6,29 +6,22 @@ from django.contrib.auth.decorators import login_required
 from products.models import Product, Variation
 from .models import Cart, CartItem
 
-
 def _cart_id(request):
     """
-    Retrieve or create a unique cart ID for the user's session.
-
-    :param request: The HTTP request object.
-    :return: A unique cart ID.
+    Get or create a cart ID from the session.
     """
-    cart = request.session.session_key
-    if not cart:
-        cart = request.session.create()
-    return cart
+    if not request.session.session_key:
+        request.session.create()
 
+    cart_id = request.session.session_key
+    return cart_id
 
 def add_cart(request, product_id):
-    """
-    Add a product to the cart. Supports both authenticated and unauthenticated users.
-    """
     product = get_object_or_404(Product, id=product_id)
     product_variation = []
 
     # Extract variations from POST data
-    if request.method == "POST":
+    if request.method == 'POST':
         for key, value in request.POST.items():
             try:
                 variation = Variation.objects.get(
@@ -45,17 +38,23 @@ def add_cart(request, product_id):
         user = request.user
         cart = None
     else:
+        cart_id = _cart_id(request)
         user = None
-        cart, _ = Cart.objects.get_or_create(cart_id=_cart_id(request))
+        cart, created = Cart.objects.get_or_create(cart_id=cart_id)
 
     # Check if the cart item already exists
-    cart_items = CartItem.objects.filter(product=product, user=user, cart=cart)
+    cart_items = CartItem.objects.filter(
+        product=product,
+        user=user,
+        cart=cart
+    )
+
     existing_variation_list = []
     id_list = []
 
     for item in cart_items:
-        existing_variations = list(item.variations.all())
-        existing_variation_list.append(existing_variations)
+        existing_variation = list(item.variations.all())
+        existing_variation_list.append(existing_variation)
         id_list.append(item.id)
 
     if product_variation in existing_variation_list:
@@ -66,20 +65,19 @@ def add_cart(request, product_id):
         item.quantity += 1
         item.save()
     else:
-        # Create a new cart item
         cart_item = CartItem.objects.create(
             product=product,
             quantity=1,
-            user=user,
-            cart=cart
+            cart=cart,
+            user=user
         )
         if product_variation:
-            cart_item.variations.add(*product_variation)
-        cart_item.save()
+            cart_item.variation.add(*product_variation)
+            cart_item.save()
 
-    # Show success message
-    messages.success(request, "The product was successfully added to the cart.")
+    messages.success(request, "The product has been added successfully to the cart")
     return redirect("cart")
+
 
 
 
