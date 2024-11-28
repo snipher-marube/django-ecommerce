@@ -3,7 +3,7 @@ certifi==2024.8.30
 cffi==1.17.1
 charset-normalizer==3.4.0
 cloudinary==1.41.0
-cryptography==43.0.3
+cryptography==44.0.0
 Django==5.1.3
 django-admin-thumbnails==0.2.9
 django-allauth==65.2.0
