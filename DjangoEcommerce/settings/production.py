@@ -3,7 +3,7 @@ from .base import *
 
 
 
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['.vercel.app']
