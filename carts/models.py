@@ -31,6 +31,8 @@ class CartItem(models.Model):
         return self.product.price * self.quantity
     
     def total_discount(self):
-        return self.product.discount * self.quantity
+        discount = self.product.discount or 0  # Use 0 if discount is None
+        return discount * self.quantity
+
     
     

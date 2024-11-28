@@ -72,7 +72,7 @@ def add_cart(request, product_id):
             user=user
         )
         if product_variation:
-            cart_item.variation.add(product_variation)
+            cart_item.variation.add(*product_variation)
             cart_item.save()
 
     messages.success(request, "The product has been added successfully to the cart")
