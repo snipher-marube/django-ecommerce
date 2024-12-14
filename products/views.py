@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 from django.urls import reverse
+from django.db.models import Q
 
 from .forms import ReviewForm
 from carts.views import _cart_id
@@ -145,3 +145,19 @@ def submit_review(request, product_id):
 
     # Redirect to the product detail page or the referer URL
     return redirect(referer_url)
+
+def search(request):
+    keyword = request.GET.get('keyword', '') # Get keyword or set it as empty string
+    products = Product.objects.all() # Get all products
+    product_count = products.count() # Default count of all the products
+
+    if keyword:
+        products = products.filter(Q(description__icontains=keyword) | Q(product_name__icontains=keyword)).order_by('-created')
+        product_count = products.count()
+
+    context = {
+        'products' : products,
+        'product_count': product_count
+    }
+    
+    return render(request, 'products/products.html', context)
