@@ -1,160 +1,148 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  My Cart
+My Cart
 {% endblock title %}
-  
+
 {% block content %}
 <div class="font-sans">
+  {% if cart_items %}
   <div class="grid gap-10 p-4 lg:grid-cols-3">
     <div class="divide-y bg-white lg:col-span-2">
       <!--cart item start-->
-      {% if cart_items %}
+
       {% for cart_item in cart_items %}
       <div class="flex items-start gap-4 py-4 max-sm:flex-col">
         <div class="h-36 shrink-0">
           <img
             src="{{cart_item.product.image.url}}"
-            class="h-full w-full rounded-md object-contain"
-          />
+            class="h-full w-full rounded-md object-contain" />
         </div>
 
         <div class="flex w-full items-start gap-4">
           <div>
             <a href="{{ cart_item.product.get_url }}">
-              <h3 class="mb-1 text-lg font-bold text-gray-800"> {{cart_item.product.product_name}}  </h3>
+              <h3 class="mb-1 text-lg font-bold text-gray-800">
+                {{cart_item.product.product_name}} </h3>
             </a>
-            
+
             <div class="space-y-1">
               {% if cart_item.variations.all %}
               {% for item in cart_item.variations.all %}
               <h6 class="text-sm text-gray-800">
-                {{ item.variation_category | capfirst }}: <strong class="ml-2">{{ item.variation_value | capfirst }}</strong>
+                {{ item.variation_category | capfirst }}: <strong
+                  class="ml-2">{{ item.variation_value | capfirst }}</strong>
               </h6>
               {% endfor %}
               {% endif %}
-              
-              
+
             </div>
 
             <div class="mt-4 flex flex-wrap gap-4">
-              <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you sure you want to remove this item?')">
+              <a
+                href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}"
+                onclick="return confirm('Are you sure you want to remove this item?')">
                 <button
-                type="button"
-                class="flex shrink-0 items-center gap-2 text-sm font-semibold text-red-500"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="inline w-4 fill-current"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                    data-original="#000000"
-                  ></path>
-                  <path
-                    d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                    data-original="#000000"
-                  ></path>
-                </svg>
-                Remove
-              </button>
+                  type="button"
+                  class="flex shrink-0 items-center gap-2 text-sm font-semibold text-red-500">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="inline w-4 fill-current"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
+                      data-original="#000000"></path>
+                    <path
+                      d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
+                      data-original="#000000"></path>
+                  </svg>
+                  Remove
+                </button>
               </a>
-              
+
               <button
                 type="button"
-                class="flex shrink-0 items-center gap-2 text-sm font-semibold text-pink-500"
-              >
+                class="flex shrink-0 items-center gap-2 text-sm font-semibold text-pink-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="inline w-4 fill-current"
-                  viewBox="0 0 64 64"
-                >
+                  viewBox="0 0 64 64">
                   <path
                     d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
-                    data-original="#000000"
-                  ></path>
+                    data-original="#000000"></path>
                 </svg>
                 Move to wish list
               </button>
             </div>
           </div>
 
-          
           <div class="ml-auto text-right">
             <form action="{% url 'cart' %}" method="POST">
               {% csrf_token %}
-              <input type="hidden" name="product_id" value="{{ cart_item.product.id }}">
-              <input type="hidden" name="cart_item_id" value="{{ cart_item.id }}">
+              <input type="hidden" name="product_id"
+                value="{{ cart_item.product.id }}">
+              <input type="hidden" name="cart_item_id"
+                value="{{ cart_item.id }}">
               <div class="flex items-center justify-end gap-3">
-              <!--decrement item-->
-              <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}">
-                <button
-                type="button"
-                class="flex h-5 w-5 items-center justify-center rounded-full bg-gray-800 outline-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-2 fill-white"
-                  viewBox="0 0 124 124"
-                >
-                  <path
-                    d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"
-                    data-original="#000000"
-                  ></path>
-                </svg>
-              </button>
-              </a>
+                <!--decrement item-->
+                <a
+                  href="{% url 'remove_cart' cart_item.product.id cart_item.id %}">
+                  <button
+                    type="button"
+                    class="flex h-5 w-5 items-center justify-center rounded-full bg-gray-800 outline-none">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-2 fill-white"
+                      viewBox="0 0 124 124">
+                      <path
+                        d="M112 50H12C5.4 50 0 55.4 0 62s5.4 12 12 12h100c6.6 0 12-5.4 12-12s-5.4-12-12-12z"
+                        data-original="#000000"></path>
+                    </svg>
+                  </button>
+                </a>
 
-              <div>
-                <input
-                  type="number"
-                  name="quantity"
-                  value="{{ cart_item.quantity }}"
-                  min="1"
-                  max="{{ cart_item.product.stock }}"
-                  class="w-12 h-8 text-center border border-gray-300 rounded-md"
-                />
+                <div>
+                  <input
+                    type="number"
+                    name="quantity"
+                    value="{{ cart_item.quantity }}"
+                    min="1"
+                    max="{{ cart_item.product.stock }}"
+                    class="w-12 h-8 text-center border border-gray-300 rounded-md" />
+                </div>
+
+                <!--increment item-->
+                <a href="{% url 'add_cart' cart_item.product.id %}">
+                  <button
+                    type="button"
+                    class="flex h-5 w-5 items-center justify-center rounded-full bg-gray-800 outline-none">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-2 fill-white"
+                      viewBox="0 0 42 42">
+                      <path
+                        d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"
+                        data-original="#000000"></path>
+                    </svg>
+                  </button>
+                </a>
+
               </div>
-              
-              <!--increment item-->
-              <a href="{% url 'add_cart' cart_item.product.id %}">
-                <button
-                type="button"
-                class="flex h-5 w-5 items-center justify-center rounded-full bg-gray-800 outline-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="w-2 fill-white"
-                  viewBox="0 0 42 42"
-                >
-                  <path
-                    d="M37.059 16H26V4.941C26 2.224 23.718 0 21 0s-5 2.224-5 4.941V16H4.941C2.224 16 0 18.282 0 21s2.224 5 4.941 5H16v11.059C16 39.776 18.282 42 21 42s5-2.224 5-4.941V26h11.059C39.776 26 42 23.718 42 21s-2.224-5-4.941-5z"
-                    data-original="#000000"
-                  ></path>
-                </svg>
-              </button>
-              </a>
-              
-            </div>
             </form>
-            
 
             <div class="mt-4">
               <h4 class="mb-1 text-lg font-bold text-gray-500">
-                <strike class="font-medium">${{cart_item.total_discount}}</strike>
+                <strike
+                  class="font-medium">${{cart_item.total_discount}}</strike>
               </h4>
-              <h4 class="text-lg font-bold text-gray-800"> ${{cart_item.sub_total}} </h4>
+              <h4 class="text-lg font-bold text-gray-800">
+                ${{cart_item.sub_total}} </h4>
             </div>
           </div>
         </div>
       </div>
       {% endfor %}
-      {% else %}
-      <div class="flex items-center justify-center h-96">
-        <h3 class="text-lg font-bold text-gray-800">No items in the cart</h3>
-      </div>
-      {% endif %}
+
       <!--cart item end-->
     </div>
 
@@ -180,12 +168,16 @@
       <a href="{% url 'place_order' %}">
         <button
           type="button"
-          class="mt-4 w-full rounded-md bg-gray-800 px-5 py-2.5 text-sm text-white hover:bg-gray-700"
-        >
+          class="mt-4 w-full rounded-md bg-gray-800 px-5 py-2.5 text-sm text-white hover:bg-gray-700">
           checkout
         </button>
       </a>
     </div>
+    {% else %}
+    <div class="flex items-center justify-center h-96">
+      <h3 class="text-lg font-bold text-gray-800">No items in the cart</h3>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}

@@ -107,7 +107,7 @@
 }
 
 /*
-! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -653,10 +653,6 @@ video {
   top: 0.75rem;
 }
 
-.left-2 {
-  left: 0.5rem;
-}
-
 .z-10 {
   z-index: 10;
 }
@@ -810,10 +806,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.-mr-5 {
-  margin-right: -1.25rem;
 }
 
 .block {
@@ -1729,6 +1721,10 @@ video {
   padding-left: 1.25rem;
 }
 
+.pr-12 {
+  padding-right: 3rem;
+}
+
 .pr-3 {
   padding-right: 0.75rem;
 }
@@ -1751,18 +1747,6 @@ video {
 
 .pt-8 {
   padding-top: 2rem;
-}
-
-.pl-10 {
-  padding-left: 2.5rem;
-}
-
-.pr-4 {
-  padding-right: 1rem;
-}
-
-.pr-12 {
-  padding-right: 3rem;
 }
 
 .text-left {
@@ -2065,24 +2049,8 @@ video {
   outline-offset: 2px;
 }
 
-.outline {
-  outline-style: solid;
-}
-
-.outline-\[\] {
-  outline-width: ;
-}
-
 .outline-\[\#333\] {
   outline-color: #333;
-}
-
-.outline-\[\#\] {
-  outline-color: #;
-}
-
-.outline-\[\#33\] {
-  outline-color: #33;
 }
 
 .ring-blue-500 {
@@ -2219,6 +2187,11 @@ video {
   color: rgb(255 81 0 / var(--tw-text-opacity, 1));
 }
 
+.hover\:text-black:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+
 .hover\:text-blue-600:hover {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity, 1));
@@ -2232,11 +2205,6 @@ video {
 .hover\:text-yellow-300:hover {
   --tw-text-opacity: 1;
   color: rgb(253 224 71 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-black:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover {
@@ -2383,10 +2351,6 @@ video {
 
   .max-lg\:w-1\/2 {
     width: 50%;
-  }
-
-  .max-lg\:w-full {
-    width: 100%;
   }
 
   .max-lg\:min-w-\[300px\] {
