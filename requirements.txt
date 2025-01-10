@@ -2,7 +2,7 @@ asgiref==3.8.1
 certifi==2024.12.14
 cffi==1.17.1
 charset-normalizer==3.4.1
-cloudinary==1.42.0
+cloudinary==1.42.1
 cryptography==44.0.0
 Django==5.1.4
 django-admin-thumbnails==0.2.9
