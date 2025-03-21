@@ -1,50 +1,81 @@
 {% extends 'base.html' %}
 
-{% block title %}
-  Products
-{% endblock title %}
-  
+{% block title %}Products{% endblock title %}
+
 {% block content %}
-<div class="bg-gray-50 px-4 py-8 font-sans">
-  <div class="mx-auto md:max-w-4xl lg:max-w-6xl">
-    <h2 class="mb-12 text-center text-4xl font-extrabold text-gray-800">
-      {% if request.GET.keyword %}
-        Search Results for "{{ request.GET.keyword }}"
-      {% else %}
-        Top Products
+<style>
+  .transition-all {
+  transition: all 0.2s ease-in-out;
+}
+
+.group-hover\:opacity-75 {
+  opacity: 0.75;
+}
+</style>
+<div class="bg-white font-sans">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
+        {% if request.GET.keyword %}
+          Search Results for "{{ request.GET.keyword }}"
+        {% else %}
+          Featured Products
+        {% endif %}
+      </h1>
+      {% if request.GET.keyword and products %}
+      <p class="mt-4 text-lg text-gray-500">{{ products|length }} results found</p>
       {% endif %}
-    </h2>
-    <div
-      class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
-    >
+    </div>
+
     {% if products %}
-    {% for product in products %}
-    <a href="{{product.get_absolute_url}}">
-      <div
-        class="cursor-pointer rounded-md bg-white p-3 shadow-sm transition-all hover:scale-[1.03]"
-      >
-        <div
-          class="aspect-w-16 aspect-h-8 mx-auto h-[130px] w-full overflow-hidden"
-        >
+    <div class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-6">
+      {% for product in products %}
+      <a href="{{product.get_absolute_url}}" class="group">
+        <div class="relative aspect-square w-full overflow-hidden rounded-lg bg-gray-100 transition-all hover:shadow-lg">
           <img
             src="{{product.image.url}}"
             alt="{{product.product_name}}"
-            class="mx-auto block h-full w-5/6 object-contain"
+            class="h-full w-full object-contain object-center p-4 transition-opacity group-hover:opacity-75"
           />
+          {% if product.discount %}
+          <span class="absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+            -{{ product.discount_percentage }}%
+          </span>
+          {% endif %}
         </div>
-        <div class="mt-4 text-center">
-          <h3 class="text-sm font-bold text-gray-800"> {{product.product_name}} </h3>
-          <h4 class="mt-2 text-base font-bold text-blue-600">${{product.price}} </h4>
+        <div class="mt-4 px-1 pb-2">
+          <h3 class="text-sm font-medium text-gray-700 line-clamp-2 h-10">
+            {{product.product_name}}
+          </h3>
+          <div class="mt-2 flex items-center justify-between">
+            <p class="text-base font-semibold text-gray-900">
+              ${{product.price}}
+            </p>
+            {% if product.discount %}
+            <p class="text-sm text-gray-500 line-through">${{product.discount}}</p>
+            {% endif %}
+          </div>
         </div>
-      </div>
-    </a>
-    {% endfor %}
-    {% else %}
-    <p class="text-center">No Products Available</p>
-    {% endif %}
-    
+      </a>
+      {% endfor %}
     </div>
-    {% include 'includes/pagination.html' %}
+    {% else %}
+    <div class="text-center py-24">
+      <div class="mx-auto h-24 w-24 text-gray-400">
+        <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+      </div>
+      <h3 class="mt-6 text-xl font-medium text-gray-900">No products found</h3>
+      <p class="mt-2 text-sm text-gray-500">Try adjusting your search or filters</p>
+    </div>
+    {% endif %}
+
+    {% if products %}
+    <div class="mt-12">
+      {% include 'includes/pagination.html' %}
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}

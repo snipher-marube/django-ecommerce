@@ -20,11 +20,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 # Secure admin login with allauth
-from allauth.account.decorators import secure_admin_login
+'''from allauth.account.decorators import secure_admin_login
 
 
 admin.autodiscover()
-admin.site.login = secure_admin_login(admin.site.login)
+admin.site.login = secure_admin_login(admin.site.login)'''
 
 urlpatterns = [
     path('admin/', admin.site.urls),
