@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-
 from products.models import Product, Variation
 from .models import Cart, CartItem
 
@@ -13,12 +12,61 @@ def _get_cart_id(request):
         request.session.create()
     return request.session.session_key
 
+def _get_cart(request):
+    """Get or create a cart for the current session."""
+    cart_id = _get_cart_id(request)
+    cart, created = Cart.objects.get_or_create(cart_id=cart_id)
+    return cart
+
 def _get_cart_items(request):
     """Helper function to get cart items based on user authentication."""
     if request.user.is_authenticated:
         return CartItem.objects.filter(user=request.user, is_active=True)
-    cart = Cart.objects.get(cart_id=_get_cart_id(request))
+    cart = _get_cart(request)
     return CartItem.objects.filter(cart=cart, is_active=True)
+
+def _transfer_cart_to_user(request, user):
+    """
+    Transfer cart items from session to user upon login/signup.
+    Returns the number of items transferred.
+    """
+    if not hasattr(request, 'session'):
+        return 0
+        
+    session_cart = _get_cart(request)
+    session_items = CartItem.objects.filter(cart=session_cart, is_active=True)
+    transferred_count = 0
+    
+    for item in session_items:
+        # Check if user already has the same product with same variations
+        existing_items = CartItem.objects.filter(
+            user=user,
+            product=item.product,
+            is_active=True
+        )
+        
+        item_variations = list(item.variations.all())
+        matching_item = None
+        
+        for existing_item in existing_items:
+            if list(existing_item.variations.all()) == item_variations:
+                matching_item = existing_item
+                break
+        
+        if matching_item:
+            # Update quantity if matching item found
+            matching_item.quantity += item.quantity
+            matching_item.save()
+            item.delete()
+        else:
+            # Transfer the item to user if no match found
+            item.user = user
+            item.cart = None
+            item.save()
+        
+        transferred_count += 1
+    
+    return transferred_count
 
 def _calculate_cart_totals(cart_items):
     """Calculate cart totals, taxes, and shipping."""
@@ -59,7 +107,7 @@ def add_cart(request, product_id):
     if request.user.is_authenticated:
         cart_item_filter = {'product': product, 'user': request.user}
     else:
-        cart = Cart.objects.get_or_create(cart_id=_get_cart_id(request))[0]
+        cart = _get_cart(request)
         cart_item_filter = {'product': product, 'cart': cart}
 
     # Check for existing cart items with same variations
@@ -102,7 +150,7 @@ def remove_cart(request, product_id, cart_item_id):
                 id=cart_item_id
             )
         else:
-            cart = get_object_or_404(Cart, cart_id=_get_cart_id(request))
+            cart = _get_cart(request)
             cart_item = get_object_or_404(
                 CartItem, 
                 product_id=product_id, 
@@ -120,7 +168,6 @@ def remove_cart(request, product_id, cart_item_id):
             
     except Exception as e:
         messages.error(request, "Error updating cart")
-        # Log the error here if you have logging setup
 
     return redirect('cart')
 
@@ -136,7 +183,7 @@ def remove_cart_item(request, product_id, cart_item_id):
                 id=cart_item_id
             )
         else:
-            cart = get_object_or_404(Cart, cart_id=_get_cart_id(request))
+            cart = _get_cart(request)
             cart_item = get_object_or_404(
                 CartItem, 
                 product_id=product_id, 
@@ -149,7 +196,6 @@ def remove_cart_item(request, product_id, cart_item_id):
         
     except Exception as e:
         messages.error(request, "Error removing item from cart")
-        # Log the error here
 
     return redirect('cart')
 
@@ -182,7 +228,6 @@ def cart(request):
                     
             except (ValueError, ObjectDoesNotExist) as e:
                 messages.error(request, 'Error updating cart quantity')
-                # Log the error here
 
         context.update({
             'cart_items': cart_items,
