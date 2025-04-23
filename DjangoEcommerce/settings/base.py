@@ -180,3 +180,4 @@ PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+ACCOUNT_ADAPTER = 'carts.adapters.CartAccountAdapter'
