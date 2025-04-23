@@ -56,7 +56,6 @@
     --container-lg: 32rem;
     --container-xl: 36rem;
     --container-4xl: 56rem;
-    --container-6xl: 72rem;
     --container-7xl: 80rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
@@ -530,9 +529,6 @@
   .h-96 {
     height: calc(var(--spacing) * 96);
   }
-  .h-\[130px\] {
-    height: 130px;
-  }
   .h-full {
     height: 100%;
   }
@@ -565,9 +561,6 @@
   }
   .w-5 {
     width: calc(var(--spacing) * 5);
-  }
-  .w-5\/6 {
-    width: calc(5/6 * 100%);
   }
   .w-6 {
     width: calc(var(--spacing) * 6);
@@ -1517,13 +1510,6 @@
       border-bottom-color: var(--color-gray-500);
     }
   }
-  .hover\:scale-\[1\.03\] {
-    &:hover {
-      @media (hover: hover) {
-        scale: 1.03;
-      }
-    }
-  }
   .hover\:border-indigo-500 {
     &:hover {
       @media (hover: hover) {
@@ -2075,19 +2061,9 @@
       width: calc(2/3 * 100%);
     }
   }
-  .md\:max-w-4xl {
-    @media (width >= 48rem) {
-      max-width: var(--container-4xl);
-    }
-  }
   .md\:max-w-screen-md {
     @media (width >= 48rem) {
       max-width: var(--breakpoint-md);
-    }
-  }
-  .md\:grid-cols-4 {
-    @media (width >= 48rem) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
   .md\:flex-row {
@@ -2222,11 +2198,6 @@
       width: 28rem;
     }
   }
-  .lg\:max-w-6xl {
-    @media (width >= 64rem) {
-      max-width: var(--container-6xl);
-    }
-  }
   .lg\:max-w-screen-lg {
     @media (width >= 64rem) {
       max-width: var(--breakpoint-lg);
@@ -2245,11 +2216,6 @@
   .lg\:grid-cols-4 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-  .lg\:grid-cols-6 {
-    @media (width >= 64rem) {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
     }
   }
   .lg\:flex-wrap {
@@ -2285,11 +2251,6 @@
   .xl\:max-w-screen-xl {
     @media (width >= 80rem) {
       max-width: var(--breakpoint-xl);
-    }
-  }
-  .xl\:grid-cols-4 {
-    @media (width >= 80rem) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
   .xl\:grid-cols-5 {

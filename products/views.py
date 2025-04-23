@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.db.models import Q
 
 from .forms import ReviewForm
-from carts.views import _cart_id
+from carts.views import _get_cart_id
 from carts.models import CartItem
 from .models import Product, ProductGallery, Category, ReviewRating, VariationCategory, Variation
 
@@ -49,7 +49,7 @@ def product_detail(request, category_slug, product_slug):
         product = get_object_or_404(Product, category__slug=category_slug, slug=product_slug)
 
         # Check if the product is in the user's cart
-        cart_id = _cart_id(request)
+        cart_id = _get_cart_id(request)
         in_cart = CartItem.objects.filter(cart__cart_id=cart_id, product=product).exists()
     except Exception as e:
         raise e

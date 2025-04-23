@@ -1,6 +1,6 @@
 from .models import Cart, CartItem
 
-from .views import _cart_id
+from .views import _get_cart_id
 
 def counter(request):
     item_count = 0
@@ -8,7 +8,7 @@ def counter(request):
         return {}
     else:
         try:
-            cart = Cart.objects.filter(cart_id=_cart_id(request)) # get the cart using the cart_id present in the session
+            cart = Cart.objects.filter(cart_id=_get_cart_id(request)) # get the cart using the cart_id present in the session
             if request.user.is_authenticated:
                 cart_items = CartItem.objects.all().filter(user=request.user)
             else:
