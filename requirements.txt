@@ -19,9 +19,9 @@ psycopg2-binary==2.9.10
 pycparser==2.22
 PyJWT==2.10.1
 python-decouple==3.8
+setuptools==80.9.0
 redis==6.2.0
 requests==2.32.4
-setuptools==80.7.1
 six==1.17.0
 sqlparse==0.5.3
 urllib3==2.4.0
