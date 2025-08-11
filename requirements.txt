@@ -1,7 +1,7 @@
 asgiref==3.9.1
 certifi==2025.8.3
 cffi==1.17.1
-charset-normalizer==3.4.2
+charset-normalizer==3.4.3
 cloudinary==1.44.1
 cryptography==45.0.6
 Django==5.1.7
