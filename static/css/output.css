@@ -585,6 +585,9 @@
   .h-0 {
     height: calc(var(--spacing) * 0);
   }
+  .h-1 {
+    height: calc(var(--spacing) * 1);
+  }
   .h-2 {
     height: calc(var(--spacing) * 2);
   }
@@ -770,6 +773,9 @@
   }
   .max-w-xs {
     max-width: var(--container-xs);
+  }
+  .min-w-0 {
+    min-width: calc(var(--spacing) * 0);
   }
   .min-w-\[44px\] {
     min-width: 44px;
@@ -1000,6 +1006,11 @@
       border-top-style: var(--tw-border-style);
       border-top-width: calc(1px * var(--tw-divide-y-reverse));
       border-bottom-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+    }
+  }
+  .divide-gray-200 {
+    :where(& > :not(:last-child)) {
+      border-color: var(--color-gray-200);
     }
   }
   .divide-gray-300 {
@@ -1832,6 +1843,10 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+  .duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+  }
   .duration-300 {
     --tw-duration: 300ms;
     transition-duration: 300ms;
@@ -1929,6 +1944,16 @@
   .peer-invalid\:flex {
     &:is(:where(.peer):invalid ~ *) {
       display: flex;
+    }
+  }
+  .first\:pt-0 {
+    &:first-child {
+      padding-top: calc(var(--spacing) * 0);
+    }
+  }
+  .last\:pb-0 {
+    &:last-child {
+      padding-bottom: calc(var(--spacing) * 0);
     }
   }
   .focus-within\:border-b-gray-500 {
@@ -2236,6 +2261,13 @@
       }
     }
   }
+  .hover\:text-yellow-600 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-yellow-600);
+      }
+    }
+  }
   .hover\:underline {
     &:hover {
       @media (hover: hover) {
@@ -2309,6 +2341,11 @@
       border-color: transparent;
     }
   }
+  .focus\:border-yellow-500 {
+    &:focus {
+      border-color: var(--color-yellow-500);
+    }
+  }
   .focus\:bg-transparent {
     &:focus {
       background-color: transparent;
@@ -2344,6 +2381,11 @@
   .focus\:ring-yellow-400 {
     &:focus {
       --tw-ring-color: var(--color-yellow-400);
+    }
+  }
+  .focus\:ring-yellow-500 {
+    &:focus {
+      --tw-ring-color: var(--color-yellow-500);
     }
   }
   .focus\:ring-offset-2 {
@@ -2388,6 +2430,11 @@
   .focus-visible\:outline-indigo-600 {
     &:focus-visible {
       outline-color: var(--color-indigo-600);
+    }
+  }
+  .focus-visible\:outline-yellow-500 {
+    &:focus-visible {
+      outline-color: var(--color-yellow-500);
     }
   }
   .focus-visible\:outline-none {
@@ -2577,6 +2624,11 @@
       flex-direction: column;
     }
   }
+  .sm\:col-span-2 {
+    @media (width >= 40rem) {
+      grid-column: span 2 / span 2;
+    }
+  }
   .sm\:mb-0 {
     @media (width >= 40rem) {
       margin-bottom: calc(var(--spacing) * 0);
@@ -2600,6 +2652,11 @@
   .sm\:w-48 {
     @media (width >= 40rem) {
       width: calc(var(--spacing) * 48);
+    }
+  }
+  .sm\:w-auto {
+    @media (width >= 40rem) {
+      width: auto;
     }
   }
   .sm\:max-w-screen-sm {
@@ -2900,6 +2957,11 @@
       top: calc(var(--spacing) * 0);
     }
   }
+  .lg\:top-4 {
+    @media (width >= 64rem) {
+      top: calc(var(--spacing) * 4);
+    }
+  }
   .lg\:bottom-0 {
     @media (width >= 64rem) {
       bottom: calc(var(--spacing) * 0);
@@ -2923,6 +2985,11 @@
   .lg\:mt-0 {
     @media (width >= 64rem) {
       margin-top: calc(var(--spacing) * 0);
+    }
+  }
+  .lg\:mt-8 {
+    @media (width >= 64rem) {
+      margin-top: calc(var(--spacing) * 8);
     }
   }
   .lg\:mt-16 {
@@ -2970,6 +3037,11 @@
       display: none;
     }
   }
+  .lg\:h-\[calc\(100vh-32px\)\] {
+    @media (width >= 64rem) {
+      height: calc(100vh - 32px);
+    }
+  }
   .lg\:h-\[calc\(100vh-60px\)\] {
     @media (width >= 64rem) {
       height: calc(100vh - 60px);
@@ -3003,6 +3075,11 @@
   .lg\:max-w-screen-lg {
     @media (width >= 64rem) {
       max-width: var(--breakpoint-lg);
+    }
+  }
+  .lg\:flex-1 {
+    @media (width >= 64rem) {
+      flex: 1;
     }
   }
   .lg\:grid-cols-2 {
@@ -3059,6 +3136,11 @@
       }
     }
   }
+  .lg\:overflow-hidden {
+    @media (width >= 64rem) {
+      overflow: hidden;
+    }
+  }
   .lg\:p-16 {
     @media (width >= 64rem) {
       padding: calc(var(--spacing) * 16);
@@ -3072,6 +3154,11 @@
   .lg\:px-10 {
     @media (width >= 64rem) {
       padding-inline: calc(var(--spacing) * 10);
+    }
+  }
+  .lg\:pr-8 {
+    @media (width >= 64rem) {
+      padding-right: calc(var(--spacing) * 8);
     }
   }
   .lg\:text-4xl {

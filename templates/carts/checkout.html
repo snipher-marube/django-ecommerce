@@ -1,203 +1,239 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-  checkout
+  Checkout | Your Store Name
 {% endblock title %}
   
 {% block content %}
-<div class="bg-white font-[sans-serif]">
-  <div class="mx-auto w-full max-lg:max-w-xl">
-    <div class="grid gap-6 lg:grid-cols-3">
-      <div
-        class="mx-auto w-full max-w-4xl p-6 !pr-0 max-lg:order-1 lg:col-span-2"
-      >
-        <div class="text-center max-lg:hidden">
-          <h2
-            class="inline-block border-b-2 border-gray-800 pb-1 text-3xl font-extrabold text-gray-800"
-          >
+<div class="bg-gray-50 font-sans">
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-8 lg:grid-cols-3">
+      <!-- Checkout Form Section -->
+      <div class="mx-auto w-full p-6 max-lg:order-1 lg:col-span-2 lg:pr-8">
+        <div class="text-center max-lg:hidden mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 relative pb-2">
             Checkout
+            <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-yellow-500 rounded-full"></span>
           </h2>
         </div>
 
-        <form method="post" action="{% url 'place_order' %}" class="lg:mt-16" id="checkout-form">
+        <form method="post" action="{% url 'place_order' %}" class="lg:mt-8" id="checkout-form">
           {% csrf_token %}
-          <div>
-            <h2 class="text-xl font-bold text-gray-800">Shipping info</h2>
+          <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+              <svg class="w-5 h-5 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+              </svg>
+              Shipping Information
+            </h2>
 
-            <div class="mt-8 grid gap-8 sm:grid-cols-2">
-              <div>
+            <div class="grid gap-6 sm:grid-cols-2">
+              <div class="space-y-1">
+                <label class="text-sm font-medium text-gray-700">First Name</label>
                 <input
                   type="text"
-                  placeholder="Fist Name"
+                  placeholder="John"
                   name="first_name"
-                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200"
                   required
                 />
               </div>
-              <div>
+              <div class="space-y-1">
+                <label class="text-sm font-medium text-gray-700">Last Name</label>
                 <input
                   type="text"
-                  placeholder="Last Name"
+                  placeholder="Doe"
                   name="last_name"
-                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200"
                   required
                 />
               </div>
-              <div>
+              <div class="space-y-1">
+                <label class="text-sm font-medium text-gray-700">Phone Number</label>
                 <input
                   type="text"
-                  placeholder="Phone Number"
+                  placeholder="+1 (555) 123-4567"
                   name="phone"
-                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200"
                   required
                 />
               </div>
-              <div>
+              <div class="space-y-1">
+                <label class="text-sm font-medium text-gray-700">Email Address</label>
                 <input
                   type="email"
-                  placeholder="Email address"
+                  placeholder="john@example.com"
                   name="email"
-                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200"
                   required
                 />
               </div>
-              <div>
+              <div class="space-y-1">
+                <label class="text-sm font-medium text-gray-700">State/Province</label>
                 <input
                   type="text"
-                  placeholder="State/County"
+                  placeholder="California"
                   name="state"
-                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200"
                   required
                 />
               </div>
-              <div>
+              <div class="space-y-1">
+                <label class="text-sm font-medium text-gray-700">City</label>
                 <input
                   type="text"
-                  placeholder="City"
+                  placeholder="San Francisco"
                   name="city"
-                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200"
                   required
                 />
               </div>
-              <div>
+              <div class="sm:col-span-2 space-y-1">
+                <label class="text-sm font-medium text-gray-700">Street Address</label>
                 <input
                   type="text"
-                  placeholder="Street address"
+                  placeholder="123 Main St"
                   name="street_address"
-                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200"
                   required
                 />
               </div>
-              
-              
-              <div>
+              <div class="space-y-1">
+                <label class="text-sm font-medium text-gray-700">Postal Code</label>
                 <input
                   type="number"
-                  placeholder="Postal code"
+                  placeholder="94107"
                   name="postal_code"
-                  class="w-full border-b bg-white px-2 pb-2 text-sm text-gray-800 outline-none focus:border-blue-600"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition duration-200"
                   required
                 />
               </div>
             </div>
           </div>
 
-          <div class="mt-16">
-            <div class="mt-8 grid gap-8">
-
-              <div class="flex items-center">
+          <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+              <svg class="w-5 h-5 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+              Terms & Conditions
+            </h2>
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
                 <input
-                required
-                  id="remember-me"
-                  name="remember-me"
+                  required
+                  id="terms"
+                  name="terms"
                   type="checkbox"
-                  class="h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  class="h-4 w-4 rounded border-gray-300 text-yellow-600 focus:ring-yellow-500"
                 />
-
-                <label for="remember-me" class="ml-3 block text-sm">
-                  I accept the
-                  <a
-                    href="#"
-                    class="ml-1 font-semibold text-blue-600 hover:underline"
-                    >Terms and Conditions</a
-                  >
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="terms" class="text-gray-700">
+                  I agree to the <a href="#" class="font-medium text-yellow-600 hover:text-yellow-500 hover:underline">Terms and Conditions</a> and <a href="#" class="font-medium text-yellow-600 hover:text-yellow-500 hover:underline">Privacy Policy</a>
                 </label>
               </div>
             </div>
           </div>
 
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a href="{% url 'products' %}">
+          <div class="flex flex-wrap justify-between gap-4">
+            <a href="{% url 'products' %}" class="w-full sm:w-auto">
               <button
-              type="button"
-              class="min-w-[150px] rounded-lg bg-gray-200 px-6 py-3.5 text-sm text-gray-800 hover:bg-gray-300"
-            >
-              Continue Shopping
-            </button>
+                type="button"
+                class="w-full sm:w-auto min-w-[150px] rounded-lg bg-white px-6 py-3.5 text-sm font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition duration-200"
+              >
+                Continue Shopping
+              </button>
             </a>
             
-            
-              <button
+            <button
               type="submit"
-              class="min-w-[150px] rounded-lg bg-gray-800 px-6 py-3.5 text-sm text-white hover:bg-gray-700"
+              class="w-full sm:w-auto min-w-[150px] rounded-lg bg-gray-900 px-6 py-3.5 text-sm font-medium text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 transition duration-200"
             >
-              Place Order of ${{grand_total}}
+              Place Order - ${{grand_total}}
             </button>
-            
-            
           </div>
         </form>
       </div>
-      <div class="bg-gray-100 lg:sticky lg:top-0 lg:h-screen">
-        <div class="relative h-full">
-          <div
-            class="overflow-auto p-6 max-lg:mb-8 max-lg:max-h-[400px] lg:h-[calc(100vh-60px)]"
-          >
-            <h2 class="text-xl font-bold text-gray-800">Order Summary</h2>
 
-            <div class="mt-8 space-y-8">
+      <!-- Order Summary Section -->
+      <div class="bg-gray-100 rounded-xl shadow-sm lg:sticky lg:top-4 lg:h-[calc(100vh-32px)] lg:overflow-hidden">
+        <div class="relative h-full flex flex-col">
+          <div class="overflow-auto p-6 max-lg:mb-8 lg:flex-1">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+              <svg class="w-5 h-5 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+              </svg>
+              Order Summary
+            </h2>
+
+            <div class="divide-y divide-gray-200">
               {% for cart_item in cart_items %}
-              <div class="flex flex-col gap-4">
-                <div class="max-w-[140px] shrink-0 rounded-lg bg-gray-200 p-4">
-                  <img
-                    src="{{cart_item.product.image.url}}"
-                    class="w-full object-contain"
-                  />
-                </div>
+              <div class="py-6 first:pt-0 last:pb-0">
+                <div class="flex gap-4">
+                  <div class="shrink-0 rounded-lg bg-white p-2 shadow-sm w-24 h-24 flex items-center justify-center">
+                    <img
+                      src="{{cart_item.product.image.url}}"
+                      alt="{{cart_item.product.product_name}}"
+                      class="w-full h-full object-contain"
+                    />
+                  </div>
 
-                <div class="w-full">
-                  <a href="{{ cart_item.product.get_url }}">
-                    <h3 class="text-base font-bold text-gray-800">
-                    {{cart_item.product.product_name}}
-                  </h3>
-                  </a>
-                  
-                  <ul class="mt-2 space-y-2 text-sm text-gray-800">
-                    {% if cart_item.variations.all %}
-                    {% for item in cart_item.variations.all %}
-                    <li class="flex flex-wrap gap-4">
-                      {{ item.variation_category | capfirst }} <span class="ml-auto">{{ item.variation_value | capfirst }}</span>
-                    </li>
-                    {% endfor %}
-                    {% endif %}
-                    <li class="flex flex-wrap gap-4">
-                      Quantity <span class="ml-auto">{{cart_item.quantity}}</span>
-                    </li>
-                    <li class="flex flex-wrap gap-4">
-                      Total Price <span class="ml-auto">${{cart_item.sub_total}}</span>
-                    </li>
-                  </ul>
+                  <div class="flex-1 min-w-0">
+                    <a href="{{ cart_item.product.get_url }}" class="block">
+                      <h3 class="text-base font-medium text-gray-900 truncate hover:text-yellow-600 transition duration-200">
+                        {{cart_item.product.product_name}}
+                      </h3>
+                    </a>
+                    
+                    <ul class="mt-2 space-y-1 text-sm text-gray-600">
+                      {% if cart_item.variations.all %}
+                      {% for item in cart_item.variations.all %}
+                      <li class="flex justify-between">
+                        <span class="text-gray-500">{{ item.variation_category | capfirst }}</span>
+                        <span class="font-medium text-gray-900">{{ item.variation_value | capfirst }}</span>
+                      </li>
+                      {% endfor %}
+                      {% endif %}
+                      <li class="flex justify-between">
+                        <span class="text-gray-500">Quantity</span>
+                        <span class="font-medium text-gray-900">{{cart_item.quantity}}</span>
+                      </li>
+                      <li class="flex justify-between">
+                        <span class="text-gray-500">Price</span>
+                        <span class="font-medium text-gray-900">${{cart_item.sub_total}}</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               {% endfor %}
-
             </div>
           </div>
 
-          <div class="w-full bg-gray-200 p-4 lg:absolute lg:bottom-0 lg:left-0">
-            <h4 class="flex flex-wrap gap-4 text-base font-bold text-gray-800">
-              Total <span class="ml-auto">${{grand_total}}</span> <p class="text-xs">Tax and shipping inclusive</p>
-            </h4>
+          <div class="border-t border-gray-200 bg-white p-6">
+            <div class="space-y-3">
+              <div class="flex justify-between text-base font-medium text-gray-900">
+                <p>Subtotal</p>
+                <p>${{grand_total}}</p>
+              </div>
+              <div class="flex justify-between text-sm text-gray-600">
+                <p>Shipping</p>
+                <p>Free</p>
+              </div>
+              <div class="flex justify-between text-sm text-gray-600">
+                <p>Tax</p>
+                <p>Included</p>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-200">
+              <div class="flex justify-between text-lg font-bold text-gray-900">
+                <p>Total</p>
+                <p>${{grand_total}}</p>
+              </div>
+              <p class="mt-1 text-xs text-gray-500">Including all applicable taxes</p>
+            </div>
           </div>
         </div>
       </div>
