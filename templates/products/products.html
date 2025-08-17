@@ -1,81 +1,306 @@
 {% extends 'base.html' %}
-
-{% block title %}Products{% endblock title %}
+{% block title %}{% if request.GET.keyword %}Search Results for "{{ request.GET.keyword }}" | Premium Collection{% else %}Premium Products Collection | Curated Selection{% endif %}{% endblock %}
 
 {% block content %}
 <style>
-  .transition-all {
-  transition: all 0.2s ease-in-out;
-}
-
-.group-hover\:opacity-75 {
-  opacity: 0.75;
-}
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .product-card {
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .yellow-accent-bg {
+    background-color: #fde047;
+  }
+  
+  .yellow-accent-text {
+    color: #fde047;
+  }
+  
+  .yellow-accent-hover:hover {
+    background-color: #facc15;
+  }
+  
+  .discount-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #f59e0b 0%, #fde047 100%);
+    color: #111827;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .product-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem;
+  }
+  
+  .product-image-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+  
+  .product-card:hover .product-image-container::before {
+    opacity: 1;
+  }
+  
+  .empty-state-icon {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .price-strike {
+    position: relative;
+  }
+  
+  .price-strike::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: #ef4444;
+    transform: rotate(-5deg);
+  }
 </style>
-<div class="bg-white font-sans">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+
+<div class="bg-gray-50 min-h-screen">
+  <!-- Hero Section for Category Pages -->
+  {% if not request.GET.keyword and category %}
+  <div class="relative bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20 md:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-black opacity-40"></div>
+      <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" 
+           alt="{{ category.category_name }}" 
+           class="w-full h-full object-cover"
+           loading="lazy">
+    </div>
+    
+    <div class="max-w-7xl mx-auto relative z-10 text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+        Premium {{ category.category_name }} Collection
+      </h1>
+      <p class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
+        Curated selection of the finest {{ category.category_name|lower }} with exclusive member benefits
+      </p>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Page Header -->
     <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4">
         {% if request.GET.keyword %}
-          Search Results for "{{ request.GET.keyword }}"
+          Search Results for <span class="yellow-accent-text">"{{ request.GET.keyword }}"</span>
+        {% elif category %}
+          {{ category.category_name }}
         {% else %}
-          Featured Products
+          Our <span class="yellow-accent-text">Premium</span> Collection
         {% endif %}
       </h1>
+      
       {% if request.GET.keyword and products %}
-      <p class="mt-4 text-lg text-gray-500">{{ products|length }} results found</p>
+      <p class="text-lg text-gray-600">{{ products.paginator.count }} exquisite items found</p>
+      {% elif not request.GET.keyword and not category %}
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Handpicked selection of premium products with exceptional quality and craftsmanship
+      </p>
       {% endif %}
     </div>
 
+    <!-- Product Grid -->
     {% if products %}
-    <div class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-6">
+    <div class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {% for product in products %}
-      <a href="{{product.get_absolute_url}}" class="group">
-        <div class="relative aspect-square w-full overflow-hidden rounded-lg bg-gray-100 transition-all hover:shadow-lg">
-          <img
-            src="{{product.image.url}}"
-            alt="{{product.product_name}}"
-            class="h-full w-full object-contain object-center p-4 transition-opacity group-hover:opacity-75"
-          />
-          {% if product.discount %}
-          <span class="absolute top-2 right-2 bg-red-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
-            -{{ product.discount_percentage }}%
-          </span>
-          {% endif %}
-        </div>
-        <div class="mt-4 px-1 pb-2">
-          <h3 class="text-sm font-medium text-gray-700 line-clamp-2 h-10">
-            {{product.product_name}}
-          </h3>
-          <div class="mt-2 flex items-center justify-between">
-            <p class="text-base font-semibold text-gray-900">
-              ${{product.price}}
-            </p>
+      <div class="product-card bg-white rounded-xl overflow-hidden">
+        <a href="{{ product.get_absolute_url }}" class="block">
+          <div class="product-image-container aspect-square bg-gray-50 relative">
+            <img
+              src="{{ product.image.url }}"
+              alt="{{ product.product_name }}"
+              class="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            
+            <!-- Badges -->
             {% if product.discount %}
-            <p class="text-sm text-gray-500 line-through">${{product.discount}}</p>
+            <span class="discount-badge text-sm">
+              {% if product.discount_type == 'percent' %}
+              -{{ product.discount }}%
+              {% else %}
+              SALE
+              {% endif %}
+            </span>
+            {% endif %}
+            
+            {% if product.created|timesince|slice:":2" <= "2" %}
+            <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10">
+              NEW
+            </span>
             {% endif %}
           </div>
+        </a>
+        
+        <div class="p-4">
+          <a href="{{ product.get_absolute_url }}" class="block">
+            <h3 class="text-md font-semibold text-gray-900 line-clamp-2 mb-2 hover:text-yellow-500 transition-colors">
+              {{ product.product_name }}
+            </h3>
+          </a>
+          
+          <div class="flex items-center justify-between mt-3">
+            <div>
+              <p class="text-lg font-bold text-gray-900">
+                ${{ product.get_final_price }}
+              </p>
+              {% if product.discount %}
+              <p class="text-sm text-gray-500 price-strike">${{ product.price }}</p>
+              {% endif %}
+            </div>
+            
+            <!-- Rating -->
+            <div class="flex items-center">
+              <div class="flex text-amber-400 mr-1">
+                {% for i in "12345" %}
+                <svg class="w-4 h-4 {% if forloop.counter <= product.average_review|add:0 %}fill-current{% else %}fill-gray-300{% endif %}" 
+                     viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+                {% endfor %}
+              </div>
+              <span class="text-xs text-gray-500">({{ product.count_review }})</span>
+            </div>
+          </div>
+          
+          <!-- Quick Add Button -->
+          <button 
+            onclick="window.location.href='{% url 'add_cart' product.id %}'"
+            class="mt-4 w-full yellow-accent-bg yellow-accent-hover text-gray-900 font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            Quick Add
+          </button>
         </div>
-      </a>
+      </div>
       {% endfor %}
     </div>
     {% else %}
+    <!-- Empty State -->
     <div class="text-center py-24">
-      <div class="mx-auto h-24 w-24 text-gray-400">
+      <div class="mx-auto h-32 w-32 text-gray-400 empty-state-icon">
         <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
         </svg>
       </div>
-      <h3 class="mt-6 text-xl font-medium text-gray-900">No products found</h3>
-      <p class="mt-2 text-sm text-gray-500">Try adjusting your search or filters</p>
+      <h3 class="mt-6 text-2xl font-bold text-gray-900">No products found</h3>
+      <p class="mt-3 text-lg text-gray-600 max-w-md mx-auto">
+        {% if request.GET.keyword %}
+        We couldn't find any matches for "{{ request.GET.keyword }}". Try different keywords.
+        {% else %}
+        Our collection is currently being updated. Check back soon for new arrivals.
+        {% endif %}
+      </p>
+      <div class="mt-6">
+        <a href="{% url 'products' %}" class="yellow-accent-bg yellow-accent-hover text-gray-900 font-bold px-8 py-3 rounded-lg shadow-lg inline-flex items-center transition duration-300">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          Browse All Products
+        </a>
+      </div>
     </div>
     {% endif %}
 
-    {% if products %}
-    <div class="mt-12">
-      {% include 'includes/pagination.html' %}
+    <!-- Pagination -->
+    {% if products and products.paginator.num_pages > 1 %}
+    <div class="mt-16">
+      <nav class="flex items-center justify-between border-t border-gray-200 pt-6">
+        <div class="flex flex-1 justify-between sm:hidden">
+          {% if products.has_previous %}
+          <a href="?page={{ products.previous_page_number }}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}" class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+            Previous
+          </a>
+          {% endif %}
+          {% if products.has_next %}
+          <a href="?page={{ products.next_page_number }}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}" class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+            Next
+          </a>
+          {% endif %}
+        </div>
+        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-center">
+          <div>
+            <p class="text-sm text-gray-700">
+              Showing <span class="font-medium">{{ products.start_index }}</span> to <span class="font-medium">{{ products.end_index }}</span> of <span class="font-medium">{{ products.paginator.count }}</span> results
+            </p>
+          </div>
+          <div class="ml-8">
+            <ul class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+              {% if products.has_previous %}
+              <li>
+                <a href="?page={{ products.previous_page_number }}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                  <span class="sr-only">Previous</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </li>
+              {% endif %}
+              
+              {% for i in products.paginator.page_range %}
+                {% if products.number == i %}
+                <li>
+                  <a href="#" aria-current="page" class="relative z-10 inline-flex items-center yellow-accent-bg text-gray-900 px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    {{ i }}
+                  </a>
+                </li>
+                {% else %}
+                <li>
+                  <a href="?page={{ i }}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                    {{ i }}
+                  </a>
+                </li>
+                {% endif %}
+              {% endfor %}
+              
+              {% if products.has_next %}
+              <li>
+                <a href="?page={{ products.next_page_number }}{% if request.GET.keyword %}&keyword={{ request.GET.keyword }}{% endif %}" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                  <span class="sr-only">Next</span>
+                  <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l4.5 4.25a.75.75 0 11-1.04 1.08l-3.938-3.71z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
     {% endif %}
   </div>
 </div>
-{% endblock content %}
+{% endblock %}
