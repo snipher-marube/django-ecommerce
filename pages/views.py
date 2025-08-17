@@ -1,12 +1,13 @@
 from django.shortcuts import render
 
-from products.models import Product
+from products.models import Product, Category
+from django.core.paginator import Paginator
 
 def home(request):
-    products = Product.objects.filter(available=True)
-    
-    for product in products:
-        product.averageReview = product.average_review()
+    product_list = Product.objects.filter(available=True)
+    paginator = Paginator(product_list, 12)  # Show 12 products per page
+    page = request.GET.get('page')
+    products = paginator.get_page(page)
     
     context = {
         'products': products,

@@ -1,208 +1,220 @@
 {% load static %}
-<header class="relative z-50 font-[sans-serif] tracking-wide shadow-md">
-  <section
-    class="relative border-b border-gray-200 bg-white px-4 py-3 max-lg:min-h-[60px] md:flex lg:min-h-[80px] lg:items-center lg:px-10">
-    <a href="{% url 'home' %}" class="shrink-0 max-sm:mb-3 max-sm:w-full"><img
-        src="{% static 'images/logo/Logo.png' %}"
-        alt="logo"
-        class="w-[160px]" />
-    </a>
+<header class="sticky top-0 z-50 bg-white shadow-md font-sans tracking-wide">
+  <div class="border-b border-gray-200 px-4 py-3 lg:min-h-[80px] lg:flex lg:items-center lg:px-10">
+    <!-- Logo -->
+    <div class="flex items-center justify-between w-full lg:w-auto">
+      <a href="{% url 'home' %}" class="shrink-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">
+        <img src="{% static 'images/logo/Logo.png' %}" alt="Company Logo" class="w-40 h-auto" width="160" height="40" loading="lazy">
+      </a>
+      
+      <!-- Mobile Menu Toggle -->
+      <button id="mobileMenuToggle" class="lg:hidden p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-expanded="false" aria-label="Toggle menu">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
 
-    <div class="flex w-full flex-wrap items-center">
-      <form action="{% url 'search' %}" method="GET"
-        class="relative flex items-center">
-        <div class="relative w-full max-lg:ml-4 max-md:mt-4 lg:ml-10 xl:w-96">
+    <!-- Search Form -->
+    <div class="mt-4 lg:mt-0 lg:ml-10 flex-1">
+      <form action="{% url 'search' %}" method="GET" class="relative max-w-xl mx-auto lg:mx-0">
+        <div class="relative">
           <input
-            type="text"
+            type="search"
             name="keyword"
-            placeholder="Search something..."
-            class="h-11 w-full rounded bg-gray-100 px-6 pr-12 text-sm outline-[#333] transition-all focus:bg-transparent" />
-          <button type="submit"
-            class="absolute inset-y-0 right-4 flex items-center text-gray-500 hover:text-black">
-            <i class="fas fa-search"></i>
+            placeholder="Search products..."
+            aria-label="Search products"
+            class="w-full h-11 pl-4 pr-12 rounded-lg bg-gray-100 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
+          >
+          <button 
+            type="submit"
+            aria-label="Search"
+            class="absolute right-0 top-0 h-full px-4 text-gray-500 hover:text-blue-600 focus:outline-none"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
           </button>
         </div>
       </form>
+    </div>
 
-      <div class="ml-auto max-lg:mt-4">
-        <ul class="flex items-center">
-          <li
-            class="flex cursor-pointer px-3 text-[15px] font-medium text-[#333] max-lg:py-2 max-sm:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20px"
-              height="20px"
-              class="mr-2"
-              viewBox="0 0 24 24">
-              <g data-name="Layer 2">
-                <path
-                  d="M14.5 12.75A3.22 3.22 0 0 1 12 11.6a3.27 3.27 0 0 1-2.5 1.15A3.22 3.22 0 0 1 7 11.6a2.91 2.91 0 0 1-.3.31 3.22 3.22 0 0 1-2.51.82 3.35 3.35 0 0 1-2.94-3.37v-.71a4.76 4.76 0 0 1 .24-1.5l1.57-4.7a1.75 1.75 0 0 1 1.66-1.2h14.56a1.75 1.75 0 0 1 1.66 1.2l1.57 4.7a4.76 4.76 0 0 1 .24 1.5v.71a3.35 3.35 0 0 1-2.92 3.37 3.2 3.2 0 0 1-2.51-.82c-.11-.1-.22-.22-.32-.33a3.28 3.28 0 0 1-2.5 1.17zm-9.78-10a.26.26 0 0 0-.24.17l-1.56 4.7a3.27 3.27 0 0 0-.17 1v.71a1.84 1.84 0 0 0 1.57 1.88A1.75 1.75 0 0 0 6.25 9.5a.75.75 0 0 1 1.5 0 1.67 1.67 0 0 0 1.75 1.75 1.76 1.76 0 0 0 1.75-1.75.75.75 0 0 1 1.5 0 1.67 1.67 0 0 0 1.75 1.75 1.76 1.76 0 0 0 1.75-1.75.75.75 0 0 1 1.5 0 1.75 1.75 0 0 0 1.93 1.74 1.84 1.84 0 0 0 1.57-1.88v-.71a3.27 3.27 0 0 0-.17-1l-1.56-4.7a.26.26 0 0 0-.24-.17z"
-                  data-original="#000000" />
-                <path
-                  d="M20 22.75H4A1.76 1.76 0 0 1 2.25 21v-9.52a.75.75 0 0 1 1.5 0V21a.25.25 0 0 0 .25.25h16a.25.25 0 0 0 .25-.25v-9.53a.75.75 0 1 1 1.5 0V21A1.76 1.76 0 0 1 20 22.75z"
-                  data-original="#000000" />
-                <path
-                  d="M15.5 22.75h-7a.76.76 0 0 1-.75-.75v-5a1.76 1.76 0 0 1 1.75-1.75h5A1.76 1.76 0 0 1 16.25 17v5a.76.76 0 0 1-.75.75zm-6.25-1.5h5.5V17a.25.25 0 0 0-.25-.25h-5a.25.25 0 0 0-.25.25z"
-                  data-original="#000000" />
-              </g>
+    <!-- Navigation Icons -->
+    <div class="mt-4 lg:mt-0 lg:ml-8">
+      <ul class="flex items-center space-x-4 lg:space-x-6">
+        <li class="hidden md:block">
+          <a href="#" class="flex items-center px-2 py-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14.5 12.75A3.22 3.22 0 0 1 12 11.6a3.27 3.27 0 0 1-2.5 1.15A3.22 3.22 0 0 1 7 11.6a2.91 2.91 0 0 1-.3.31 3.22 3.22 0 0 1-2.51.82 3.35 3.35 0 0 1-2.94-3.37v-.71a4.76 4.76 0 0 1 .24-1.5l1.57-4.7a1.75 1.75 0 0 1 1.66-1.2h14.56a1.75 1.75 0 0 1 1.66 1.2l1.57 4.7a4.76 4.76 0 0 1 .24 1.5v.71a3.35 3.35 0 0 1-2.92 3.37 3.2 3.2 0 0 1-2.51-.82c-.11-.1-.22-.22-.32-.33a3.28 3.28 0 0 1-2.5 1.17zm-9.78-10a.26.26 0 0 0-.24.17l-1.56 4.7a3.27 3.27 0 0 0-.17 1v.71a1.84 1.84 0 0 0 1.57 1.88A1.75 1.75 0 0 0 6.25 9.5a.75.75 0 0 1 1.5 0 1.67 1.67 0 0 0 1.75 1.75 1.76 1.76 0 0 0 1.75-1.75.75.75 0 0 1 1.5 0 1.67 1.67 0 0 0 1.75 1.75 1.76 1.76 0 0 0 1.75-1.75.75.75 0 0 1 1.5 0 1.75 1.75 0 0 0 1.93 1.74 1.84 1.84 0 0 0 1.57-1.88v-.71a3.27 3.27 0 0 0-.17-1l-1.56-4.7a.26.26 0 0 0-.24-.17z" />
+              <path d="M20 22.75H4A1.76 1.76 0 0 1 2.25 21v-9.52a.75.75 0 0 1 1.5 0V21a.25.25 0 0 0 .25.25h16a.25.25 0 0 0 .25-.25v-9.53a.75.75 0 1 1 1.5 0V21A1.76 1.76 0 0 1 20 22.75z" />
+              <path d="M15.5 22.75h-7a.76.76 0 0 1-.75-.75v-5a1.76 1.76 0 0 1 1.75-1.75h5A1.76 1.76 0 0 1 16.25 17v5a.76.76 0 0 1-.75.75zm-6.25-1.5h5.5V17a.25.25 0 0 0-.25-.25h-5a.25.25 0 0 0-.25.25z" />
             </svg>
-            Stores and Services
-          </li>
-          <li
-            class="flex cursor-pointer px-3 text-[15px] font-medium text-[#333] max-lg:py-2 max-sm:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20px"
-              height="20px"
-              class="mr-2"
-              viewBox="0 0 512 511">
-              <path
-                d="M497 193.3h-40.168c-1.215 0-2.418.052-3.613.13-9.024-8.051-19.004-14.7-29.68-19.82 24.348-17.294 40.262-45.712 40.262-77.778C463.8 43.266 421.035.5 368.469.5c-52.57 0-95.336 42.766-95.336 95.332 0 25.262 9.883 48.258 25.976 65.332h-70.148c16.094-17.074 25.973-40.07 25.973-65.332C254.934 43.266 212.168.5 159.602.5c-52.567 0-95.336 42.766-95.336 95.332 0 29.48 13.453 55.875 34.539 73.379-14.602 5.457-28.149 13.617-40.028 24.219a55.211 55.211 0 0 0-3.609-.13H15c-8.285 0-15 6.716-15 15v80.333c0 8.285 6.715 15 15 15h1.066v113.535c0 8.281 6.715 15 15 15h449.868c8.285 0 15-6.719 15-15V303.633H497c8.285 0 15-6.715 15-15V208.3c0-8.285-6.715-15-15-15zm-15 80.333h-25.168c-13.875 0-25.168-11.29-25.168-25.168 0-13.875 11.293-25.164 25.168-25.164H482zM303.133 95.832c0-36.023 29.308-65.332 65.332-65.332 36.023 0 65.336 29.309 65.336 65.332 0 36.027-29.309 65.332-65.332 65.332-36.028 0-65.336-29.305-65.336-65.332zM159.602 30.5c36.023 0 65.332 29.309 65.332 65.332 0 36.023-29.309 65.332-65.332 65.332-36.028 0-65.336-29.305-65.336-65.332 0-36.023 29.308-65.332 65.336-65.332zM30 223.3h25.168c13.875 0 25.168 11.29 25.168 25.169 0 13.875-11.293 25.164-25.168 25.164H30zm16.066 80.333h9.102c30.418 0 55.168-24.746 55.168-55.168 0-16.844-7.602-31.942-19.54-42.067h.356c15.504-9.918 33.535-15.23 52.383-15.23h142.887C258.664 214.566 241 249.574 241 288.633v113.535H110.332v-65.336c0-8.281-6.715-15-15-15-8.281 0-15 6.719-15 15v65.332H46.066zm419.868 98.531h-34.27v-65.332c0-8.281-6.715-15-15-15-8.281 0-15 6.719-15 15v65.332H271V288.633c0-53.742 43.723-97.465 97.469-97.465 18.933 0 37.039 5.36 52.582 15.36-11.852 10.128-19.383 25.163-19.383 41.94 0 30.419 24.746 55.165 55.168 55.165h9.098zm0 0"
-                data-original="#000000" />
-            </svg>
-            wishlist
-          </li>
-          <a href="{% url 'cart' %}">
-            <li class="cursor-pointer px-3 max-lg:py-2">
-              <span class="relative">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20px"
-                  height="20px"
-                  class="inline"
-                  viewBox="0 0 512 512">
-                  <path
-                    d="M164.96 300.004h.024c.02 0 .04-.004.059-.004H437a15.003 15.003 0 0 0 14.422-10.879l60-210a15.003 15.003 0 0 0-2.445-13.152A15.006 15.006 0 0 0 497 60H130.367l-10.722-48.254A15.003 15.003 0 0 0 105 0H15C6.715 0 0 6.715 0 15s6.715 15 15 15h77.969c1.898 8.55 51.312 230.918 54.156 243.71C131.184 280.64 120 296.536 120 315c0 24.812 20.188 45 45 45h272c8.285 0 15-6.715 15-15s-6.715-15-15-15H165c-8.27 0-15-6.73-15-15 0-8.258 6.707-14.977 14.96-14.996zM477.114 90l-51.43 180H177.032l-40-180zM150 405c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm167 15c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm0 0"
-                    data-original="#000000"></path>
-                </svg>
-                <span
-                  class="absolute -top-1 left-auto -ml-1 rounded-full bg-red-500 px-1 py-0 text-xs text-white">
-                  {{item_count}} </span>
-              </span>
-            </li>
+            <span>Stores</span>
           </a>
+        </li>
+        
+        <li class="hidden md:block">
+          <a href="#" class="flex items-center px-2 py-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" viewBox="0 0 512 511" fill="currentColor">
+              <path d="M497 193.3h-40.168c-1.215 0-2.418.052-3.613.13-9.024-8.051-19.004-14.7-29.68-19.82 24.348-17.294 40.262-45.712 40.262-77.778C463.8 43.266 421.035.5 368.469.5c-52.57 0-95.336 42.766-95.336 95.332 0 25.262 9.883 48.258 25.976 65.332h-70.148c16.094-17.074 25.973-40.07 25.973-65.332C254.934 43.266 212.168.5 159.602.5c-52.567 0-95.336 42.766-95.336 95.332 0 29.48 13.453 55.875 34.539 73.379-14.602 5.457-28.149 13.617-40.028 24.219a55.211 55.211 0 0 0-3.609-.13H15c-8.285 0-15 6.716-15 15v80.333c0 8.285 6.715 15 15 15h1.066v113.535c0 8.281 6.715 15 15 15h449.868c8.285 0 15-6.719 15-15V303.633H497c8.285 0 15-6.715 15-15V208.3c0-8.285-6.715-15-15-15zm-15 80.333h-25.168c-13.875 0-25.168-11.29-25.168-25.168 0-13.875 11.293-25.164 25.168-25.164H482zM303.133 95.832c0-36.023 29.308-65.332 65.332-65.332 36.023 0 65.336 29.309 65.336 65.332 0 36.027-29.309 65.332-65.332 65.332-36.028 0-65.336-29.305-65.336-65.332zM159.602 30.5c36.023 0 65.332 29.309 65.332 65.332 0 36.023-29.309 65.332-65.332 65.332-36.028 0-65.336-29.305-65.336-65.332 0-36.023 29.308-65.332 65.336-65.332zM30 223.3h25.168c13.875 0 25.168 11.29 25.168 25.169 0 13.875-11.293 25.164-25.168 25.164H30zm16.066 80.333h9.102c30.418 0 55.168-24.746 55.168-55.168 0-16.844-7.602-31.942-19.54-42.067h.356c15.504-9.918 33.535-15.23 52.383-15.23h142.887C258.664 214.566 241 249.574 241 288.633v113.535H110.332v-65.336c0-8.281-6.715-15-15-15-8.281 0-15 6.719-15 15v65.332H46.066zm419.868 98.531h-34.27v-65.332c0-8.281-6.715-15-15-15-8.281 0-15 6.719-15 15v65.332H271V288.633c0-53.742 43.723-97.465 97.469-97.465 18.933 0 37.039 5.36 52.582 15.36-11.852 10.128-19.383 25.163-19.383 41.94 0 30.419 24.746 55.165 55.168 55.165h9.098zm0 0" />
+            </svg>
+            <span>Wishlist</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="{% url 'cart' %}" class="relative flex items-center px-2 py-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 512 512" fill="currentColor">
+              <path d="M164.96 300.004h.024c.02 0 .04-.004.059-.004H437a15.003 15.003 0 0 0 14.422-10.879l60-210a15.003 15.003 0 0 0-2.445-13.152A15.006 15.006 0 0 0 497 60H130.367l-10.722-48.254A15.003 15.003 0 0 0 105 0H15C6.715 0 0 6.715 0 15s6.715 15 15 15h77.969c1.898 8.55 51.312 230.918 54.156 243.71C131.184 280.64 120 296.536 120 315c0 24.812 20.188 45 45 45h272c8.285 0 15-6.715 15-15s-6.715-15-15-15H165c-8.27 0-15-6.73-15-15 0-8.258 6.707-14.977 14.96-14.996zM477.114 90l-51.43 180H177.032l-40-180zM150 405c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm167 15c0 24.813 20.188 45 45 45s45-20.188 45-45-20.188-45-45-45-45 20.188-45 45zm45-15c8.27 0 15 6.73 15 15s-6.73 15-15 15-15-6.73-15-15 6.73-15 15-15zm0 0" />
+            </svg>
+            {% if item_count > 0 %}
+            <span class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">{{ item_count }}</span>
+            {% endif %}
+          </a>
+        </li>
+        
+        <!-- User Account -->
+        <li class="relative ml-2">
           {% if request.user.is_authenticated %}
-          {% url 'account_email' as email_url %}
-          {% if logout_url %}
-          <a href="{{ email_url }}">
-            <li
-              class="flex px-3 text-[15px] hover:fill-[#007bff] hover:text-[#007bff] max-lg:py-2">
-              <button
-                class="rounded border-2 border-[#333] bg-transparent px-4 py-2 text-sm font-semibold text-[#333]">
-                Change Email
-              </button>
-            </li>
-          </a>
-          {% endif %}
-
-          {% url 'account_logout' as logout_url %}
-          {% if logout_url %}
-          <a href="{{ logout_url }}">
-            <li
-              class="flex px-3 text-[15px] hover:fill-[#ff3c00] hover:text-[#ff5100] max-lg:py-2">
-              <button
-                class="rounded border-2 border-[#333] bg-transparent px-4 py-2 text-sm font-semibold text-[#333]">
-                Logout
-              </button>
-            </li>
-          </a>
-          {% endif %}
-          {% else %}
-          <!--login-->
-          {% url 'account_login' as login_url %}
-          <a href="{{login_url}}">
-            <li
-              class="flex px-3 text-[15px] hover:fill-[#007bff] hover:text-[#007bff] max-lg:py-2">
-              <button
-                class="rounded border-2 border-[#333] bg-transparent px-4 py-2 text-sm font-semibold text-[#333]">
-                Sign In
-              </button>
-            </li>
-          </a>
-          {% endif %}
-
-          <li id="toggleOpen" class="lg:hidden">
-            <button>
-              <svg
-                class="h-7 w-7"
-                fill="#333"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fill-rule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd"></path>
+            <button id="userMenuButton" class="flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 focus:outline-none transition-colors">
+              <span class="sr-only">User menu</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
               </svg>
             </button>
-          </li>
-        </ul>
+            
+            <!-- Dropdown Menu -->
+            <div id="userMenuDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+              <a href="{% url 'account_email' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Change Email</a>
+              <a href="{% url 'account_logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign Out</a>
+            </div>
+          {% else %}
+            <a href="{% url 'account_login' %}" class="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+              Sign In
+            </a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Primary Navigation -->
+  <nav class="bg-gray-800 hidden lg:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-center h-16">
+        <div class="flex space-x-8">
+          <a href="{% url 'home' %}" class="inline-flex items-center px-1 pt-1 border-b-2 border-yellow-400 text-sm font-medium text-white">
+            Home
+          </a>
+          <a href="{% url 'products' %}" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-white hover:text-yellow-300 hover:border-yellow-300 transition-colors">
+            Products
+          </a>
+          {% for category in categories %}
+          <a href="{{category.get_absolute_url}}" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-white hover:text-yellow-300 hover:border-yellow-300 transition-colors">
+            {{category.category_name}}
+          </a>
+          {% endfor %}
+        </div>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <div
-    id="collapseMenu"
-    class="max-lg:hidden max-lg:before:fixed max-lg:before:inset-0 max-lg:before:z-50 max-lg:before:bg-black max-lg:before:opacity-50 lg:!block">
-    <button
-      id="toggleClose"
-      class="fixed right-4 top-2 z-[100] rounded-full bg-white p-3 lg:hidden">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-4 fill-black"
-        viewBox="0 0 320.591 320.591">
-        <path
-          d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-          data-original="#000000"></path>
-        <path
-          d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-          data-original="#000000"></path>
-      </svg>
-    </button>
-
-    <ul
-      class="z-50 min-h-[46px] gap-4 bg-[#333] px-10 py-3 max-lg:fixed max-lg:left-0 max-lg:top-0 max-lg:h-full max-lg:w-1/2 max-lg:min-w-[300px] max-lg:space-y-4 max-lg:overflow-auto max-lg:p-6 max-lg:shadow-md lg:flex lg:flex-wrap lg:items-center lg:justify-center">
-      <li class="mb-6 hidden max-lg:block">
-        <a href="{% url 'home' %}"><img
-            src="{% static 'images/logo/Logo.png' %}"
-            alt="logo"
-            class="w-36" />
-        </a>
-      </li>
-      <li class="px-3 max-lg:border-b max-lg:py-3">
-        <a
-          href="{% url 'home' %}"
-          class="block text-[15px] font-medium text-yellow-300 hover:text-yellow-300">Home</a>
-      </li>
-      <li class="px-3 max-lg:border-b max-lg:py-3">
-        <a
-          href="{% url 'products' %}"
-          class="block text-[15px] font-medium text-white hover:text-yellow-300">Products</a>
-      </li>
-      {% for category in categories %}
-      <li class="px-3 max-lg:border-b max-lg:py-3">
-        <a
-          href="{{category.get_absolute_url}}"
-          class="block text-[15px] font-medium text-white hover:text-yellow-300">
-          {{category.category_name}} </a>
-      </li>
-      {% endfor %}
-    </ul>
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden lg:hidden fixed inset-0 z-40">
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-75" aria-hidden="true"></div>
+    <div class="fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-xl">
+      <div class="flex flex-col h-full">
+        <div class="px-4 pt-5 pb-2 flex justify-between items-center border-b border-gray-200">
+          <img src="{% static 'images/logo/Logo.png' %}" alt="Company Logo" class="w-32 h-auto">
+          <button id="mobileMenuClose" class="p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <div class="flex-1 px-4 py-6 overflow-y-auto">
+          <nav class="space-y-6">
+            <div class="space-y-1">
+              <a href="{% url 'home' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Home</a>
+              <a href="{% url 'products' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Products</a>
+              {% for category in categories %}
+              <a href="{{category.get_absolute_url}}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">{{category.category_name}}</a>
+              {% endfor %}
+            </div>
+            
+            <div class="border-t border-gray-200 pt-6">
+              <div class="space-y-1">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Stores</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Wishlist</a>
+                <a href="{% url 'cart' %}" class="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">
+                  Cart
+                  {% if item_count > 0 %}
+                  <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">{{ item_count }}</span>
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+        
+        <div class="px-4 py-6 border-t border-gray-200">
+          {% if request.user.is_authenticated %}
+            <div class="space-y-3">
+              <a href="{% url 'account_email' %}" class="block w-full px-4 py-2 text-center text-sm font-medium text-gray-700 hover:text-gray-900">Change Email</a>
+              <a href="{% url 'account_logout' %}" class="block w-full px-4 py-2 text-center text-sm font-medium text-gray-700 hover:text-gray-900">Sign Out</a>
+            </div>
+          {% else %}
+            <a href="{% url 'account_login' %}" class="block w-full px-4 py-2 text-center text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md">Sign In</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
 <script>
-  var toggleOpen = document.getElementById("toggleOpen");
-  var toggleClose = document.getElementById("toggleClose");
-  var collapseMenu = document.getElementById("collapseMenu");
-
-  function handleClick() {
-    if (collapseMenu.style.display === "block") {
-      collapseMenu.style.display = "none";
-    } else {
-      collapseMenu.style.display = "block";
+  document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    function toggleMobileMenu() {
+      const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+      mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+      mobileMenu.classList.toggle('hidden');
+      document.body.classList.toggle('overflow-hidden');
     }
-  }
-
-  toggleOpen.addEventListener("click", handleClick);
-  toggleClose.addEventListener("click", handleClick);
+    
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    mobileMenuClose.addEventListener('click', toggleMobileMenu);
+    
+    // User dropdown menu
+    const userMenuButton = document.getElementById('userMenuButton');
+    const userMenuDropdown = document.getElementById('userMenuDropdown');
+    
+    if (userMenuButton && userMenuDropdown) {
+      userMenuButton.addEventListener('click', function() {
+        const isExpanded = userMenuButton.getAttribute('aria-expanded') === 'true';
+        userMenuButton.setAttribute('aria-expanded', !isExpanded);
+        userMenuDropdown.classList.toggle('hidden');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!userMenuButton.contains(event.target) {
+          userMenuButton.setAttribute('aria-expanded', 'false');
+          userMenuDropdown.classList.add('hidden');
+        }
+      });
+    }
+    
+    // Close mobile menu when clicking on a link
+    const mobileMenuLinks = document.querySelectorAll('#mobileMenu a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', toggleMobileMenu);
+    });
+  });
 </script>
