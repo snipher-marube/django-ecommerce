@@ -12,8 +12,8 @@ django-mpesa==2.0.14
 django-redis==6.0.0
 djangorestframework==3.16.1
 django-unfold==0.67.0
-idna==3.11
-jsonfield==3.1.0
+idna==3.10
+jsonfield==3.2.0
 pillow==11.3.0
 psycopg2-binary==2.9.11
 pycparser==2.23
