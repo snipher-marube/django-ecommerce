@@ -3,6 +3,7 @@ asgiref==3.11.0
 cffi==2.0.0
 charset-normalizer==3.4.4
 cloudinary==1.44.1
+Django==6.0.1
 cryptography==46.0.5
 Django==6.0
 django-admin-thumbnails==1.0.0
